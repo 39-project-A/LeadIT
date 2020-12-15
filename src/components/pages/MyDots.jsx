@@ -8,6 +8,7 @@ import OurSideBar from "../templates/OurSideBar";
 import firebase from "../../firebase/firebase";
 import { AuthContext } from "../../firebase/AuthService";
 import MiniDots from "../templates/MiniDots.jsx";
+import Calendar from "../templates/Calendar";
 
 const useStyles = makeStyles({
   container: {
@@ -114,12 +115,9 @@ const MyDots = () => {
         </div>
         <div>
           <ul>
-            <MiniDots />
+            <Calendar />
+            {/* <MiniDots /> */}
             {/* <p>今週の学習時間　{oneWeekHours} hours</p> */}
-            <li>データ1 </li>
-            <li>データ2</li>
-            <li>データ3</li>
-            <li>データ4</li>
           </ul>
         </div>
       </from>

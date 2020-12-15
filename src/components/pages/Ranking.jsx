@@ -68,7 +68,6 @@ const Ranking = () => {
         setThreeRank(threeRank);
         const threeHours = group[2].working;
         setThreeHours(threeHours);
-        console.log(group);
       });
   }, []);
 

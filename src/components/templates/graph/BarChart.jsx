@@ -88,7 +88,6 @@ const BarChart = () => {
     };
     return weeksObj;
   };
-  console.log(init_arrayWeeks2());
 
   useEffect(() => {
     if (user) {
@@ -127,30 +126,27 @@ const BarChart = () => {
     if (user) {
       db.orderBy("createdAt")
         .where("userId", "==", user.uid)
-        // .where(
-        //   "createdAt",
-        //   ">",
-        //   firebase.firestore.Timestamp.fromDate(zeroAdjust2())
-        // )
         .startAt(startDate)
         .endBefore(endDate)
         .onSnapshot((snapshot) => {
-          const hope = init_arrayWeeks2().weekData;
           snapshot.docs.map((doc) => {
-            const item = doc.data();
-            const receivedDay = item.getday;
-            const hours = item.working;
-            for (let i = 0; i < hope.length; i++) {
-              if (receivedDay === hope[i].jsGetDay) {
-                hope[i].initNum = hours;
+            const hope2 = init_arrayWeeks2().weekData;
+            // console.log(hope);
+            const item2 = doc.data();
+            console.log(item2);
+            const receivedDay = item2.getday;
+            const hours = item2.working;
+            for (let i = 0; i < hope2.length; i++) {
+              if (receivedDay === hope2[i].jsGetDay) {
+                hope2[i].initNum = hours;
               }
             }
           });
-          // console.log(hope);
-          const finalWeek = hope.map((el) => {
-            return el.initNum;
-          });
-          set_filledWeek2(finalWeek);
+          // console.log(hope2);
+          // const finalWeek = hope.map((el) => {
+          //   return el.initNum;
+          // });
+          // set_filledWeek2(finalWeek);
         });
     }
   }, [user]);
@@ -182,7 +178,7 @@ const BarChart = () => {
                   "rgba(153, 102, 255, 1)",
                   "rgba(255, 159, 64, 1)",
                 ],
-                borderWidth: 1,
+                borderWidth: 2,
               },
             ],
           }}

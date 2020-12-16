@@ -25,6 +25,12 @@
   padding: 0;
   border: none;
 }
+.profile-pic2 {
+  width: 125px;
+  height: 125px;
+  padding: 0;
+  border: none;
+}
 
 .opaque {
   opacity: 1 !important;

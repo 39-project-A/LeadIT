@@ -114,7 +114,7 @@ const MyDots = () => {
           <div className={classes.div}> </div>
         </div>
         <div>
-          <ul>
+          <ul style={{ marginTop: "30px", marginRight: "50px" }}>
             <Calendar />
             {/* <MiniDots /> */}
             {/* <p>今週の学習時間　{oneWeekHours} hours</p> */}

@@ -34,18 +34,18 @@ export default function MiniDots() {
   const classes = useStyles();
   const user = useContext(AuthContext);
 
-  const test = dots.filter((dot) => {
+  const catchMyDot = dots.filter((dot) => {
     if (dot.userId === user.uid) {
       return dot;
     }
   });
-  console.log(test);
+  // console.log(test);
 
   return (
     <>
       <div className={classes.root}>
         <List component="nav">
-          {test.map((dot) => {
+          {catchMyDot.map((dot) => {
             return <Dots dot={dot} key={dot.dotId} />;
           })}
         </List>

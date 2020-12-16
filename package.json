@@ -18,6 +18,7 @@
     "aws-amplify": "^3.3.10",
     "bootstrap": "^4.5.3",
     "chart.js": "^2.9.4",
+    "date-fns": "^2.16.1",
     "firebase": "^8.1.1",
     "firebase-admin": "^9.4.2",
     "material-ui": "^0.20.2",

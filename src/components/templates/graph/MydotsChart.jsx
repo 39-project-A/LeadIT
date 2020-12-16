@@ -140,7 +140,7 @@ const MydotsChart = () => {
         });
     }
   }, [user]);
-  console.log(oneWeekHours);
+  // console.log(oneWeekHours);
 
   //前週のdotsをDBから取得
   useEffect(() => {
@@ -172,7 +172,7 @@ const MydotsChart = () => {
         });
     }
   }, [user]);
-  console.log(filledWeek2);
+  // console.log(filledWeek2);
 
   return (
     <div className="App">

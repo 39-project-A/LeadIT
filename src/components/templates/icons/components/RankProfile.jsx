@@ -35,7 +35,7 @@ const RankProfile = ({ oneRank, twoRank, threeRank }) => {
     <div className="container">
       <button
         type="button"
-        className="btn btn-primary rounded-circle mt-2 opaque profile-pic"
+        className="btn btn-primary rounded-circle mt-2 opaque profile-pic2"
         disabled={imageSrc}
       >
         {!imageSrc && (

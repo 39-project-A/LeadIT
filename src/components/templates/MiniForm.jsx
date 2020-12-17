@@ -54,6 +54,7 @@ export default function MiniForm() {
           userId: user.uid,
           userName: user.displayName,
           createdAt: new Date(),
+          getDate: new Date().toDateString(),
           getday: new Date().getDay(),
         });
       dispatch(

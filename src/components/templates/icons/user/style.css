@@ -8,6 +8,9 @@
   border: 1px solid grey;
   border-radius: 4px;
 }
+.container3 {
+  margin: 50px 150px;
+}
 
 .previewDiv {
   border: 1px solid grey;
@@ -30,6 +33,13 @@
   height: 125px;
   padding: 0;
   border: none;
+}
+.profile-pic3 {
+  width: 200px;
+  height: 200px;
+  padding: 0;
+  border: none;
+  margin: 0 auto;
 }
 
 .opaque {

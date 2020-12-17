@@ -6,7 +6,6 @@ import { AuthContext } from "../../../../firebase/AuthService";
 
 const ProfilePhoto = ({ getData, imageSrc }) => {
   const [toggle, setToggle] = useState(false);
-  const [, setBlobKey] = useState("");
   const db = firebase.firestore().collection("userIcon");
   const currentUser = firebase.auth().currentUser;
   const user = useContext(AuthContext);
@@ -20,8 +19,6 @@ const ProfilePhoto = ({ getData, imageSrc }) => {
           data.docs.map((doc) => {
             const item = doc.data();
             const blob = item.img;
-            const getBlobId = item.blobId;
-            setBlobKey(getBlobId);
             if (!imageSrc && !toggle) {
               imageSrc = blob;
               setToggle(true);

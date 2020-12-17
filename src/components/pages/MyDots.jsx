@@ -7,8 +7,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import OurSideBar from "../templates/OurSideBar";
 import firebase from "../../firebase/firebase";
 import { AuthContext } from "../../firebase/AuthService";
-import MiniDots from "../templates/MiniDots.jsx";
+// import MiniDots from "../templates/MiniDots.jsx";
 import Calendar from "../templates/Calendar";
+import MydotsProfile from "../templates/icons/components/MydotsProfile";
+import { Top, Profile, StyledCalendar, Chart } from "../../style/mydots";
 
 const useStyles = makeStyles({
   container: {
@@ -98,29 +100,30 @@ const MyDots = () => {
   return (
     <React.Fragment>
       <Header />
-      <from className="MainFrom" style={MainStyle}>
+      <form className="MainFrom" style={MainStyle}>
         <div>
           <OurSideBar />
         </div>
-        <div className="Our-list">
-          <MydotsChart oneWeekHour={oneWeekHours} totalHours={totalHours} />
-          <TextField
-            id="outlined-multiline-static"
-            className={classes.text}
-            multiline
-            rows={6}
-            variant="outlined"
-          />
-          <div className={classes.div}> </div>
-        </div>
-        <div>
-          <ul style={{ marginTop: "30px", marginRight: "50px" }}>
+        <Top>
+          <Profile>
+            <MydotsProfile />
+          </Profile>
+          <StyledCalendar>
             <Calendar />
-            {/* <MiniDots /> */}
-            {/* <p>今週の学習時間　{oneWeekHours} hours</p> */}
-          </ul>
-        </div>
-      </from>
+          </StyledCalendar>
+        </Top>
+
+        {/* <div className="Our-list"> */}
+        <Chart>{/* <MydotsChart /> */}</Chart>
+        {/* <div className={classes.div}> </div> */}
+        {/* </div> */}
+        {/* <div> */}
+        {/* <ul style={{ marginTop: "30px", marginRight: "50px" }}> */}
+        {/* <MiniDots /> */}
+        {/* <p>今週の学習時間　{oneWeekHours} hours</p> */}
+        {/* </ul> */}
+        {/* </div> */}
+      </form>
       <Footer />
     </React.Fragment>
   );

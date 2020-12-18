@@ -129,7 +129,7 @@ const Form = () => {
             })}
         </div>
         <div className={classes.div}> </div> */}
-        <select name="working" ref={register({ required: true })}>
+        {/* <select name="working" ref={register({ required: true })}>
           <option value="0.5">0.5</option>
           <option value="1.0">1.0</option>
           <option value="1.5">1.5</option>
@@ -149,7 +149,7 @@ const Form = () => {
           <option value="8.5">8.5</option>
           <option value="9.0">9.0</option>
           <option value="10">9+</option>
-        </select>
+        </select> */}
         <TextField
           id="outlined-multiline-static"
           name="text"

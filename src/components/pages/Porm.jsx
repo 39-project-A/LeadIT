@@ -29,7 +29,7 @@ import React, { useContext, useState } from "react";
 //   },
 // });
 
-const Form = () => {
+const Porm = () => {
   // const classes = useStyles();
   // const { register, handleSubmit } = useForm();
   // const dispatch = useDispatch();
@@ -167,4 +167,4 @@ const Form = () => {
     <p>HELLO</p>
   );
 };
-export default Form;
+export default Porm;

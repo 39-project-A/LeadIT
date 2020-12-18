@@ -106,13 +106,13 @@ const Form = () => {
         <FormSideBar tags={tags} set_tags={set_tags} />
       </div>
       <form className={classes.container} onSubmit={console.log("HELLO")}>
-        {/* {star === 1 ? (
+        {star === 1 ? (
           <p style={{ color: "#e65c00", textAlign: "center" }}>
             今日のdotはすでに作成済みです！
           </p>
         ) : (
           ""
-        )} */}
+        )}
         <label>
           <input
             type="text"
@@ -121,7 +121,7 @@ const Form = () => {
             ref={register({ required: true })}
           />
         </label>
-        {/* {star === 0 ? <input type="submit" value="Send" /> : ""} */}
+        {star === 0 ? <input type="submit" value="Send" /> : ""}
         <div className={classes.div}>
           {tags &&
             tags.map((tag) => {

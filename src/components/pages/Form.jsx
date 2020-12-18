@@ -44,56 +44,56 @@ const Form = () => {
     return TODAY_MIDNIGHT.setSeconds(0);
   };
 
-  // if (user) {
-  //   firebase
-  //     .firestore()
-  //     .collection("dots")
-  //     .where("userId", "==", user.uid)
-  //     .where("createdAt", ">=", new Date(get_todayMidnight()))
-  //     .get()
-  //     .then((data) => {
-  //       const todayDot = data.docs.map((doc) => {
-  //         return doc.data();
-  //       });
-  //       dispatch(fetch_todayDotLength(todayDot.length));
-  //     });
-  // }
+  if (user) {
+    firebase
+      .firestore()
+      .collection("dots")
+      .where("userId", "==", user.uid)
+      .where("createdAt", ">=", new Date(get_todayMidnight()))
+      .get()
+      .then((data) => {
+        const todayDot = data.docs.map((doc) => {
+          return doc.data();
+        });
+        dispatch(fetch_todayDotLength(todayDot.length));
+      });
+  }
 
-  // const onSubmit = (data) => {
-  //   const dotId = shortid.generate();
-  //   if (star === 0) {
-  //     firebase
-  //       .firestore()
-  //       .collection("dots")
-  //       .doc(dotId)
-  //       .set({
-  //         dotId: dotId,
-  //         title: data.title,
-  //         text: "",
-  //         url: "",
-  //         working: Number(data.working),
-  //         tags: tags,
-  //         userId: user.uid,
-  //         userName: user.displayName,
-  //         createdAt: new Date(),
-  //         getday: new Date().getDay(),
-  //       });
-  //     dispatch(
-  //       add_dot({
-  //         dotId: dotId,
-  //         title: data.title,
-  //         text: "",
-  //         url: "",
-  //         working: Number(data.working),
-  //         tags: tags,
-  //         userId: user.uid,
-  //         userName: user.displayName,
-  //         createdAt: new Date(),
-  //       })
-  //     );
-  //     dispatch(set_star());
-  //   }
-  // };
+  const onSubmit = (data) => {
+    const dotId = shortid.generate();
+    if (star === 0) {
+      firebase
+        .firestore()
+        .collection("dots")
+        .doc(dotId)
+        .set({
+          dotId: dotId,
+          title: data.title,
+          text: "",
+          url: "",
+          working: Number(data.working),
+          tags: tags,
+          userId: user.uid,
+          userName: user.displayName,
+          createdAt: new Date(),
+          getday: new Date().getDay(),
+        });
+      dispatch(
+        add_dot({
+          dotId: dotId,
+          title: data.title,
+          text: "",
+          url: "",
+          working: Number(data.working),
+          tags: tags,
+          userId: user.uid,
+          userName: user.displayName,
+          createdAt: new Date(),
+        })
+      );
+      dispatch(set_star());
+    }
+  };
 
   return (
     <React.Fragment>

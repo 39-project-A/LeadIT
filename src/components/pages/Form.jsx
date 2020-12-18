@@ -105,9 +105,8 @@ const Form = () => {
       >
         <FormSideBar tags={tags} set_tags={set_tags} />
       </div>
-      {/* <form className={classes.container} onSubmit={console.log("HELLO")}>
-        <div className={classes.div}> </div>
-        {star === 1 ? (
+      <form className={classes.container} onSubmit={console.log("HELLO")}>
+        {/* {star === 1 ? (
           <p style={{ color: "#e65c00", textAlign: "center" }}>
             今日のdotはすでに作成済みです！
           </p>
@@ -159,9 +158,8 @@ const Form = () => {
           rows={6}
           variant="outlined"
           ref={register({ required: true })}
-        />
-        <div className={classes.div}> </div>
-      </form> */}
+        /> */}
+      </form>
       <Footer />
     </React.Fragment>
   );

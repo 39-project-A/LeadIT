@@ -128,7 +128,7 @@ const Form = () => {
               return `${tag} / `;
             })}
         </div>
-        <div className={classes.div}> </div>
+        <div className={classes.div}> </div> */}
         <select name="working" ref={register({ required: true })}>
           <option value="0.5">0.5</option>
           <option value="1.0">1.0</option>
@@ -158,7 +158,7 @@ const Form = () => {
           rows={6}
           variant="outlined"
           ref={register({ required: true })}
-        /> */}
+        />
       </form>
       <Footer />
     </React.Fragment>

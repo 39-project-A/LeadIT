@@ -8,7 +8,7 @@ import SignIn from "./components/pages/SignIn";
 import SignUp from "./components/pages/SignUp";
 import MyDots from "./components/pages/MyDots";
 import DotDetail from "./components/pages/DotDetail";
-import Porm from "./components/pages/Porm";
+import Form from "./components/pages/Form";
 import OurDots from "./components/pages/OurDots";
 import firebase from "./firebase/firebase";
 import { AuthProvider } from "./firebase/AuthService";
@@ -41,7 +41,7 @@ export default function App() {
           <Route exact path="/signin" component={SignIn} />
           <Route exact path="/signup" component={SignUp} />
           <Route exact path="/mydots" component={MyDots} />
-          <Route exact path="/porm" component={Porm} />
+          <Route exact path="/form" component={Form} />
           <Route exact path="/dot/:id" component={DotDetail} />
           <Route exact path="/dot/:id/edit" component={Edit} />
           <Route exact path="/mydots" component={MyDots} />

@@ -76,7 +76,7 @@ export default function Base() {
         </div>
         <div style={topjobstyle}>
           <h4>goto</h4>
-          <Link to="/porm">
+          <Link to="/form">
             <button>Formページ</button>
           </Link>
           <Link to="/ourdots">

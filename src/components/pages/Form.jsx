@@ -150,13 +150,15 @@ const Form = () => {
           <option value="10">9+</option>
         </select>
         <TextField
-          // id="outlined-multiline-static"
+          variant="outlined"
+          required
+          fullWidth
+          id="text"
           name="text"
-          className={classes.text}
-          multiline
-          rows={6}
-          // variant="outlined"
-          ref={register({ required: true })}
+          // className={classes.text}
+          // multiline
+          // rows={6}
+          inputRef={register({ required: true })}
         />
       </form>
       <Footer />

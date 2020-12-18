@@ -105,7 +105,7 @@ const Form = () => {
       >
         <FormSideBar tags={tags} set_tags={set_tags} />
       </div>
-      <form className={classes.container} onSubmit={console.log("HELLO")}>
+      <form className={classes.container} onSubmit={handleSubmit(onSubmit)}>
         {star === 1 ? (
           <p style={{ color: "#e65c00", textAlign: "center" }}>
             今日のdotはすでに作成済みです！

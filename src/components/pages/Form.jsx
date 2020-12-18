@@ -24,9 +24,9 @@ const useStyles = makeStyles({
   div: {
     height: "40px",
   },
-  text: {
-    width: "400px",
-  },
+  // text: {
+  //   width: "400px",
+  // },
 });
 
 const Form = () => {
@@ -149,15 +149,15 @@ const Form = () => {
           <option value="9.0">9.0</option>
           <option value="10">9+</option>
         </select>
-        {/* <TextField
-          id="outlined-multiline-static"
+        <TextField
+          // id="outlined-multiline-static"
           name="text"
           className={classes.text}
           multiline
           rows={6}
-          variant="outlined"
+          // variant="outlined"
           ref={register({ required: true })}
-        /> */}
+        />
       </form>
       <Footer />
     </React.Fragment>

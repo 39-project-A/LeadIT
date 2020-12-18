@@ -1,17 +1,17 @@
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-// import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
-// import firebase from "../../firebase/firebase";
-// import { fetch_todayDotLength } from "../../reducks/star/action";
-// import { AuthContext } from "../../firebase/AuthService";
+import firebase from "../../firebase/firebase";
+import { fetch_todayDotLength } from "../../reducks/star/action";
+import { AuthContext } from "../../firebase/AuthService";
 import TextField from "@material-ui/core/TextField";
 import Header from "../templates/Header/Header.jsx";
 import Footer from "../templates/Footer/Footer.jsx";
 import FormSideBar from "../templates/FormSideBar";
-// import shortid from "shortid";
-// import { add_dot } from "../../reducks/dots/action";
-// import { set_star } from "../../reducks/star/action";
+import shortid from "shortid";
+import { add_dot } from "../../reducks/dots/action";
+import { set_star } from "../../reducks/star/action";
 
 const useStyles = makeStyles({
   container: {
@@ -32,9 +32,9 @@ const useStyles = makeStyles({
 const Form = () => {
   const classes = useStyles();
   const { register, handleSubmit } = useForm();
-  // const dispatch = useDispatch();
-  // const user = useContext(AuthContext);
-  // const star = useSelector((state) => state.star);
+  const dispatch = useDispatch();
+  const user = useContext(AuthContext);
+  const star = useSelector((state) => state.star);
   const [tags, set_tags] = useState([]);
 
   const get_todayMidnight = () => {
@@ -105,15 +105,15 @@ const Form = () => {
       >
         <FormSideBar tags={tags} set_tags={set_tags} />
       </div>
-      <form className={classes.container} onSubmit={console.log("HELLO")}>
+      {/* <form className={classes.container} onSubmit={console.log("HELLO")}>
         <div className={classes.div}> </div>
-        {/* {star === 1 ? (
+        {star === 1 ? (
           <p style={{ color: "#e65c00", textAlign: "center" }}>
             今日のdotはすでに作成済みです！
           </p>
         ) : (
           ""
-        )} */}
+        )}
         <label>
           <input
             type="text"
@@ -122,7 +122,7 @@ const Form = () => {
             ref={register({ required: true })}
           />
         </label>
-        {/* {star === 0 ? <input type="submit" value="Send" /> : ""} */}
+        {star === 0 ? <input type="submit" value="Send" /> : ""}
         <div className={classes.div}>
           {tags &&
             tags.map((tag) => {
@@ -161,7 +161,7 @@ const Form = () => {
           ref={register({ required: true })}
         />
         <div className={classes.div}> </div>
-      </form>
+      </form> */}
       <Footer />
     </React.Fragment>
   );

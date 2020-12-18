@@ -19,14 +19,15 @@ const useStyles = makeStyles({
     margin: "0 auto",
   },
   input: {
+    marginTop: "30px",
     width: "343px",
   },
   div: {
     height: "40px",
   },
-  // text: {
-  //   width: "400px",
-  // },
+  text: {
+    width: "400px",
+  },
 });
 
 const Form = () => {
@@ -150,14 +151,12 @@ const Form = () => {
           <option value="10">9+</option>
         </select>
         <TextField
-          variant="outlined"
-          required
-          fullWidth
-          id="text"
+          id="outlined-multiline-static"
           name="text"
-          // className={classes.text}
-          // multiline
-          // rows={6}
+          className={classes.text}
+          multiline
+          rows={6}
+          variant="outlined"
           inputRef={register({ required: true })}
         />
       </form>

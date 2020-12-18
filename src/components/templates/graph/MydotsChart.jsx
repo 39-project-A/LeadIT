@@ -176,14 +176,14 @@ const MydotsChart = () => {
 
   return (
     <div className="App">
-      <div style={{ height: "300px", width: "600px" }}>
+      <div style={{ height: "300px", width: "500px" }}>
         <Line
           data={{
             labels: init_arrayWeeks().weekLabel,
             // labels: init_arrayWeeks2().weekLabel,
             datasets: [
               {
-                label: " # 今週の学習状況 ",
+                label: " #⚡ 今週の学習状況 ",
                 // pointStyle: oneWeekHours,
                 data: filledWeek,
                 backgroundColor: [

@@ -10,7 +10,19 @@ import { AuthContext } from "../../firebase/AuthService";
 // import MiniDots from "../templates/MiniDots.jsx";
 import Calendar from "../templates/Calendar";
 import MydotsProfile from "../templates/icons/components/MydotsProfile";
-import { Top, Profile, StyledCalendar, Chart } from "../../style/mydots";
+import {
+  LeftPage,
+  Profile,
+  WeekStudyHours,
+  WeekTitle,
+  StudyHours,
+  RightPage,
+  RightTop,
+  ExplainCalendar,
+  CalendarText,
+  StyledCalendar,
+  StyledChart,
+} from "../../style/mydots";
 
 const useStyles = makeStyles({
   container: {
@@ -96,6 +108,8 @@ const MyDots = () => {
         });
     }
   }, [user]);
+  console.log(oneWeekHours);
+  console.log(totalHours);
 
   return (
     <React.Fragment>
@@ -104,25 +118,36 @@ const MyDots = () => {
         <div>
           <OurSideBar />
         </div>
-        <Top>
+        <LeftPage>
           <Profile>
             <MydotsProfile />
           </Profile>
-          <StyledCalendar>
-            <Calendar />
-          </StyledCalendar>
-        </Top>
-
-        {/* <div className="Our-list"> */}
-        <Chart>{/* <MydotsChart /> */}</Chart>
-        {/* <div className={classes.div}> </div> */}
-        {/* </div> */}
-        {/* <div> */}
-        {/* <ul style={{ marginTop: "30px", marginRight: "50px" }}> */}
-        {/* <MiniDots /> */}
-        {/* <p>今週の学習時間　{oneWeekHours} hours</p> */}
-        {/* </ul> */}
-        {/* </div> */}
+          <WeekStudyHours>
+            <WeekTitle>📅今週の学習時間 : {oneWeekHours}時間</WeekTitle>
+            <StudyHours>
+              (前週の学習時間:)
+              <br />
+              💪総学習時間:{totalHours}時間
+            </StudyHours>
+          </WeekStudyHours>
+        </LeftPage>
+        <RightPage>
+          <RightTop>
+            <StyledCalendar>
+              <Calendar />
+            </StyledCalendar>
+            <ExplainCalendar>
+              {/* <CalendarText> */}
+              🟩：dotをやった日
+              <br />
+              👈 : 日付をクリックすると詳細ページの確認が出来るよ
+              {/* </CalendarText> */}
+            </ExplainCalendar>
+          </RightTop>
+          <StyledChart>
+            <MydotsChart />
+          </StyledChart>
+        </RightPage>
       </form>
       <Footer />
     </React.Fragment>

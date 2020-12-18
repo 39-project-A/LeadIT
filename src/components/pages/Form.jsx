@@ -112,7 +112,7 @@ const Form = () => {
           </p>
         ) : (
           ""
-        )}
+        )} */}
         <label>
           <input
             type="text"
@@ -121,14 +121,13 @@ const Form = () => {
             ref={register({ required: true })}
           />
         </label>
-        {star === 0 ? <input type="submit" value="Send" /> : ""}
+        {/* {star === 0 ? <input type="submit" value="Send" /> : ""} */}
         <div className={classes.div}>
           {tags &&
             tags.map((tag) => {
               return `${tag} / `;
             })}
         </div>
-        <div className={classes.div}> </div> */}
         <select name="working" ref={register({ required: true })}>
           <option value="0.5">0.5</option>
           <option value="1.0">1.0</option>

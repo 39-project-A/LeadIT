@@ -19,6 +19,7 @@ const useStyles = makeStyles({
     margin: "0 auto",
   },
   input: {
+    marginTop: "30px",
     width: "343px",
   },
   div: {
@@ -106,7 +107,6 @@ const Form = () => {
         <FormSideBar tags={tags} set_tags={set_tags} />
       </div>
       <form className={classes.container} onSubmit={handleSubmit(onSubmit)}>
-        <div className={classes.div}> </div>
         {star === 1 ? (
           <p style={{ color: "#e65c00", textAlign: "center" }}>
             今日のdotはすでに作成済みです！
@@ -129,7 +129,6 @@ const Form = () => {
               return `${tag} / `;
             })}
         </div>
-        <div className={classes.div}> </div>
         <select name="working" ref={register({ required: true })}>
           <option value="0.5">0.5</option>
           <option value="1.0">1.0</option>
@@ -158,9 +157,8 @@ const Form = () => {
           multiline
           rows={6}
           variant="outlined"
-          ref={register({ required: true })}
+          inputRef={register({ required: true })}
         />
-        <div className={classes.div}> </div>
       </form>
       <Footer />
     </React.Fragment>

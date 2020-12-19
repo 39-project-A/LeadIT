@@ -42,17 +42,17 @@ export default function Base() {
   }, []);
 
   const jobstyle = {
-    display: 'flex',
-    JustifyContent:'flex-end'
+    display: "flex",
+    JustifyContent: "flex-end",
   };
 
   const topjobstyle = {
-    display: 'flex',
-    flexFlow: 'column',
+    display: "flex",
+    flexFlow: "column",
   };
 
   return (
-    <React.Fragment >
+    <React.Fragment>
       <Header />
       <BarChart />
       <Bodyleft>
@@ -60,46 +60,46 @@ export default function Base() {
         <MiniDots />
       </Bodyleft>
       <Footer />
-    
+
       <div>Index</div>
       <button style={{ width: "100px", height: "30px" }} onClick={logout}>
         ログアウト
       </button>
       <div style={jobstyle}>
-        <div style={topjobstyle}>  
-        <h4>Justice!!!!</h4>
-        <Link to="/mydots">
-          <button>MyDotsページ</button>
-        </Link>
-        <Link to="/ranking">
-          <button>Rankingページ</button>
-        </Link>
-      </div>
         <div style={topjobstyle}>
-        <h4>goto</h4>
-        <Link to="/form">
-          <button>Formページ</button>
-        </Link>
-        <Link to="/ourdots">
-          <button>OurDotsページ</button>
-        </Link>
-      </div>
+          <h4>Justice!!!!</h4>
+          <Link to="/mydots">
+            <button>MyDotsページ</button>
+          </Link>
+          <Link to="/ranking">
+            <button>Rankingページ</button>
+          </Link>
+        </div>
         <div style={topjobstyle}>
-        <h4>ito</h4>
-        <Link to="/dot/:id.jsx">
-          <button>DotDetailページ</button>
-        </Link>
-        <Link to="/dot/:id/edit">
-          <button>Editページ</button>
-        </Link>
-      </div>
+          <h4>goto</h4>
+          <Link to="/form">
+            <button>Formページ</button>
+          </Link>
+          <Link to="/ourdots">
+            <button>OurDotsページ</button>
+          </Link>
+        </div>
         <div style={topjobstyle}>
-        <h4>iwaswa</h4>
-        <Link to="/home">
-          <button>Homeページ</button>
-        </Link>
+          <h4>ito</h4>
+          <Link to="/dot/:id.jsx">
+            <button>DotDetailページ</button>
+          </Link>
+          <Link to="/dot/:id/edit">
+            <button>Editページ</button>
+          </Link>
+        </div>
+        <div style={topjobstyle}>
+          <h4>iwaswa</h4>
+          <Link to="/home">
+            <button>Homeページ</button>
+          </Link>
+        </div>
       </div>
-</div>
     </React.Fragment>
   );
 }

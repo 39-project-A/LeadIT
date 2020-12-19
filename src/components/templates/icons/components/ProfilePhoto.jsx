@@ -40,7 +40,7 @@ const ProfilePhoto = ({ getData, imageSrc }) => {
     db.doc(currentUser.uid).delete();
   };
   return (
-    <div className="container">
+    <div>
       <button
         type="button"
         onClick={handleToggleClick}
@@ -48,7 +48,7 @@ const ProfilePhoto = ({ getData, imageSrc }) => {
         disabled={toggle && imageSrc}
       >
         {(!toggle || !imageSrc) && (
-          <FontAwesomeIcon icon={faUserAlt} color="white" size="3x" />
+          <FontAwesomeIcon icon={faUserAlt} color="white" size="7x" />
         )}
         {toggle && imageSrc && (
           <img

@@ -10,7 +10,7 @@ const MydotsChart = () => {
   const [oneWeekHours, setOneWeekHours] = useState("");
   const user = useContext(AuthContext);
 
-  const zeroAdjust = () => {
+  const specify_weekago = () => {
     let agoDate = new Date();
     let agoWeek = agoDate.setDate(agoDate.getDate() - 6);
     let hope = new Date(agoWeek);
@@ -24,14 +24,14 @@ const MydotsChart = () => {
   };
 
   let yesterday2 = new Date(
-    zeroAdjust().getFullYear(),
-    zeroAdjust().getMonth(),
-    zeroAdjust().getDate() - 1
+    specify_weekago().getFullYear(),
+    specify_weekago().getMonth(),
+    specify_weekago().getDate() - 1
   );
   const yesterday = new Date(yesterday2.setHours(23, 59, 59, 999));
 
   //前週を指定
-  const zeroAdjust2 = () => {
+  const specify_lastweek = () => {
     let agoWeek2 = yesterday2.setDate(yesterday2.getDate() - 6);
     let hope2 = new Date(agoWeek2);
     let zero2 = hope2.setHours(0);
@@ -73,7 +73,7 @@ const MydotsChart = () => {
 
   //前週の日付とラベルを取得
   const init_arrayWeeks2 = () => {
-    let today = new Date(zeroAdjust());
+    let today = new Date(specify_weekago());
     let yesterday = new Date(
       today.getFullYear(),
       today.getMonth(),
@@ -112,7 +112,7 @@ const MydotsChart = () => {
         .where(
           "createdAt",
           ">",
-          firebase.firestore.Timestamp.fromDate(zeroAdjust())
+          firebase.firestore.Timestamp.fromDate(specify_weekago())
         )
         .orderBy("createdAt")
         .onSnapshot((snapshot) => {
@@ -146,7 +146,9 @@ const MydotsChart = () => {
   useEffect(() => {
     if (user) {
       //firestoreのDBでも時間が指定できるように変換する
-      const startDate = firebase.firestore.Timestamp.fromDate(zeroAdjust2());
+      const startDate = firebase.firestore.Timestamp.fromDate(
+        specify_lastweek()
+      );
       const endDate = firebase.firestore.Timestamp.fromDate(yesterday);
       db.orderBy("createdAt")
         .where("userId", "==", user.uid)
@@ -176,7 +178,14 @@ const MydotsChart = () => {
 
   return (
     <div className="App">
-      <div style={{ height: "300px", width: "500px", marginTop: "50px" }}>
+      <div
+        style={{
+          height: "450px",
+          width: "700px",
+          marginTop: "50px",
+          // position: "absolute",
+        }}
+      >
         <Line
           data={{
             labels: init_arrayWeeks().weekLabel,
@@ -255,7 +264,7 @@ const MydotsChart = () => {
             },
             legend: {
               labels: {
-                fontSize: 15,
+                fontSize: 25,
               },
             },
           }}

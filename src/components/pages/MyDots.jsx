@@ -10,7 +10,7 @@ import firebase from "../../firebase/firebase";
 import { AuthContext } from "../../firebase/AuthService";
 import MiniDots from "../templates/MiniDots.jsx";
 import Calendar from "../templates/Calendar";
-import MydotsProfile from "../templates/icons/components/MydotsProfile";
+import UserIcon from "../templates/icons/user/user";
 import {
   LeftPage,
   LeftPage_Top,
@@ -52,13 +52,14 @@ const MainStyle = {
 
 const MyDots = () => {
   const classes = useStyles();
-  const [oneWeekHours, setOneWeekHours] = useState("");
-  const [totalHours, setTotalHours] = useState("");
+  const [week_hours, setWeek_hours] = useState("");
+  const [lastweek_hours, setLastweek_hours] = useState("");
+  const [total_hours, setTotal_hours] = useState("");
   const db = firebase.firestore().collection("dots");
   const user = useContext(AuthContext);
 
   // 今日から一週間前の指定
-  const zeroAdjust = () => {
+  const specify_weekago = () => {
     let agoDate = new Date();
     let agoWeek = agoDate.setDate(agoDate.getDate() - 6);
     let hope = new Date(agoWeek);
@@ -71,95 +72,135 @@ const MyDots = () => {
     return five;
   };
 
-  //一週間文の勉強時間を取得し合計する
-  const array = [];
+  let weekago_yesterday = new Date(
+    specify_weekago().getFullYear(),
+    specify_weekago().getMonth(),
+    specify_weekago().getDate() - 1
+  );
+
+  const just_weekago = new Date(weekago_yesterday.setHours(23, 59, 59, 999));
+
+  //前週を指定
+  const specify_lastweek = () => {
+    let agoWeek2 = weekago_yesterday.setDate(weekago_yesterday.getDate() - 6);
+    let hope2 = new Date(agoWeek2);
+    let zero2 = hope2.setHours(0);
+    let one2 = new Date(zero2);
+    let two2 = one2.setMinutes(0);
+    let three2 = new Date(two2);
+    let four2 = three2.setSeconds(0);
+    let five2 = new Date(four2);
+    return five2;
+  };
+
+  //一週間文のdotsを取得し勉強時間を合計する
   useEffect(() => {
     if (user) {
+      const week_array = [];
       db.where("userId", "==", user.uid)
         .where(
           "createdAt",
           ">",
-          firebase.firestore.Timestamp.fromDate(zeroAdjust())
+          firebase.firestore.Timestamp.fromDate(specify_weekago())
         )
         .get()
         .then((data) => {
           data.docs.map((doc) => {
             const item = doc.data();
-            array.push(item);
+            week_array.push(item);
           });
-          const totalWeekHours = array.reduce((result, current) => {
+          const totalWeekHours = week_array.reduce((result, current) => {
             return result + current.working;
           }, 0);
-          setOneWeekHours(totalWeekHours);
+          setWeek_hours(totalWeekHours);
+        });
+    }
+  }, [user]);
+
+  //前週のdotsをDBから取得
+  useEffect(() => {
+    const lastweek_array = [];
+    if (user) {
+      //firestoreのDBでも時間が指定できるように変換する
+      const startDate = firebase.firestore.Timestamp.fromDate(
+        specify_lastweek()
+      );
+      const endDate = firebase.firestore.Timestamp.fromDate(just_weekago);
+      db.orderBy("createdAt")
+        .where("userId", "==", user.uid)
+        .startAt(startDate)
+        .endBefore(endDate)
+        .get()
+        .then((data) => {
+          data.docs.map((doc) => {
+            const item = doc.data();
+            lastweek_array.push(item);
+          });
+          const total_lastweekHours = lastweek_array.reduce(
+            (result, current) => {
+              return result + current.working;
+            },
+            0
+          );
+          setLastweek_hours(total_lastweekHours);
         });
     }
   }, [user]);
 
   //総学習時間を取得
-  const array2 = [];
   useEffect(() => {
+    const total_array = [];
     if (user) {
       db.where("userId", "==", user.uid)
         .get()
         .then((data) => {
           data.docs.map((doc) => {
             const item = doc.data();
-            array.push(item);
+            total_array.push(item);
           });
-          const totalHours = array.reduce((result, current) => {
+          const total_hours = total_array.reduce((result, current) => {
             return result + current.working;
           }, 0);
-          setTotalHours(totalHours);
+          setTotal_hours(total_hours);
         });
     }
   }, [user]);
-  console.log(oneWeekHours);
-  console.log(totalHours);
 
   return (
     <React.Fragment>
       <Header />
       <form className="MainFrom" style={MainStyle}>
         <div>
-          {/* <SideBar /> */}
           <OurSideBar />
         </div>
-        <LeftPage>
-          <LeftPage_Top>
-            <MydotsProfile />
-            <WeekStudyHours>
-              {/* <WeekTitle>📅学習時間 : {oneWeekHours}時間</WeekTitle> */}
-              <StudyHours>今週の学習時間 / {oneWeekHours}時間</StudyHours>
-              <StudyHours>前週の学習時間 / {totalHours}時間</StudyHours>
-              <StudyHours>総学習時間 / {totalHours}時間</StudyHours>
-            </WeekStudyHours>
-          </LeftPage_Top>
-          {/* <Profile> */}
-          {/* </Profile> */}
-          {/* <StyledChart> */}
+
+        <Profile>
+          <UserIcon />
+          <WeekStudyHours>
+            <StudyHours>今週の学習時間 / {week_hours}時間</StudyHours>
+            <StudyHours>前週の学習時間 / {lastweek_hours}時間</StudyHours>
+            <StudyHours>総学習時間 / {total_hours}時間</StudyHours>
+          </WeekStudyHours>
+        </Profile>
+        <StyledChart>
+          <StyledForm>
+            <MiniForm />
+          </StyledForm>
           <MydotsChart />
-          {/* </StyledChart> */}
-        </LeftPage>
-        <RightPage>
-          <RightTop>
-            <StyledCalendar>
-              <Calendar />
-            </StyledCalendar>
-            <ExplainCalendar>
-              {/* <CalendarText> */}
-              🟩：dotをやった日
-              <br />
-              👈 : 日付をクリックすると詳細ページの確認が出来るよ
-              {/* </CalendarText> */}
-            </ExplainCalendar>
-            {/* <StyledDots>
-              <MiniDots />
-            </StyledDots> */}
-            <StyledForm>
-              <MiniForm />
-            </StyledForm>
-          </RightTop>
-        </RightPage>
+        </StyledChart>
+        <StyledCalendar>
+          <Calendar />
+        </StyledCalendar>
+        {/* <ExplainCalendar> */}
+        {/* <CalendarText> */}
+        {/* 🟩：dotをやった日 */}
+        {/* <br /> */}
+        {/* 👈 : 日付をクリックすると詳細ページの確認が出来るよ */}
+        {/* </CalendarText> */}
+        {/* </ExplainCalendar> */}
+        <StyledDots>
+          <MiniDots />
+        </StyledDots>
       </form>
       <Footer />
     </React.Fragment>

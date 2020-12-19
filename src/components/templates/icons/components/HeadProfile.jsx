@@ -4,7 +4,7 @@ import { faUserAlt } from "@fortawesome/free-solid-svg-icons";
 import firebase from "firebase";
 import { AuthContext } from "../../../../firebase/AuthService";
 
-const MydotsProfile = () => {
+const HeadProfile = () => {
   const [imageSrc, setImageSrc] = useState("");
   const db = firebase.firestore().collection("userIcon");
   const user = useContext(AuthContext);
@@ -49,4 +49,4 @@ const MydotsProfile = () => {
   );
 };
 
-export default MydotsProfile;
+export default HeadProfile;

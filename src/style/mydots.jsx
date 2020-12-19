@@ -1,24 +1,20 @@
 import styled from "styled-components";
 
-export const LeftPage = styled.div`
-  position: absolute;
-  /* padding: 0 10rem; */
-  width: 40%;
-  height: 80%;
-  left: 18rem;
-  /* border: solid 10px #a1e8d7; */
-`;
-
-export const LeftPage_Top = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-top: 50px;
-`;
-
 export const StyledChart = styled.div`
-  /* padding: 0 10rem; */
+  position: absolute;
+  transform: translate(520px, 10px);
+`;
+
+export const StyledForm = styled.div`
+  position: absolute;
+  /* bottom: 200px; */
+  transform: translate(150px, -10px);
+  margin-top: 10px;
 `;
 export const Profile = styled.div`
+  position: absolute;
+  transform: translate(250px, 30px);
+  margin-top: 50px;
   /* padding: 0 10rem; */
   /* width: 50%; */
   /* height: 50%; */
@@ -43,17 +39,6 @@ export const StudyHours = styled.li`
   list-style-type: none;
 `;
 
-export const RightPage = styled.div`
-  position: absolute;
-  width: 40%;
-  right: 1rem;
-`;
-
-export const RightTop = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
 export const StyledCalendar = styled.div`
   margin-right: 3rem;
 `;
@@ -64,7 +49,7 @@ export const ExplainCalendar = styled.div`
   background-color: #b3e5fc;
   margin-top: 2rem;
   margin-bottom: 6em;
-  margin-right: 12em;
+  /* margin-right: 12em; */
   ::before {
     content: "";
     position: absolute;
@@ -84,14 +69,12 @@ export const CalendarText = styled.p`
   padding: 0;
 `;
 
-export const StyledForm = styled.div`
-  position: absolute;
-  bottom: -50px;
-  right: 0;
-`;
-
 export const StyledDots = styled.div`
-  height: 200px;
-  width: 100%;
+  position: absolute;
+  height: 50%;
+  width: 15%;
+  bottom: 0;
+  right: 0;
+  /* transform: translate(-150px, -150px); */
   overflow: auto;
 `;

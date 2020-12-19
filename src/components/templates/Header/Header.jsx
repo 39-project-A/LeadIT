@@ -1,5 +1,5 @@
 import React from "react";
-import UserIcon from "../icons/user/user";
+import HeadProfile from "../icons/components/HeadProfile";
 import { Nav, NavLink, NavBtn, NavBtnLink, Icon } from "./HeaderElements";
 import Achievement from "./Achievement";
 
@@ -15,7 +15,7 @@ const Header = () => {
         </NavBtn>
         <Achievement />
         <Icon>
-          <UserIcon />
+          <HeadProfile />
         </Icon>
       </Nav>
     </>

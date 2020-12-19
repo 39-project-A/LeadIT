@@ -7,7 +7,6 @@ import { useHistory } from "react-router-dom";
 import DatePicker, { registerLocale } from "react-datepicker";
 import ja from "date-fns/locale/ja";
 registerLocale("ja", ja);
-// import { useSelector } from "react-redux";
 
 const Calendar = () => {
   const [startDate, setStartDate] = useState(new Date());
@@ -48,6 +47,7 @@ const Calendar = () => {
   return (
     <DatePicker
       locale="ja"
+      
       //   selected={startDate}
       // onChange={(date) => setStartDate(date)}
       onChange={select_date}

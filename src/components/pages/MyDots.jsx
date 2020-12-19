@@ -5,13 +5,15 @@ import MydotsChart from "../templates/graph/MydotsChart";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
 import OurSideBar from "../templates/OurSideBar";
+// import SideBar from "../templates/SideBar";
 import firebase from "../../firebase/firebase";
 import { AuthContext } from "../../firebase/AuthService";
-// import MiniDots from "../templates/MiniDots.jsx";
+import MiniDots from "../templates/MiniDots.jsx";
 import Calendar from "../templates/Calendar";
 import MydotsProfile from "../templates/icons/components/MydotsProfile";
 import {
   LeftPage,
+  LeftPage_Top,
   Profile,
   WeekStudyHours,
   WeekTitle,
@@ -22,7 +24,10 @@ import {
   CalendarText,
   StyledCalendar,
   StyledChart,
+  StyledForm,
+  StyledDots,
 } from "../../style/mydots";
+import MiniForm from "../templates/MiniForm.jsx";
 
 const useStyles = makeStyles({
   container: {
@@ -116,20 +121,24 @@ const MyDots = () => {
       <Header />
       <form className="MainFrom" style={MainStyle}>
         <div>
+          {/* <SideBar /> */}
           <OurSideBar />
         </div>
         <LeftPage>
-          <Profile>
+          <LeftPage_Top>
             <MydotsProfile />
-          </Profile>
-          <WeekStudyHours>
-            <WeekTitle>📅今週の学習時間 : {oneWeekHours}時間</WeekTitle>
-            <StudyHours>
-              (前週の学習時間:)
-              <br />
-              💪総学習時間:{totalHours}時間
-            </StudyHours>
-          </WeekStudyHours>
+            <WeekStudyHours>
+              {/* <WeekTitle>📅学習時間 : {oneWeekHours}時間</WeekTitle> */}
+              <StudyHours>今週の学習時間 / {oneWeekHours}時間</StudyHours>
+              <StudyHours>前週の学習時間 / {totalHours}時間</StudyHours>
+              <StudyHours>総学習時間 / {totalHours}時間</StudyHours>
+            </WeekStudyHours>
+          </LeftPage_Top>
+          {/* <Profile> */}
+          {/* </Profile> */}
+          {/* <StyledChart> */}
+          <MydotsChart />
+          {/* </StyledChart> */}
         </LeftPage>
         <RightPage>
           <RightTop>
@@ -143,10 +152,13 @@ const MyDots = () => {
               👈 : 日付をクリックすると詳細ページの確認が出来るよ
               {/* </CalendarText> */}
             </ExplainCalendar>
+            {/* <StyledDots>
+              <MiniDots />
+            </StyledDots> */}
+            <StyledForm>
+              <MiniForm />
+            </StyledForm>
           </RightTop>
-          <StyledChart>
-            <MydotsChart />
-          </StyledChart>
         </RightPage>
       </form>
       <Footer />

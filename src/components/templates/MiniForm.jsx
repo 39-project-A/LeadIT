@@ -68,6 +68,7 @@ export default function MiniForm() {
           userId: user.uid,
           userName: user.displayName,
           createdAt: new Date(),
+          getDate: new Date().toDateString(),
         })
       );
       dispatch(set_star());

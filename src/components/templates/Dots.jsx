@@ -46,8 +46,7 @@ export default function Dots({ dot }) {
       .collection("dots")
       .doc(dot.dotId)
       .delete()
-      .then(function () {
-      })
+      .then(function () {})
       .catch(function (error) {
         console.error("Error removing document: ", error);
       });
@@ -60,9 +59,11 @@ export default function Dots({ dot }) {
           className={classes.list}
           primary={dot.title}
           classes={{ primary: classes.primary }}
+          secondary={dot.getDate}
+          classes={{ secondary: classes.secondary }}
         />
       </Link>
-      <button onClick={handle_delete}>削除</button>
+      {/* <button onClick={handle_delete}>削除</button> */}
       <Divider />
     </div>
   );

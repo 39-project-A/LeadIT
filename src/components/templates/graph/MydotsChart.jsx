@@ -176,14 +176,14 @@ const MydotsChart = () => {
 
   return (
     <div className="App">
-      <div style={{ height: "300px", width: "500px" }}>
+      <div style={{ height: "300px", width: "500px", marginTop: "50px" }}>
         <Line
           data={{
             labels: init_arrayWeeks().weekLabel,
             // labels: init_arrayWeeks2().weekLabel,
             datasets: [
               {
-                label: " #⚡ 今週の学習状況 ",
+                label: " #今週の学習状況 ",
                 // pointStyle: oneWeekHours,
                 data: filledWeek,
                 backgroundColor: [
@@ -234,7 +234,7 @@ const MydotsChart = () => {
               xAxes: [
                 {
                   ticks: {
-                    // maxTicksLimit: 3,
+                    fontSize: 15,
                   },
                 },
               ],
@@ -243,17 +243,19 @@ const MydotsChart = () => {
                   ticks: {
                     beginAtZero: true,
                     max: 8,
+                    fontSize: 15,
                   },
                   scaleLabel: {
                     display: true,
                     labelString: "(hour)",
+                    fontSize: 20,
                   },
                 },
               ],
             },
             legend: {
               labels: {
-                fontSize: 20,
+                fontSize: 15,
               },
             },
           }}

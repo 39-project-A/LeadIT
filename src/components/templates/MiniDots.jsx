@@ -39,6 +39,8 @@ export default function MiniDots() {
       return dot;
     }
   });
+
+  
   // console.log(test);
 
   return (
@@ -46,7 +48,7 @@ export default function MiniDots() {
       <div className={classes.root}>
         <List component="nav">
           {catch_myDot.map((dot) => {
-            return <Dots dot={dot} key={dot.dotId} />;
+            return <Dots dot={dot} key={dot.dotId}  />;
           })}
         </List>
       </div>

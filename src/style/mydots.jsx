@@ -5,45 +5,47 @@ export const LeftPage = styled.div`
   /* padding: 0 10rem; */
   width: 40%;
   height: 80%;
-  left: 10rem;
-  border: solid 10px #a1e8d7;
+  left: 18rem;
+  /* border: solid 10px #a1e8d7; */
 `;
 
+export const LeftPage_Top = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 50px;
+`;
+
+export const StyledChart = styled.div`
+  /* padding: 0 10rem; */
+`;
 export const Profile = styled.div`
   /* padding: 0 10rem; */
   /* width: 50%; */
   /* height: 50%; */
 `;
 
-export const WeekStudyHours = styled.div`
-  position: relative;
-  margin: 5rem 10rem;
-  padding: 5rem 1em;
-  border: solid 3px #95ccff;
-  border-radius: 8px;
+export const WeekStudyHours = styled.ul`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin: 10px auto;
+  padding: 0 0 0 0 !important;
 `;
 
-export const WeekTitle = styled.span`
-  position: absolute;
-  display: inline-block;
-  top: -13px;
-  left: 10px;
-  padding: 0 9px;
-  line-height: 1;
-  font-size: 19px;
-  background: #fff;
-  color: #95ccff;
-  font-weight: bold;
-`;
-
-export const StudyHours = styled.p`
-  margin: 0;
-  padding: 0;
+export const StudyHours = styled.li`
+  color: #2d8fdd;
+  border-left: solid 6px #f4b364; /*左側の線の色を変えたい場合はここ*/
+  background: #fdf2e3; /*背景色を変えたい場合はここ*/
+  margin-bottom: 5px;
+  line-height: 1.5;
+  padding: 0.5em;
+  border-bottom: solid 2px #dadada;
+  list-style-type: none;
 `;
 
 export const RightPage = styled.div`
   position: absolute;
-  width: 45%;
+  width: 40%;
   right: 1rem;
 `;
 
@@ -82,6 +84,14 @@ export const CalendarText = styled.p`
   padding: 0;
 `;
 
-export const StyledChart = styled.div`
-  /* padding: 0 10rem; */
+export const StyledForm = styled.div`
+  position: absolute;
+  bottom: -50px;
+  right: 0;
+`;
+
+export const StyledDots = styled.div`
+  height: 200px;
+  width: 100%;
+  overflow: auto;
 `;

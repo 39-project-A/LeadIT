@@ -51,7 +51,7 @@ const ProfilePhoto = ({ getData, imageSrc }) => {
         disabled={toggle && imageSrc}
       >
         {(!toggle || !imageSrc) && (
-          <FontAwesomeIcon icon={faUserAlt} color="white" size="3x" />
+          <FontAwesomeIcon icon={faUserAlt} color="white" size="1x" />
         )}
         {toggle && imageSrc && (
           <img
@@ -67,8 +67,9 @@ const ProfilePhoto = ({ getData, imageSrc }) => {
           type="button"
           className="btn btn-danger rounded-circle position-relative delete-button"
           onClick={deletePic}
+          
         >
-          <FontAwesomeIcon icon={faTrashAlt} color="white" size="xs" />
+          <FontAwesomeIcon icon={faTrashAlt} style={{ color: "white", fontSize: "10px", margin: "2px -4px 30px"  }} />
         </button>
       )}
     </div>

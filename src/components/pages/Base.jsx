@@ -8,6 +8,7 @@ import MiniDots from "../templates/MiniDots";
 import MiniForm from "../templates/MiniForm";
 import { AuthContext } from "../../firebase/AuthService";
 import firebase from "../../firebase/firebase";
+import {fetch_dots} from "../../reducks/dots/action"
 import { fetch_todayDotLength } from "../../reducks/star/action";
 import { Bodyleft } from "../templates/Header/HeaderElements";
 
@@ -26,6 +27,21 @@ export default function Base() {
     firebase.auth().signOut();
   };
 
+// -----全てのdotをfetch-----
+  useEffect(() => {
+    firebase
+      .firestore()
+      .collection("dots")
+      .get()
+      .then((data) => {
+        const RESPONSE = data.docs.map((doc) => {
+          return doc.data();
+        });
+        dispatch(fetch_dots(RESPONSE));
+      });
+  }, []);
+
+  // -----今日のDotのfetch------
   useEffect(() => {
     firebase
       .firestore()

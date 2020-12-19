@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams, useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { delete_dot } from "../../reducks/dots/action";
 import { fetch_todayDotLength } from "../../reducks/star/action";
 import firebase from "../../firebase/firebase";
@@ -34,15 +34,15 @@ const DETAIL_WRAPPER = styled.div`
 	padding-left: 8%;
 `;
 
-const TEXT = styled.div`
+const TEXT = styled.p`
 	font-size: 1.2rem;
-	height: 65%;
+	height: 40vh;
 	padding-bottom: 10%;
+	word-break: break-all;
 `;
 
 const IMG_WRAPPER = styled.div`
 	width: 100%;
-	// padding-bottom: 10%;
 `;
 
 const IMG = styled.img`
@@ -60,21 +60,54 @@ export default function DotDetail() {
 	const history = useHistory();
 	const dispatch = useDispatch();
 	const user = useContext(AuthContext);
-	const [dot, set_dot] = useState();
+	const [workingTime, set_WorkingTime] = useState([]);
+	const dotsFromRedux = useSelector((state) => state.dots);
+	const clickedDot = dotsFromRedux.find(
+		(dotFromRedux) => dotFromRedux.dotId === id
+	);
 
-	
+	// -----一週間分の合計勉強時間------//
+	const zeroAdjust = () => {
+		let agoDate = new Date();
+		let agoWeek = agoDate.setDate(agoDate.getDate() - 6);
+		let hope = new Date(agoWeek);
+		let zero = hope.setHours(0);
+		let one = new Date(zero);
+		let two = one.setMinutes(0);
+		let three = new Date(two);
+		let four = three.setSeconds(0);
+		let five = new Date(four);
+		return five;
+	};
+
+	const array = [];
 	useEffect(() => {
-		firebase
-			.firestore()
-			.collection("dots")
-			.get()
-			.then((data) => {
-				const dots = data.docs.map((doc) => {
-					return doc.data();
+		if (user) {
+			firebase
+				.firestore()
+				.collection("dots")
+				.where("userId", "==", user.uid)
+				.where(
+					"createdAt",
+					">",
+					firebase.firestore.Timestamp.fromDate(zeroAdjust())
+				)
+				.get()
+				.then((data) => {
+					data.docs.map((doc) => {
+						const oneWeekDots = doc.data();
+						array.push(oneWeekDots);
+					});
+
+					let totalWorking = 0;
+					for (let i = 0; i < array.length; i++) {
+						totalWorking += array[i].working;
+					}
+					set_WorkingTime(totalWorking);
 				});
-				set_dot(dots.find((dot) => dot.dotId == id));
-			});
-	}, []);
+		}
+	}, [user]);
+	// -------------------------------//
 
 	// ----今日のdot作ってるか確認------//
 	const get_todayMidnight = () => {
@@ -100,77 +133,17 @@ export default function DotDetail() {
 	}
 	// -----------------------
 
-	
-	const onEdit_click = () => {
-		console.log("edit click");
-	};
 
-	const onDelete_click = () => {
-		console.log(dot);
-		firebase
-			.firestore()
-			.collection("dots")
-			.doc(dot.dotId)
-			.delete()
-			.then(function () {
-				console.log("Document successfully deleted!");
-				dispatch(delete_dot(dot));
-				history.push("/");
-			})
-			.catch(function (error) {
-				console.error("Error removing document: ", error);
-			});
-	};
 
-	const show_editAndDeleteButtons = () => {
-		if (user && dot && user.uid === dot.userId) {
-			return (
-				<div style={{ display: "flex" }}>
-					<Button
-						variant="contained"
-						color="primary"
-						className={classes.button}
-						startIcon={<DeleteIcon />}
-						style={{ left: "92%" }}
-						onClick={onEdit_click}
-					>
-						編集
-					</Button>
-					<Button
-						variant="contained"
-						color="secondary"
-						className={classes.button}
-						startIcon={<DeleteIcon />}
-						style={{ left: "100%" }}
-						onClick={onDelete_click}
-					>
-						消去
-					</Button>
-				</div>
-			);
+	const renderText = () => {
+		if (clickedDot) {
+			return clickedDot.text;
 		}
 	};
 
-	// const dot = firebase
-	//   .firestore()
-	//   .collection("dots")
-	//   .doc(id)
-	//   .get()
-	//   .then((doc) => {
-	//     console.log(doc.data().title);
-	//     return doc.data();
-	//     // set_dot(doc.data());
-	//   });
-	// console.log(dot.handleFulfilled(value));
-
-	// .then((doc) => {
-	//   return doc;
-	// });
-
-
-	const render_workTime = () => {
-		if (dot) {
-			const createdAt = new Date(dot.createdAt.seconds * 1000);
+	const renderWorkingTime = () => {
+		if (clickedDot) {
+			const createdAt = new Date(clickedDot.createdAt);
 			const year = createdAt.getFullYear();
 			const month = createdAt.getMonth() + 1;
 			const date = createdAt.getDate();
@@ -184,24 +157,73 @@ export default function DotDetail() {
 				date +
 				"の勉強時間" +
 				"：" +
-				dot.working +
+				clickedDot.working +
 				" 時間"
 			);
 		}
 	};
 
+
+	const onDelete_click = () => {
+		firebase
+			.firestore()
+			.collection("dots")
+			.doc(clickedDot.dotId)
+			.delete()
+			.then(function () {
+				console.log("Document successfully deleted!");
+				dispatch(delete_dot(clickedDot));
+				history.push("/");
+			})
+			.catch(function (error) {
+				console.error("Error removing document: ", error);
+			});
+	};
+
+	const show_editAndDeleteButtons = () => {
+		if (user && clickedDot && user.uid === clickedDot.userId) {
+			return (
+				<div style={{ display: "flex" }}>
+					<Button
+						variant="contained"
+						color="primary"
+						className={classes.button}
+						startIcon={<DeleteIcon />}
+						style={{ left: "92%", marginTop: "5%" }}
+						onClick={onEdit_click}
+					>
+						編集
+					</Button>
+					<Button
+						variant="contained"
+						color="secondary"
+						className={classes.button}
+						startIcon={<DeleteIcon />}
+						style={{ left: "100%", marginTop: "5%" }}
+						onClick={onDelete_click}
+					>
+						消去
+					</Button>
+				</div>
+			);
+		}
+	};
+
+	const onEdit_click = () => {
+		console.log("edit click");
+	};
+
 	return (
 		<div style={{ height: "10vh" }}>
-			<Header />
+			{/* 👇戻す */}
+			{/* <Header /> */}
 			<INNER>
+				{/* ----avatarの実装はここ👇----- */}
 				<diV>
 					<Avatar src="/broken-image.jpg" className={classes.large} />
 				</diV>
 				<DETAIL_WRAPPER>
-					<TEXT>
-						今日はテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
-						勉強時間は?時間だった。 今日の勉強で？？？の記事(URL)が役に立った。
-					</TEXT>
+					<TEXT>{renderText()}</TEXT>
 					<IMG_WRAPPER style={{ paddingBottom: "10%" }}>
 						<IMG
 							src={calendarImg}
@@ -209,7 +231,7 @@ export default function DotDetail() {
 							alt="カレンダーのアイコン "
 							align="middle"
 						/>
-						{render_workTime()}
+						{renderWorkingTime()}
 					</IMG_WRAPPER>
 
 					<IMG_WRAPPER style={{ paddingBottom: "2%" }}>
@@ -219,7 +241,7 @@ export default function DotDetail() {
 							alt="時計のアイコン"
 							align="middle"
 						/>
-						今週の合計勉強時間：30時間
+						今週の合計勉強時間： {workingTime} 時間
 					</IMG_WRAPPER>
 					<span>{show_editAndDeleteButtons()}</span>
 
@@ -232,6 +254,5 @@ export default function DotDetail() {
 			</INNER>
 			<Footer />
 		</div>
-
 	);
 }

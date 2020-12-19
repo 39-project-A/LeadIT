@@ -19,38 +19,49 @@ import LoggedInRoute from "./firebase/LoggedInRoute";
 import Ranking from "./components/pages/Ranking";
 
 export default function App() {
-  const dispatch = useDispatch();
+	const dispatch = useDispatch();
 
-  useEffect(() => {
-    firebase
-      .firestore()
-      .collection("dots")
-      .get()
-      .then((data) => {
-        const RESPONSE = data.docs.map((doc) => {
-          return doc.data();
-        });
-        dispatch(fetch_dots(RESPONSE));
-      });
-  }, []);
+	useEffect(() => {
+		firebase
+			.firestore()
+			.collection("dots")
+			.orderBy("createdAt", "asc")
+			.get()
+			.then((data) => {
+				const RESPONSE = data.docs.map((doc) => {
+					return {
+						dotId: doc.data().dotId,
+						title: doc.data().title,
+						text: doc.data().text,
+						working: doc.data().working,
+						tags: doc.data().tags,
+						userId: doc.data().userId,
+						userName: doc.data().userName,
+						createdAt: new Date(doc.data().createdAt.seconds * 1000),
+						getday: doc.data().getday,
+					};
+				});
+				dispatch(fetch_dots(RESPONSE));
+			});
+	}, []);
 
-  return (
-    <AuthProvider>
-      <Router>
-        <Switch>
-          <LoggedInRoute exact path="/" component={Base} />
-          <Route exact path="/home" component={Home} />
-          <Route exact path="/about" component={About} />
-          <Route exact path="/signin" component={SignIn} />
-          <Route exact path="/signup" component={SignUp} />
-          <Route exact path="/mydots" component={MyDots} />
-          <Route exact path="/form" component={Form} />
-          <Route exact path="/dot/:id" component={DotDetail} />
-          <Route exact path="/mydots" component={MyDots} />
-          <Route exact path="/ourdots" component={OurDots} />
-          <Route exact path="/ranking" component={Ranking} />
-        </Switch>
-      </Router>
-    </AuthProvider>
-  );
+	return (
+		<AuthProvider>
+			<Router>
+				<Switch>
+					<LoggedInRoute exact path="/" component={Base} />
+					<Route exact path="/home" component={Home} />
+					<Route exact path="/about" component={About} />
+					<Route exact path="/signin" component={SignIn} />
+					<Route exact path="/signup" component={SignUp} />
+					<Route exact path="/mydots" component={MyDots} />
+					<Route exact path="/form" component={Form} />
+					<Route exact path="/dot/:id" component={DotDetail} />
+					<Route exact path="/mydots" component={MyDots} />
+					<Route exact path="/ourdots" component={OurDots} />
+					<Route exact path="/ranking" component={Ranking} />
+				</Switch>
+			</Router>
+		</AuthProvider>
+	);
 }

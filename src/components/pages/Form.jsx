@@ -67,6 +67,7 @@ const Form = () => {
 
 	const onSubmit = (data) => {
 		const dotId = shortid.generate();
+		console.log(data)
 		if (star === 0) {
 			firebase
 				.firestore()
@@ -75,7 +76,7 @@ const Form = () => {
 				.set({
 					dotId: dotId,
 					title: data.title,
-					text: "",
+					text: data.text,
 					url: "",
 					working: Number(data.working),
 					tags: tags,
@@ -88,7 +89,7 @@ const Form = () => {
 				add_dot({
 					dotId: dotId,
 					title: data.title,
-					text: "",
+					text: data.text,
 					url: "",
 					working: Number(data.working),
 					tags: tags,
@@ -103,7 +104,8 @@ const Form = () => {
 
 	return (
 		<React.Fragment>
-			<Header />
+			{/* 戻す👇 */}
+			{/* <Header /> */}
 			<div style={bodyStyle}>
 				<FormSideBar tags={tags} set_tags={set_tags} />
 			</div>
@@ -162,7 +164,8 @@ const Form = () => {
 					multiline
 					rows={6}
 					variant="outlined"
-					ref={register({ required: true })}
+					inputRef={register({ required: true })}
+						// ref={register({ required: true })}
 				/>
 				<div className={classes.div}> </div>
 			</form>

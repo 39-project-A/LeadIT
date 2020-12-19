@@ -32,12 +32,14 @@ export default function Dots({ dot }) {
 			TODAY_MIDNIGHT.setMinutes(0);
 			return TODAY_MIDNIGHT.setSeconds(0);
 		};
-	
-		if (new Date(dot.createdAt).toString() === "Invalid Date") {
-			dotTime = new Date(dot.createdAt.seconds * 1000);
-		} else {
-			dotTime = new Date(dot.createdAt);
-		}
+
+		const dotTime = new Date(dot.createdAt)
+		// 👇以前まで書いてたverもしばらく取っておきます
+		// if (new Date(dot.createdAt).toString() === "Invalid Date") {
+		// 	dotTime = new Date(dot.createdAt.seconds * 1000);
+		// } else {
+		// 	dotTime = new Date(dot.createdAt);
+		// }
 
 		if (dotTime >= new Date(get_todayMidnight())) {
 			dispatch(unset_star());

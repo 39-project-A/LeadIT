@@ -104,8 +104,7 @@ const Form = () => {
 
 	return (
 		<React.Fragment>
-			{/* 戻す👇 */}
-			{/* <Header /> */}
+			<Header />
 			<div style={bodyStyle}>
 				<FormSideBar tags={tags} set_tags={set_tags} />
 			</div>

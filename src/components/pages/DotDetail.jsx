@@ -147,8 +147,6 @@ export default function DotDetail() {
 			const year = createdAt.getFullYear();
 			const month = createdAt.getMonth() + 1;
 			const date = createdAt.getDate();
-			const hour = createdAt.getHours();
-			const minute = createdAt.getMinutes();
 			return (
 				year +
 				"/" +
@@ -215,13 +213,13 @@ export default function DotDetail() {
 
 	return (
 		<div style={{ height: "10vh" }}>
-			{/* 👇戻す */}
-			{/* <Header /> */}
+			<Header />
 			<INNER>
 				{/* ----avatarの実装はここ👇----- */}
 				<diV>
 					<Avatar src="/broken-image.jpg" className={classes.large} />
 				</diV>
+				{/* ----------ここまで------------ */}
 				<DETAIL_WRAPPER>
 					<TEXT>{renderText()}</TEXT>
 					<IMG_WRAPPER style={{ paddingBottom: "10%" }}>

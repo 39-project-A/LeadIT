@@ -180,8 +180,8 @@ const MydotsChart = () => {
     <div className="App">
       <div
         style={{
-          height: "450px",
-          width: "700px",
+          height: "550px",
+          width: "800px",
           marginTop: "50px",
           // position: "absolute",
         }}
@@ -193,10 +193,13 @@ const MydotsChart = () => {
             datasets: [
               {
                 label: " #今週の学習状況 ",
+                // borderCapStyle: "round",
+                borderJoinStyle: "square",
+                // borderDash: [],
                 // pointStyle: oneWeekHours,
                 data: filledWeek,
                 backgroundColor: [
-                  "rgba(28, 169, 212, 0.5)",
+                  "rgb(255, 255, 0, 0.7)",
                   "rgba(54, 162, 235, 0.2)",
                   "rgba(255, 206, 86, 0.2)",
                   "rgba(75, 192, 192, 0.2)",
@@ -204,21 +207,21 @@ const MydotsChart = () => {
                   "rgba(255, 159, 64, 0.2)",
                 ],
                 borderColor: [
-                  "#63ffea",
+                  "rgb(255, 215, 0, 1)",
                   "rgba(54, 162, 235, 1)",
                   "rgba(255, 206, 86, 1)",
                   "rgba(75, 192, 192, 1)",
                   "rgba(153, 102, 255, 1)",
                   "rgba(255, 159, 64, 1)",
                 ],
-                borderWidth: 2,
+                borderWidth: 3,
               },
               {
                 label: " # 前週の学習状況",
                 data: filledWeek2,
                 // fill: false,
                 backgroundColor: [
-                  "rgba(112, 255, 99, 0.3)",
+                  "rgba(0, 191, 255, 0.3)",
                   "rgba(54, 162, 235, 0.2)",
                   "rgba(255, 206, 86, 0.2)",
                   "rgba(75, 192, 192, 0.2)",
@@ -226,14 +229,14 @@ const MydotsChart = () => {
                   "rgba(255, 159, 64, 0.2)",
                 ],
                 borderColor: [
-                  "#9c5363",
+                  "rgba(30, 144, 255, 0.25)",
                   "rgba(54, 162, 235, 1)",
                   "rgba(255, 206, 86, 1)",
                   "rgba(75, 192, 192, 1)",
                   "rgba(153, 102, 255, 1)",
                   "rgba(255, 159, 64, 1)",
                 ],
-                borderWidth: 0.1,
+                borderWidth: 3,
               },
             ],
           }}
@@ -243,7 +246,12 @@ const MydotsChart = () => {
               xAxes: [
                 {
                   ticks: {
-                    fontSize: 15,
+                    fontSize: 20,
+                  },
+                  scaleLabel: {
+                    display: true,
+                    labelString: "day",
+                    fontSize: 25,
                   },
                 },
               ],
@@ -252,12 +260,12 @@ const MydotsChart = () => {
                   ticks: {
                     beginAtZero: true,
                     max: 8,
-                    fontSize: 15,
+                    fontSize: 25,
                   },
                   scaleLabel: {
                     display: true,
-                    labelString: "(hour)",
-                    fontSize: 20,
+                    labelString: "hour",
+                    fontSize: 25,
                   },
                 },
               ],

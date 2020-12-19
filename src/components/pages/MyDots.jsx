@@ -12,7 +12,7 @@ import MiniDots from "../templates/MiniDots.jsx";
 import Calendar from "../templates/Calendar";
 import UserIcon from "../templates/icons/user/user";
 import {
-  LeftPage,
+  Left,
   LeftPage_Top,
   Profile,
   WeekStudyHours,
@@ -173,21 +173,21 @@ const MyDots = () => {
         <div>
           <OurSideBar />
         </div>
-
-        <Profile>
-          <UserIcon />
-          <WeekStudyHours>
-            <StudyHours>今週の学習時間 / {week_hours}時間</StudyHours>
-            <StudyHours>前週の学習時間 / {lastweek_hours}時間</StudyHours>
-            <StudyHours>総学習時間 / {total_hours}時間</StudyHours>
-          </WeekStudyHours>
-        </Profile>
+        <Left>
+          <Profile>
+            <UserIcon />
+            <StyledDots>
+              <MiniDots />
+            </StyledDots>
+          </Profile>
+        </Left>
         <StyledChart>
           <StyledForm>
             <MiniForm />
           </StyledForm>
           <MydotsChart />
         </StyledChart>
+
         <StyledCalendar>
           <Calendar />
         </StyledCalendar>
@@ -198,9 +198,12 @@ const MyDots = () => {
         {/* 👈 : 日付をクリックすると詳細ページの確認が出来るよ */}
         {/* </CalendarText> */}
         {/* </ExplainCalendar> */}
-        <StyledDots>
-          <MiniDots />
-        </StyledDots>
+        <WeekStudyHours>
+          <StudyHours>今週の学習時間 / {week_hours}時間</StudyHours>
+          <StudyHours>前週の学習時間 / {lastweek_hours}時間</StudyHours>
+          <StudyHours>総学習時間 / {total_hours}時間</StudyHours>
+        </WeekStudyHours>
+        {/* </StyledDots> */}
       </form>
       <Footer />
     </React.Fragment>

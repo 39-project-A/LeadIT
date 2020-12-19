@@ -1,8 +1,14 @@
 import styled from "styled-components";
 
+export const Left = styled.div`
+  position: absolute;
+  transform: translate(250px, 30px);
+  margin-top: 50px;
+`;
+
 export const StyledChart = styled.div`
   position: absolute;
-  transform: translate(520px, 10px);
+  transform: translate(436px, 10px);
 `;
 
 export const StyledForm = styled.div`
@@ -13,7 +19,7 @@ export const StyledForm = styled.div`
 `;
 export const Profile = styled.div`
   position: absolute;
-  transform: translate(250px, 30px);
+  transform: translate(-10px, -113px);
   margin-top: 50px;
   /* padding: 0 10rem; */
   /* width: 50%; */
@@ -21,6 +27,9 @@ export const Profile = styled.div`
 `;
 
 export const WeekStudyHours = styled.ul`
+  position: absolute;
+  top: 400px;
+  right: 50px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -41,6 +50,9 @@ export const StudyHours = styled.li`
 
 export const StyledCalendar = styled.div`
   margin-right: 3rem;
+  position: absolute;
+  right: -20px;
+  top: 105px;
 `;
 
 export const ExplainCalendar = styled.div`
@@ -71,10 +83,12 @@ export const CalendarText = styled.p`
 
 export const StyledDots = styled.div`
   position: absolute;
-  height: 50%;
-  width: 15%;
-  bottom: 0;
-  right: 0;
+  /* top: 0; */
+  /* left: 0; */
+  height: 210%;
+  width: 100%;
+  /* bottom: 0; */
+  /* right: 0; */
   /* transform: translate(-150px, -150px); */
   overflow: auto;
 `;

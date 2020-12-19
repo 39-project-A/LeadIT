@@ -51,9 +51,9 @@
 }
 
 .delete-button {
-  font-size: 30px;
-  left: -41px;
-  top: 65px;
+  font-size: 110px;
+  left: -130px;
+  top: 50px;
   padding: 0 7px;
   svg {
     margin-bottom: 0.1rem;

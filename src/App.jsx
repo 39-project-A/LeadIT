@@ -17,20 +17,7 @@ import Edit from "./components/pages/Edit";
 import Ranking from "./components/pages/Ranking";
 
 export default function App() {
-  const dispatch = useDispatch();
 
-  useEffect(() => {
-    firebase
-      .firestore()
-      .collection("dots")
-      .get()
-      .then((data) => {
-        const RESPONSE = data.docs.map((doc) => {
-          return doc.data();
-        });
-        dispatch(fetch_dots(RESPONSE));
-      });
-  }, []);
 
   return (
     <AuthProvider>

@@ -39,7 +39,7 @@ const RankProfile = ({ oneRank, twoRank, threeRank }) => {
         disabled={imageSrc}
       >
         {!imageSrc && (
-          <FontAwesomeIcon icon={faUserAlt} color="white" size="3x" />
+          <FontAwesomeIcon icon={faUserAlt} color="white" size="2px" />
         )}
         {imageSrc && (
           <img
@@ -47,6 +47,7 @@ const RankProfile = ({ oneRank, twoRank, threeRank }) => {
             src={imageSrc}
             className="rounded-circle"
             width="100%"
+
           />
         )}
       </button>

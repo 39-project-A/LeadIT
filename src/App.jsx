@@ -17,8 +17,6 @@ import Edit from "./components/pages/Edit";
 import Ranking from "./components/pages/Ranking";
 
 export default function App() {
-
-
   return (
     <AuthProvider>
       <Router>

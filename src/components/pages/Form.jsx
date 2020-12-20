@@ -60,6 +60,43 @@ const Form = () => {
       });
   }
 
+	const onSubmit = (data) => {
+		const dotId = shortid.generate();
+		console.log(data)
+		if (star === 0) {
+			firebase
+				.firestore()
+				.collection("dots")
+				.doc(dotId)
+				.set({
+					dotId: dotId,
+					title: data.title,
+					text: data.text,
+					url: "",
+					working: Number(data.working),
+					tags: tags,
+					userId: user.uid,
+					userName: user.displayName,
+					createdAt: new Date(),
+					getday: new Date().getDay(),
+				});
+			dispatch(
+				add_dot({
+					dotId: dotId,
+					title: data.title,
+					text: data.text,
+					url: "",
+					working: Number(data.working),
+					tags: tags,
+					userId: user.uid,
+					userName: user.displayName,
+					createdAt: new Date(),
+				})
+			);
+			dispatch(set_star());
+		}
+	};
+
   const onSubmit = (data) => {
     const dotId = shortid.generate();
     if (star === 0) {

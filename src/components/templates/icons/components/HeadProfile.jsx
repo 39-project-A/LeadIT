@@ -30,11 +30,11 @@ const HeadProfile = () => {
     <div className="container3">
       <button
         type="button"
-        className="btn btn-primary rounded-circle mt-2 opaque profile-pic3"
+        className=" btn-primary_header rounded-circle  opaque profile-pic3"
         disabled={imageSrc}
       >
         {!imageSrc && (
-          <FontAwesomeIcon icon={faUserAlt} color="white" size="3x" />
+          <FontAwesomeIcon icon={faUserAlt} color="white" size="2x" />
         )}
         {imageSrc && (
           <img

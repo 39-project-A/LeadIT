@@ -5,9 +5,17 @@
   z-index: 999;
   /* top: 0; */
   /* right: 0; */
-  width: 300%;
+  width: 330%;
   border: 1px solid grey;
   border-radius: 4px;
+}
+
+.m-auto {
+  z-index: 999;
+}
+
+.container {
+  height: 20%;
 }
 
 .container3 {
@@ -51,11 +59,28 @@
 }
 
 .delete-button {
-  font-size: 110px;
-  left: -130px;
-  top: 50px;
-  padding: 0 7px;
+  /* position: absolute; */
+  font-size: 25px;
+  top: -45px;
+  left: 110px;
+  background-color: skyblue;
   svg {
     margin-bottom: 0.1rem;
   }
+}
+
+.btn-primary {
+  background-color: #aeaeae;
+}
+
+.btn-primary_header {
+  background-color: #aeaeae;
+}
+
+.btn-primary_ranking {
+  background-color: #aeaeae;
+}
+
+.btn-danger_base:hover {
+  background-color: salmon;
 }

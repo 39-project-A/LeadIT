@@ -54,7 +54,14 @@ export default function Dots({ dot }) {
 
   return (
     <div>
-      <Link style={{ display: "flex" }} to={`/dot/${dot.dotId}`}>
+      <Link
+        style={{
+          display: "flex",
+          backgroundColor: "rgba(221, 255, 221, 0.5)",
+          border: "3px solid skyblue",
+        }}
+        to={`/dot/${dot.dotId}`}
+      >
         <ListItemText
           className={classes.list}
           primary={dot.title}

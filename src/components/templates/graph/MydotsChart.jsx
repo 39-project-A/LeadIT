@@ -193,11 +193,8 @@ const MydotsChart = () => {
             datasets: [
               {
                 label: " #今週の学習状況 ",
-                // borderCapStyle: "round",
-                borderJoinStyle: "square",
-                // borderDash: [],
-                // pointStyle: oneWeekHours,
                 data: filledWeek,
+                // lineTension: 0,
                 backgroundColor: [
                   "rgb(255, 255, 0, 0.7)",
                   "rgba(54, 162, 235, 0.2)",
@@ -208,17 +205,17 @@ const MydotsChart = () => {
                 ],
                 borderColor: [
                   "rgb(255, 215, 0, 1)",
-                  "rgba(54, 162, 235, 1)",
-                  "rgba(255, 206, 86, 1)",
-                  "rgba(75, 192, 192, 1)",
-                  "rgba(153, 102, 255, 1)",
-                  "rgba(255, 159, 64, 1)",
+                  "rgb(255, 255, 0, 0.7)",
+                  "rgb(255, 255, 0, 0.7)",
+                  "rgb(255, 255, 0, 0.7)",
+                  "rgb(255, 255, 0, 0.7)",
                 ],
                 borderWidth: 3,
               },
               {
                 label: " # 前週の学習状況",
                 data: filledWeek2,
+                // lineTension: 0,
                 // fill: false,
                 backgroundColor: [
                   "rgba(0, 191, 255, 0.3)",
@@ -230,11 +227,11 @@ const MydotsChart = () => {
                 ],
                 borderColor: [
                   "rgba(30, 144, 255, 0.25)",
-                  "rgba(54, 162, 235, 1)",
-                  "rgba(255, 206, 86, 1)",
-                  "rgba(75, 192, 192, 1)",
-                  "rgba(153, 102, 255, 1)",
-                  "rgba(255, 159, 64, 1)",
+                  "rgba(0, 191, 255, 0.3)",
+                  "rgba(0, 191, 255, 0.3)",
+                  "rgba(0, 191, 255, 0.3)",
+                  "rgba(0, 191, 255, 0.3)",
+                  "rgba(0, 191, 255, 0.3)",
                 ],
                 borderWidth: 3,
               },

@@ -6,11 +6,16 @@ import { AuthContext } from "../../firebase/AuthService";
 import firebase from "../../firebase/firebase";
 import { add_dot } from "../../reducks/dots/action";
 import { set_star } from "../../reducks/star/action";
+import "../../style/Miniform.css";
 
 const Select = React.forwardRef(({ label }, ref) => (
   <>
     <label>{label}</label>
-    <select name={label} ref={ref}>
+    <select
+      name={label}
+      ref={ref}
+      style={{ backgroundColor: "rgba(253, 245, 230, 1)", marginRight: "10px" }}
+    >
       <option value="0.5">0.5</option>
       <option value="1.0">1.0</option>
       <option value="1.5">1.5</option>
@@ -77,15 +82,23 @@ export default function MiniForm() {
 
   const setSendButton = () => {
     if (star === 0) {
-      return <input type="submit" value="Send" />;
+      return <input type="submit" value="👣" class="mini-button" />;
     }
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <label>Title</label>
-      <input name="title" ref={register({ required: true })} />
-      <Select label="working" ref={register({ required: true })} />
+      <label>📝</label>
+      <input
+        name="title"
+        placeholder="title"
+        ref={register({ required: true })}
+        style={{
+          backgroundColor: "rgba(253, 245, 230, 1)",
+          marginRight: "10px",
+        }}
+      />
+      <Select label="🕒" ref={register({ required: true })} />
       {setSendButton()}
     </form>
   );

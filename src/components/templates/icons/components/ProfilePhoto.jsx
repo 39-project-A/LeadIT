@@ -1,6 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUserAlt, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import {
+  faUserAlt,
+  faTrashAlt,
+  faUserEdit,
+  faUserPlus,
+} from "@fortawesome/free-solid-svg-icons";
 import firebase from "firebase";
 import { AuthContext } from "../../../../firebase/AuthService";
 
@@ -40,7 +45,7 @@ const ProfilePhoto = ({ getData, imageSrc }) => {
     db.doc(currentUser.uid).delete();
   };
   return (
-    <div>
+    <div className="container">
       <button
         type="button"
         onClick={handleToggleClick}
@@ -48,7 +53,7 @@ const ProfilePhoto = ({ getData, imageSrc }) => {
         disabled={toggle && imageSrc}
       >
         {(!toggle || !imageSrc) && (
-          <FontAwesomeIcon icon={faUserAlt} color="white" size="7x" />
+          <FontAwesomeIcon icon={faUserAlt} color="white" size="5x" />
         )}
         {toggle && imageSrc && (
           <img
@@ -62,10 +67,10 @@ const ProfilePhoto = ({ getData, imageSrc }) => {
       {toggle && imageSrc && (
         <button
           type="button"
-          className="btn btn-danger rounded-circle position-relative delete-button"
+          className="btn btn-danger_base rounded-circle position-relative delete-button"
           onClick={deletePic}
         >
-          <FontAwesomeIcon icon={faTrashAlt} color="white" size="xs" />
+          <FontAwesomeIcon icon={faUserPlus} color="white" size="xs" />
         </button>
       )}
     </div>

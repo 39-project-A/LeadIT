@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 // import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+// import "react-datepicker/dist/react-datepicker.css";
+import "../../style/Calendar.css";
 import firebase from "../../firebase/firebase";
 import { AuthContext } from "../../firebase/AuthService";
 import { useHistory } from "react-router-dom";
@@ -47,7 +48,6 @@ const Calendar = () => {
   return (
     <DatePicker
       locale="ja"
-      
       //   selected={startDate}
       // onChange={(date) => setStartDate(date)}
       onChange={select_date}

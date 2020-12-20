@@ -26,7 +26,6 @@ const Home = () => {
           に対してのモチベーションを保ってもらえるように様々な機能を駆使し作り上げました。
         </AboutLeadIT>
       </Explain>
-
       <Footer></Footer>
     </>
   );

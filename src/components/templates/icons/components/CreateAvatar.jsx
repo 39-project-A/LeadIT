@@ -10,9 +10,8 @@ const CreateAvatar = ({ getData }) => {
   const user = useContext(AuthContext);
 
   const set_userIcon = (preview) => {
-    // blobに変換
     const blob = preview;
-    // firestoreに保存
+
     db.doc(currentUser.uid)
       .set({
         userName: user.displayName,
@@ -46,10 +45,7 @@ const CreateAvatar = ({ getData }) => {
     <div className="container">
       <div className="row mx-auto my-3">
         <div className="col-md-6 m-auto">
-          <div
-            className="mx-auto my-4 choose-file"
-            // style={{ overflow: "scroll" }}
-          >
+          <div className="mx-auto my-4 choose-file">
             <Avatar
               imageWidth={270}
               width={"100%"}

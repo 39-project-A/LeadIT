@@ -29,7 +29,6 @@ const useStyles = makeStyles((theme) => ({
     bottom: "7%",
   },
 }));
-
 const bodyStyle = {
   display: "flex",
 };
@@ -49,7 +48,11 @@ export default function OurDots() {
     <React.Fragment>
       <Header />
       <div style={sideBar}>
-        <OurSideBar dots={dots} sortDots={sortDots} set_sortDots={set_sortDots} />
+        <OurSideBar
+          dots={dots}
+          sortDots={sortDots}
+          set_sortDots={set_sortDots}
+        />
       </div>
       <div className="MainBody" style={bodyStyle}>
         <div className={classes.root}>
@@ -64,4 +67,3 @@ export default function OurDots() {
     </React.Fragment>
   );
 }
-//

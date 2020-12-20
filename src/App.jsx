@@ -1,11 +1,9 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { fetch_dot, fetch_dots } from "./reducks/dots/action";
-import { fetch_today_dot } from "./reducks/star/action";
+import { fetch_dots } from "./reducks/dots/action";
 import Base from "./components/pages/Base";
 import Home from "./components/pages/Home";
-import About from "./components/pages/About";
 import SignIn from "./components/pages/SignIn";
 import SignUp from "./components/pages/SignUp";
 import MyDots from "./components/pages/MyDots";
@@ -14,45 +12,54 @@ import Form from "./components/pages/Form";
 import OurDots from "./components/pages/OurDots";
 import firebase from "./firebase/firebase";
 import { AuthProvider } from "./firebase/AuthService";
-import { AuthContext } from "./firebase/AuthService";
 import LoggedInRoute from "./firebase/LoggedInRoute";
 import Edit from "./components/pages/Edit";
 import Ranking from "./components/pages/Ranking";
 
 export default function App() {
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    firebase
-      .firestore()
-      .collection("dots")
-      .get()
-      .then((data) => {
-        const RESPONSE = data.docs.map((doc) => {
-          return doc.data();
-        });
-        dispatch(fetch_dots(RESPONSE));
-      });
-  }, []);
-
-  return (
-    <AuthProvider>
-      <Router>
-        <Switch>
-          <LoggedInRoute exact path="/" component={Base} />
-          <Route exact path="/home" component={Home} />
-          <Route exact path="/about" component={About} />
-          <Route exact path="/signin" component={SignIn} />
-          <Route exact path="/signup" component={SignUp} />
-          <Route exact path="/mydots" component={MyDots} />
-          <Route exact path="/form" component={Form} />
-          <Route exact path="/dot/:id" component={DotDetail} />
-          <Route exact path="/dot/:id/edit" component={Edit} />
-          <Route exact path="/mydots" component={MyDots} />
-          <Route exact path="/ourdots" component={OurDots} />
-          <Route exact path="/ranking" component={Ranking} />
-        </Switch>
-      </Router>
-    </AuthProvider>
-  );
+  
+	// -----全てのdotをfetch-----
+	useEffect(() => {
+		firebase
+			.firestore()
+			.collection("dots")
+			.get()
+			.then((data) => {
+				const RESPONSE = data.docs.map((doc) => {
+					return {
+						dotId: doc.data().dotId,
+						title: doc.data().title,
+						text: doc.data().text,
+						// url: data.url,
+						working: doc.data().working,
+						tags: doc.data().tags,
+						userId: doc.data().userId,
+						userName: doc.data().displayName,
+						createdAt: new Date(doc.data().createdAt.seconds * 1000),
+						getday: doc.data().getday,
+					};
+				});
+				dispatch(fetch_dots(RESPONSE));
+			});
+	}, []);
+	return (
+		<AuthProvider>
+			<Router>
+				<Switch>
+					<LoggedInRoute exact path="/" component={Base} />
+					<Route exact path="/home" component={Home} />
+					<Route exact path="/signin" component={SignIn} />
+					<Route exact path="/signup" component={SignUp} />
+					<Route exact path="/mydots" component={MyDots} />
+					<Route exact path="/form" component={Form} />
+					<Route exact path="/dot/:id" component={DotDetail} />
+					<Route exact path="/dot/:id/edit" component={Edit} />
+					<Route exact path="/mydots" component={MyDots} />
+					<Route exact path="/ourdots" component={OurDots} />
+					<Route exact path="/ranking" component={Ranking} />
+				</Switch>
+			</Router>
+		</AuthProvider>
+	);
 }

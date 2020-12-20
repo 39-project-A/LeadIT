@@ -21,6 +21,7 @@ import { faHtml5 } from "@fortawesome/free-brands-svg-icons";
 import { faCss3 } from "@fortawesome/free-brands-svg-icons";
 import { faDocker } from "@fortawesome/free-brands-svg-icons";
 import { faGlobe } from "@fortawesome/free-solid-svg-icons";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
@@ -38,6 +39,7 @@ export default function OurSideBar({ dots, sortDots, set_sortDots }) {
       })
     );
   };
+
   return (
     <div className={classes.root}>
       <List component="nav" aria-label="main mailbox folders">

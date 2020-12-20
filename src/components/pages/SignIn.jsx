@@ -12,7 +12,7 @@ import Container from "@material-ui/core/Container";
 import { Link, useHistory } from "react-router-dom";
 import { auth } from "../../firebase/firebase";
 import { AuthContext } from "../../firebase/AuthService";
-import { Route, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 function Copyright() {
   return (
@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [, setLoading] = useState(false);
   const classes = useStyles();
   const history = useHistory();
   const user = useContext(AuthContext);
@@ -63,12 +63,10 @@ const SignIn = () => {
     auth
       .signInWithEmailAndPassword(email, password)
       .then((response) => {
-        console.log("ログイン成功", response);
         setLoading(false);
         history.push("/");
       })
       .catch((e) => {
-        console.log("ログイン失敗", e);
         setLoading(false);
       });
   };

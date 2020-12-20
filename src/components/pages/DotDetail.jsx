@@ -35,11 +35,14 @@ const TEXT = styled.p`
 	font-size: 1.2rem;
 	height: 40vh;
 	padding-bottom: 10%;
-	word-break: break-all;
+  word-break: break-all;
+`
+
 const TAGS = styled.div`
   font-size: 1.2rem;
   height: 50px;
 `;
+
 const IMG_WRAPPER = styled.div`
 	width: 100%;
 `;

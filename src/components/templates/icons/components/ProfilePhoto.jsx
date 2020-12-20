@@ -69,6 +69,7 @@ const ProfilePhoto = ({ getData, imageSrc }) => {
           type="button"
           className="btn btn-danger_base rounded-circle position-relative delete-button"
           onClick={deletePic}
+          
         >
           <FontAwesomeIcon icon={faUserPlus} color="white" size="xs" />
         </button>

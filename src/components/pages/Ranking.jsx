@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import firebase from "../../firebase/firebase";
 import Header from "../templates/Header/Header";
 import RankProfile from "../templates/icons/components/RankProfile";
@@ -68,7 +68,6 @@ const Ranking = () => {
         setThreeRank(threeRank);
         const threeHours = group[2].working;
         setThreeHours(threeHours);
-        console.log(group);
       });
   }, []);
 

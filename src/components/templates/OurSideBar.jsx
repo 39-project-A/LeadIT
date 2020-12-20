@@ -21,159 +21,127 @@ import { faHtml5 } from "@fortawesome/free-brands-svg-icons";
 import { faCss3 } from "@fortawesome/free-brands-svg-icons";
 import { faDocker } from "@fortawesome/free-brands-svg-icons";
 import { faGlobe } from "@fortawesome/free-solid-svg-icons";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
-    maxWidth: 200,
+    maxWidth: 400,
     backgroundColor: theme.palette.background.paper,
   },
 }));
 
-export default function FormSideBar({ tags, set_tags }) {
+export default function OurSideBar({ dots, sortDots, set_sortDots }) {
   const classes = useStyles();
-  const adjust_tags = (tag) => {
-    let index = tags.indexOf(tag);
-    if (index === -1) {
-      set_tags([...tags, tag]);
-    } else {
-      let tagArr = tags.filter(function (item) {
-        return item !== tag;
-      });
-      set_tags(tagArr);
-    }
+  const sort_dots = (tag) => {
+    set_sortDots(
+      sortDots.filter((dot) => {
+        if (dot.tags.indexOf(tag) !== -1) return dot;
+      })
+    );
   };
-  const adjust_AllTags = () => {
-    set_tags([
-      "HTML5",
-      "CSS3",
-      "JavaScript",
-      "React",
-      "Vue",
-      "Angular",
-      "PHP",
-      "Laravel",
-      "Python",
-      "Java",
-      "Swift",
-      "Git",
-      "Github",
-      "Docker",
-    ]);
-  };
-  const clear_tags = () => {
-    set_tags([]);
-  };
+
   return (
     <div className={classes.root}>
       <List component="nav" aria-label="main mailbox folders">
-        <ListItem button onClick={() => adjust_AllTags()}>
+        <ListItem button onClick={() => set_sortDots(dots)}>
           <ListItemIcon>
             <FontAwesomeIcon icon={faGlobe} />
           </ListItemIcon>
           <ListItemText primary="ALL" />
         </ListItem>
         <Divider />
-        <ListItem button onClick={() => clear_tags()}>
-          <ListItemIcon>
-            <FontAwesomeIcon icon={faTrash} />
-          </ListItemIcon>
-          <ListItemText primary="clear" />
-        </ListItem>
-        <Divider />
-        <ListItem button onClick={() => adjust_tags("HTML5")}>
+        <ListItem button onClick={() => sort_dots("HTML5")}>
           <ListItemIcon>
             <FontAwesomeIcon icon={faHtml5} />
           </ListItemIcon>
           <ListItemText primary="HTML5" />
         </ListItem>
         <Divider />
-        <ListItem button onClick={() => adjust_tags("CSS3")}>
+        <ListItem button onClick={() => sort_dots("CSS3")}>
           <ListItemIcon>
             <FontAwesomeIcon icon={faCss3} />
           </ListItemIcon>
           <ListItemText primary="CSS3" />
         </ListItem>
         <Divider />
-        <ListItem button onClick={() => adjust_tags("JavaScript")}>
+        <ListItem button onClick={() => sort_dots("JavaScript")}>
           <ListItemIcon>
             <FontAwesomeIcon icon={faJs} />
           </ListItemIcon>
           <ListItemText primary="JavaScript" />
         </ListItem>
         <Divider />
-        <ListItem button onClick={() => adjust_tags("React")}>
+        <ListItem button onClick={() => sort_dots("React")}>
           <ListItemIcon>
             <FontAwesomeIcon icon={faReact} />
           </ListItemIcon>
           <ListItemText primary="React" />
         </ListItem>
         <Divider />
-        <ListItem button onClick={() => adjust_tags("Vue")}>
+        <ListItem button onClick={() => sort_dots("Vue")}>
           <ListItemIcon>
             <FontAwesomeIcon icon={faVuejs} />
           </ListItemIcon>
           <ListItemText primary="Vue" />
         </ListItem>
         <Divider />
-        <ListItem button onClick={() => adjust_tags("Angular")}>
+        <ListItem button onClick={() => sort_dots("Angular")}>
           <ListItemIcon>
             <FontAwesomeIcon icon={faAngular} />
           </ListItemIcon>
           <ListItemText primary="Angular" />
         </ListItem>
         <Divider />
-        <ListItem button onClick={() => adjust_tags("PHP")}>
+        <ListItem button onClick={() => sort_dots("PHP")}>
           <ListItemIcon>
             <FontAwesomeIcon icon={faPhp} />
           </ListItemIcon>
           <ListItemText primary="PHP" />
         </ListItem>
         <Divider />
-        <ListItem button onClick={() => adjust_tags("Laravel")}>
+        <ListItem button onClick={() => sort_dots("Laravel")}>
           <ListItemIcon>
             <FontAwesomeIcon icon={faLaravel} />
           </ListItemIcon>
           <ListItemText primary="Laravel" />
         </ListItem>
         <Divider />
-        <ListItem button onClick={() => adjust_tags("Python")}>
+        <ListItem button onClick={() => sort_dots("Python")}>
           <ListItemIcon>
             <FontAwesomeIcon icon={faPython} />
           </ListItemIcon>
           <ListItemText primary="Python" />
         </ListItem>
         <Divider />
-        <ListItem button onClick={() => adjust_tags("Java")}>
+        <ListItem button onClick={() => sort_dots("Java")}>
           <ListItemIcon>
             <FontAwesomeIcon icon={faJava} />
           </ListItemIcon>
           <ListItemText primary="Java" />
         </ListItem>
         <Divider />
-        <ListItem button onClick={() => adjust_tags("Swift")}>
+        <ListItem button onClick={() => sort_dots("Swift")}>
           <ListItemIcon>
             <FontAwesomeIcon icon={faSwift} />
           </ListItemIcon>
           <ListItemText primary="Swift" />
         </ListItem>
         <Divider />
-        <ListItem button onClick={() => adjust_tags("Git")}>
+        <ListItem button onClick={() => sort_dots("Git")}>
           <ListItemIcon>
             <FontAwesomeIcon icon={faGit} />
           </ListItemIcon>
           <ListItemText primary="Git" />
         </ListItem>
         <Divider />
-        <ListItem button onClick={() => adjust_tags("Github")}>
+        <ListItem button onClick={() => sort_dots("Github")}>
           <ListItemIcon>
             <FontAwesomeIcon icon={faGithub} />
           </ListItemIcon>
           <ListItemText primary="Github" />
         </ListItem>
         <Divider />
-        <ListItem button onClick={() => adjust_tags("Docker")}>
+        <ListItem button onClick={() => sort_dots("Docker")}>
           <ListItemIcon>
             <FontAwesomeIcon icon={faDocker} />
           </ListItemIcon>

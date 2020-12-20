@@ -8,8 +8,9 @@ export default function Achievement() {
 
 
 	const show_star = () => {
+		
 		if (star > 0) {
-			return <img src={startImg} style={{ width: "55px" }}></img>;
+			return <img src={startImg} style={{ width: "55px", }}></img>;
 		} else {
 			return <img src={blackStarImg} style={{ width: "55px" }}></img>;
 		}

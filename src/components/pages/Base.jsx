@@ -6,15 +6,11 @@ import Header from "../templates/Header/Header";
 import BarChart from "../templates/graph/BarChart";
 import MiniDots from "../templates/MiniDots";
 import MiniForm from "../templates/MiniForm";
-import Dots from "../templates/Dots";
 import { AuthContext } from "../../firebase/AuthService";
 import firebase from "../../firebase/firebase";
+import {fetch_dots} from "../../reducks/dots/action"
 import { fetch_todayDotLength } from "../../reducks/star/action";
-
-import { red } from "@material-ui/core/colors";
-// import UserIcon from "../templates/icons/user/user";
 import { Bodyleft } from "../templates/Header/HeaderElements";
-// import Ranking from "./Ranking";
 
 export default function Base() {
   const dispatch = useDispatch();
@@ -31,6 +27,21 @@ export default function Base() {
     firebase.auth().signOut();
   };
 
+// -----全てのdotをfetch-----
+  useEffect(() => {
+    firebase
+      .firestore()
+      .collection("dots")
+      .get()
+      .then((data) => {
+        const RESPONSE = data.docs.map((doc) => {
+          return doc.data();
+        });
+        dispatch(fetch_dots(RESPONSE));
+      });
+  }, []);
+
+  // -----今日のDotのfetch------
   useEffect(() => {
     firebase
       .firestore()
@@ -46,6 +57,16 @@ export default function Base() {
       });
   }, []);
 
+  const jobstyle = {
+    display: "flex",
+    JustifyContent: "flex-end",
+  };
+
+  const topjobstyle = {
+    display: "flex",
+    flexFlow: "column",
+  };
+
   return (
     <React.Fragment>
       <Header />
@@ -54,15 +75,47 @@ export default function Base() {
         <MiniForm />
         <MiniDots />
       </Bodyleft>
-      {/* <UserIcon /> */}
       <Footer />
+
       <div>Index</div>
       <button style={{ width: "100px", height: "30px" }} onClick={logout}>
         ログアウト
       </button>
-      <Link to="/form">
-        <button>Formページ</button>
-      </Link>
+      <div style={jobstyle}>
+        <div style={topjobstyle}>
+          <h4>Justice!!!!</h4>
+          <Link to="/mydots">
+            <button>MyDotsページ</button>
+          </Link>
+          <Link to="/ranking">
+            <button>Rankingページ</button>
+          </Link>
+        </div>
+        <div style={topjobstyle}>
+          <h4>goto</h4>
+          <Link to="/form">
+            <button>Formページ</button>
+          </Link>
+          <Link to="/ourdots">
+            <button>OurDotsページ</button>
+          </Link>
+        </div>
+        <div style={topjobstyle}>
+          <h4>ito</h4>
+          <Link to="/dot/:id.jsx">
+            <button>DotDetailページ</button>
+          </Link>
+          <Link to="/dot/:id/edit">
+            <button>Editページ</button>
+          </Link>
+        </div>
+        <div style={topjobstyle}>
+          <h4>iwaswa</h4>
+          <Link to="/home">
+            <button>Homeページ</button>
+          </Link>
+        </div>
+      </div>
     </React.Fragment>
   );
 }

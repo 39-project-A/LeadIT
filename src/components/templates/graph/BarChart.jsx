@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Line } from "react-chartjs-2";
 import firebase from "firebase";
+import { AuthContext } from "../../../firebase/AuthService";
 
 const BarChart = () => {
   const db = firebase.firestore().collection("dots");
   const [filledWeek, set_filledWeek] = useState([]);
-  const currentUserId = firebase.auth().currentUser.uid;
+  const user = useContext(AuthContext);
 
   const zeroAdjust = () => {
     let agoDate = new Date();
@@ -48,32 +49,34 @@ const BarChart = () => {
   };
 
   useEffect(() => {
-    db.where("userId", "==", currentUserId)
-      .where(
-        "createdAt",
-        ">",
-        firebase.firestore.Timestamp.fromDate(zeroAdjust())
-      )
-      .orderBy("createdAt")
-      .onSnapshot((snapshot) => {
-        const hope = init_arrayWeeks().weekData;
-        snapshot.docs.map((doc) => {
-          const item = doc.data();
-          const receivedDay = item.getday;
-          const hours = item.working;
-          for (let i = 0; i < hope.length; i++) {
-            if (receivedDay === hope[i].jsGetDay) {
-              hope[i].initNum = hours;
+    if (user) {
+      db.where("userId", "==", user.uid)
+        .where(
+          "createdAt",
+          ">",
+          firebase.firestore.Timestamp.fromDate(zeroAdjust())
+        )
+        .orderBy("createdAt")
+        .onSnapshot((snapshot) => {
+          const hope = init_arrayWeeks().weekData;
+          snapshot.docs.map((doc) => {
+            const item = doc.data();
+            const receivedDay = item.getday;
+            const hours = item.working;
+            for (let i = 0; i < hope.length; i++) {
+              if (receivedDay === hope[i].jsGetDay) {
+                hope[i].initNum = hours;
+              }
             }
-          }
-        });
+          });
 
-        const finalWeek = hope.map((el) => {
-          return el.initNum;
+          const finalWeek = hope.map((el) => {
+            return el.initNum;
+          });
+          set_filledWeek(finalWeek);
         });
-        set_filledWeek(finalWeek);
-      });
-  }, []);
+    }
+  }, [user]);
 
   return (
     <div className="App">

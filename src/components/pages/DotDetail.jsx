@@ -8,30 +8,27 @@ import { AuthContext } from "../../firebase/AuthService";
 import Header from "../templates/Header/Header";
 import Footer from "../templates/Footer/Footer";
 import styled from "styled-components";
-import Avatar from "@material-ui/core/Avatar"; //ひとまずのimport
+import Avatar from "@material-ui/core/Avatar";
 import { makeStyles } from "@material-ui/core/styles";
 import calendarImg from "../pages/img/calendar.png";
 import clockImg from "../pages/img/alarm-clock.png";
 import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
 
 const useStyles = makeStyles((theme) => ({
-	large: {
-		width: theme.spacing(7),
-		height: theme.spacing(7),
-	},
+  large: {
+    width: theme.spacing(7),
+    height: theme.spacing(7),
+  },
 }));
-
 const INNER = styled.div`
-	display: flex;
-	width: 60%;
-	margin: auto;
-	padding: 6% 2%;
+  display: flex;
+  width: 60%;
+  margin: auto;
+  padding: 6% 2%;
 `;
-
 const DETAIL_WRAPPER = styled.div`
-	padding-left: 8%;
+  padding-left: 8%;
 `;
 
 const TEXT = styled.p`
@@ -39,19 +36,16 @@ const TEXT = styled.p`
 	height: 40vh;
 	padding-bottom: 10%;
 	word-break: break-all;
+const TAGS = styled.div`
+  font-size: 1.2rem;
+  height: 50px;
 `;
-
 const IMG_WRAPPER = styled.div`
 	width: 100%;
 `;
-
 const IMG = styled.img`
-	width: 55px;
-	padding-right: 2%;
-`;
-
-const P = styled.p`
-	font-size: 1.2rem;
+  width: 55px;
+  padding-right: 2%;
 `;
 
 export default function DotDetail() {

@@ -6,28 +6,31 @@ import { AuthContext } from "../../../../firebase/AuthService";
 
 const ProfilePhoto = ({ getData, imageSrc }) => {
   const [toggle, setToggle] = useState(false);
-  const [blobKey, setBlobKey] = useState("");
+  const [, setBlobKey] = useState("");
   const db = firebase.firestore().collection("userIcon");
   const currentUser = firebase.auth().currentUser;
   const user = useContext(AuthContext);
+
   useEffect(() => {
-    db.where("userId", "==", user.uid)
-      .limit(1)
-      .get()
-      .then((data) => {
-        data.docs.map((doc) => {
-          const item = doc.data();
-          const blob = item.img;
-          const getBlobId = item.blobId;
-          setBlobKey(getBlobId);
-          if (!imageSrc && !toggle) {
-            imageSrc = blob;
-            setToggle(true);
-            getData(true, imageSrc);
-          }
+    if (user) {
+      db.where("userId", "==", user.uid)
+        .limit(1)
+        .get()
+        .then((data) => {
+          data.docs.map((doc) => {
+            const item = doc.data();
+            const blob = item.img;
+            const getBlobId = item.blobId;
+            setBlobKey(getBlobId);
+            if (!imageSrc && !toggle) {
+              imageSrc = blob;
+              setToggle(true);
+              getData(true, imageSrc);
+            }
+          });
         });
-      });
-  }, []);
+    }
+  }, [user]);
 
   const handleToggleClick = () => {
     setToggle(true);
@@ -48,7 +51,7 @@ const ProfilePhoto = ({ getData, imageSrc }) => {
         disabled={toggle && imageSrc}
       >
         {(!toggle || !imageSrc) && (
-          <FontAwesomeIcon icon={faUserAlt} color="white" size="3x" />
+          <FontAwesomeIcon icon={faUserAlt} color="white" size="1x" />
         )}
         {toggle && imageSrc && (
           <img
@@ -64,8 +67,9 @@ const ProfilePhoto = ({ getData, imageSrc }) => {
           type="button"
           className="btn btn-danger rounded-circle position-relative delete-button"
           onClick={deletePic}
+          
         >
-          <FontAwesomeIcon icon={faTrashAlt} color="white" size="xs" />
+          <FontAwesomeIcon icon={faTrashAlt} style={{ color: "white", fontSize: "10px", margin: "2px -4px 30px"  }} />
         </button>
       )}
     </div>

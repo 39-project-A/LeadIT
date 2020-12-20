@@ -12,15 +12,15 @@ import Container from "@material-ui/core/Container";
 import { Link, useHistory } from "react-router-dom";
 import { auth } from "../../firebase/firebase";
 import { AuthContext } from "../../firebase/AuthService";
-import { Route, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
+      <a color="inherit" href="https://material-ui.com/">
         Your Website
-      </Link>{" "}
+      </a>{" "}
       {new Date().getFullYear()}
       {"."}
     </Typography>
@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [, setLoading] = useState(false);
   const classes = useStyles();
   const history = useHistory();
   const user = useContext(AuthContext);
@@ -63,12 +63,10 @@ const SignIn = () => {
     auth
       .signInWithEmailAndPassword(email, password)
       .then((response) => {
-        console.log("ログイン成功", response);
         setLoading(false);
         history.push("/");
       })
       .catch((e) => {
-        console.log("ログイン失敗", e);
         setLoading(false);
       });
   };
@@ -120,9 +118,8 @@ const SignIn = () => {
             variant="contained"
             color="primary"
             className={classes.submit}
-            display={loading}
           >
-            Sign Up
+            Sign In
           </Button>
           <Grid container justify="flex-end">
             <Grid item>

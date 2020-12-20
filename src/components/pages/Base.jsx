@@ -43,8 +43,9 @@ export default function Base() {
 						working: doc.data().working,
 						tags: doc.data().tags,
 						userId: doc.data().userId,
-						userName: doc.data().displayName,
-						createdAt: new Date(doc.data().createdAt.seconds * 1000),
+            userName: doc.data().displayName,
+            createdAt: doc.data().createdAt,
+						// createdAt: new Date(doc.data().createdAt.seconds * 1000),
 						getday: doc.data().getday,
 					};
 				});

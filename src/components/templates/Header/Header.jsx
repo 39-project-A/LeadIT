@@ -1,6 +1,17 @@
 import React from "react";
 import HeadProfile from "../icons/components/HeadProfile";
-import { Nav, NavLink, NavBtn, NavBtnLink, Icon } from "./HeaderElements";
+import {
+  Nav,
+  NavLink,
+  NavBtn,
+  NavBtnLink,
+  Icon,
+  LogoItem,
+  HoverText,
+  ItemTop,
+  // UserIcon
+} from "./HeaderElements";
+import UserIcon from "../icons/user/user";
 import Achievement from "./Achievement";
 import rogo from "../../pages/img/logo.png";
 import { Link } from "react-router-dom";

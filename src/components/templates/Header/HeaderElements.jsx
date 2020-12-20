@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { NavLink as Link } from "react-router-dom";
 
-
 export const Nav = styled.nav`
 background:#00DAFF;
 width: 100%;
@@ -16,18 +15,18 @@ justify-content: space-between;
 `;
 
 export const NavLink = styled(Link)`
-color: #fff;
-display: flex;
-align-items: center;
-text-decoration: none;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
   padding: 0 1rem;
   height: 100%;
   cursor: pointer;
-  
+
   &.active {
     color: black;
   }
-  `;
+`;
 
 export const NavBtn = styled.nav`
   display: flex;
@@ -56,33 +55,37 @@ export const NavBtnLink = styled(Link)`
     background: #fff;
     color: #010606;
   }
-  `;
+`;
 
 export const Icon = styled.i`
-background-size: 5px;
-padding-top:5px;
+  background-size: 5px;
+  padding-top: 5px;
 `;
 export const Bodyleft = styled.div`
-float: right;
+  float: right;
 `;
 
 export const LogoItem = styled.div`
-display: flex;
-justify-content: space-between;
-margin: 0px 20px 30px; 
-`
+  display: flex;
+  justify-content: space-between;
+  margin: 0px 20px 30px;
+`;
 export const ItemTop = styled.div`
- padding-top:4px;
+  padding-top: 4px;
 `;
 export const HoverText = styled.p`
-isplay: flex;
-justify-content: space-between;
-  text-align:center;
-  color: 'white';
-	:hover {
-		color:#008b8b;
+  isplay: flex;
+  justify-content: space-between;
+  text-align: center;
+  color: "white";
+  :hover {
+    color: #008b8b;
     cursor: pointer;
-   transform: scale(0.9);
+    transform: scale(0.9);
     transition-duration: 0.7s;
-	}
-`
+  }
+`;
+export const UserIcon = styled.i`
+  background-size: 5px;
+  padding-top: 5px;
+`;

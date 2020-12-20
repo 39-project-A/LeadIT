@@ -15,6 +15,7 @@ import FormSideBar from "../templates/FormSideBar";
 import firebase from "firebase";
 import styled from "styled-components";
 
+
 const useStyles = makeStyles({
 	container: {
 		width: "400px",
@@ -24,7 +25,7 @@ const useStyles = makeStyles({
 		transform: "translateY(-50%) translateX(-50%)",
 	},
 	input: {
-		width: "343px",
+		width: "100%",
 	},
 	div: {
 		height: "40px",
@@ -37,6 +38,13 @@ const useStyles = makeStyles({
 const bodyStyle = {
 	float: "left",
 };
+
+const H3 = styled.h3 `
+	text-align: center;
+	padding-bottom: 5%;
+	color: #003399;
+	font-weight: bold;
+`
 
 const WRAPPER = styled.div`
 	margin-bottom: 7%;
@@ -139,6 +147,7 @@ const Edit = () => {
 			</div>
 			<form className={classes.container} onSubmit={handleSubmit(onSubmit)}>
 				<div className={classes.div}> </div>
+				<H3>EDIT PAGE</H3>
 				<LABEL>タイトル</LABEL>
 				<input
 					type="text"

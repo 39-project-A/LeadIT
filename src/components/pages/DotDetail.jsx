@@ -10,45 +10,56 @@ import Footer from "../templates/Footer/Footer";
 import styled from "styled-components";
 import Avatar from "@material-ui/core/Avatar";
 import { makeStyles } from "@material-ui/core/styles";
-import calendarImg from "../pages/img/calendar.png";
-import clockImg from "../pages/img/alarm-clock.png";
+import oneWeekIcon from "../pages/img/one-week.png";
+import yayFrogIcon from "../pages/img/yayFrog.png";
+
+
 import Button from "@material-ui/core/Button";
-import DeleteIcon from "@material-ui/icons/Delete";
+import EditSharpIcon from "@material-ui/icons/EditSharp";
+import DeleteSharpIcon from "@material-ui/icons/DeleteSharp";
 
 const useStyles = makeStyles((theme) => ({
-  large: {
-    width: theme.spacing(7),
-    height: theme.spacing(7),
-  },
+	large: {
+		width: theme.spacing(7),
+		height: theme.spacing(7),
+	},
 }));
+
+const H3 = styled.h3`
+	text-align: center;
+	font-weight: bold;
+`;
+
 const INNER = styled.div`
-  display: flex;
-  width: 60%;
-  margin: auto;
-  padding: 6% 2%;
+	display: flex;
+	margin: auto;
+	width: 70%;
+	padding-top: 5%;
+	// padding: 6% 2%;
 `;
 const DETAIL_WRAPPER = styled.div`
-  padding-left: 8%;
+	padding-left: 8%;
+	width: 100%;
 `;
 
 const TEXT = styled.p`
 	font-size: 1.2rem;
-	height: 40vh;
-	padding-bottom: 10%;
-  word-break: break-all;
-`
+	height: 30vh;
+	padding-bottom: 5%;
+	word-break: break-all;
+`;
 
 const TAGS = styled.div`
-  font-size: 1.2rem;
-  height: 50px;
+	font-size: 1.2rem;
+	height: 50px;
 `;
 
 const IMG_WRAPPER = styled.div`
 	width: 100%;
 `;
 const IMG = styled.img`
-  width: 55px;
-  padding-right: 2%;
+	width: 55px;
+	padding-right: 2%;
 `;
 
 export default function DotDetail() {
@@ -130,17 +141,21 @@ export default function DotDetail() {
 	}
 	// -----------------------
 
-
-
 	const renderText = () => {
 		if (clickedDot) {
 			return clickedDot.text;
 		}
 	};
 
+	const renderTitle = () => {
+		if (clickedDot) {
+			return clickedDot.title;
+		}
+	};
+
 	const renderWorkingTime = () => {
 		if (clickedDot) {
-			const createdAt = new Date(clickedDot.createdAt);
+			const createdAt = clickedDot.createdAt;
 			const year = createdAt.getFullYear();
 			const month = createdAt.getMonth() + 1;
 			const date = createdAt.getDate();
@@ -157,7 +172,6 @@ export default function DotDetail() {
 			);
 		}
 	};
-
 
 	const onDelete_click = () => {
 		firebase
@@ -178,26 +192,26 @@ export default function DotDetail() {
 	const show_editAndDeleteButtons = () => {
 		if (user && clickedDot && user.uid === clickedDot.userId) {
 			return (
-				<div style={{ display: "flex" }}>
+				<div style={{ display: "flex", float: "right", paddingRight: "5%" }}>
 					<Button
 						variant="contained"
 						color="primary"
 						className={classes.button}
-						startIcon={<DeleteIcon />}
-						style={{ left: "92%", marginTop: "5%" }}
+						startIcon={<EditSharpIcon />}
+						style={{ marginTop: "5%" }}
 						onClick={onEdit_click}
 					>
-						編集
+						EDIT
 					</Button>
 					<Button
 						variant="contained"
 						color="secondary"
 						className={classes.button}
-						startIcon={<DeleteIcon />}
-						style={{ left: "100%", marginTop: "5%" }}
+						startIcon={<DeleteSharpIcon />}
+						style={{ marginTop: "5%", marginLeft: "8%" }}
 						onClick={onDelete_click}
 					>
-						消去
+						DELETE
 					</Button>
 				</div>
 			);
@@ -206,6 +220,7 @@ export default function DotDetail() {
 
 	const onEdit_click = () => {
 		console.log("edit click");
+		history.push(`/dot/${id}/edit`);
 	};
 
 	return (
@@ -218,10 +233,11 @@ export default function DotDetail() {
 				</diV>
 				{/* ----------ここまで------------ */}
 				<DETAIL_WRAPPER>
+					<H3> {renderTitle()} </H3>
 					<TEXT>{renderText()}</TEXT>
 					<IMG_WRAPPER style={{ paddingBottom: "10%" }}>
 						<IMG
-							src={calendarImg}
+							src={yayFrogIcon}
 							title="カレンダー"
 							alt="カレンダーのアイコン "
 							align="middle"
@@ -231,22 +247,22 @@ export default function DotDetail() {
 
 					<IMG_WRAPPER style={{ paddingBottom: "2%" }}>
 						<IMG
-							src={clockImg}
+							src={oneWeekIcon}
 							title="時計"
 							alt="時計のアイコン"
 							align="middle"
 						/>
 						今週の合計勉強時間： {workingTime} 時間
 					</IMG_WRAPPER>
-					<span>{show_editAndDeleteButtons()}</span>
+				</DETAIL_WRAPPER>
 
-					{/* {dot && <p>title : {dot.title}</p>}
+				{/* {dot && <p>title : {dot.title}</p>}
 						{dot && <p>tag : {dot.tag}</p>}
 						{dot && <p>url : {dot.url}</p>}
 						{dot && <p>working : {dot.working}</p>}
-						{dot && <p>text : {dot.text}</p>} */}
-				</DETAIL_WRAPPER>
+          {dot && <p>text : {dot.text}</p>} */}
 			</INNER>
+			<span>{show_editAndDeleteButtons()}</span>
 			<Footer />
 		</div>
 	);

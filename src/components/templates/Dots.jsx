@@ -40,11 +40,6 @@ export default function Dots({ dot }) {
 		// 	dotTime = new Date(dot.createdAt);
 		// }
 
-    if (new Date(dot.createdAt).toString() === "Invalid Date") {
-      dotTime = new Date(dot.createdAt.seconds * 1000);
-    } else {
-      dotTime = new Date(dot.createdAt);
-    }
 
     if (dotTime >= new Date(get_todayMidnight())) {
       dispatch(unset_star());

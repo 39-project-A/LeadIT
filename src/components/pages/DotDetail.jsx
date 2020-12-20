@@ -242,7 +242,6 @@ export default function DotDetail() {
 							alt="カレンダーのアイコン "
 							align="middle"
 						/>
-						{renderWorkingTime()}
 					</IMG_WRAPPER>
 
 					<IMG_WRAPPER style={{ paddingBottom: "2%" }}>

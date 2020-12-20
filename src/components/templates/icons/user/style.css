@@ -1,15 +1,26 @@
 .createAvatarDiv_content {
   background-color: #e8fff8;
   position: absolute;
-  z-index: 100;
-  top: 0;
-  right: 0;
-  width: 70%;
+  transform: translate(-250px, -300px);
+  z-index: 999;
+  /* top: 0; */
+  /* right: 0; */
+  width: 330%;
   border: 1px solid grey;
   border-radius: 4px;
-  @media screen and (max-width: 767px) {
-    width: 90%;
-  }
+}
+
+.m-auto {
+  z-index: 999;
+}
+
+.container {
+  height: 20%;
+}
+
+.container3 {
+  /* margin: 30px 30px; */
+  width: 30%;
 }
 
 .previewDiv {
@@ -20,16 +31,27 @@
 
 .choose-file {
   width: 250px;
-  @media screen and (max-width: 350px) {
-    width: 230px;
-  }
 }
 
 .profile-pic {
-  width: 40px;
-  height: 41px;
+  width: 150px;
+  height: 150px;
   padding: 0;
   border: none;
+}
+.profile-pic_rank {
+  width: 100px;
+  height: 100px;
+  margin: 30px;
+  padding: 0;
+  border: none;
+}
+.profile-pic3 {
+  width: 60px;
+  height: 60px;
+  padding: 0;
+  border: none;
+  margin: 0 auto;
 }
 
 .opaque {
@@ -37,13 +59,27 @@
 }
 
 .delete-button {
-  left: -13px;
-  top: 21px;
-  padding: 0 7px;
-  width: 17px;
-  height: 17px;
-  ;
+  font-size: 25px;
+  top: -45px;
+  left: 110px;
+  background-color: skyblue;
   svg {
     margin-bottom: 0.1rem;
   }
+}
+
+.btn-primary {
+  background-color: #aeaeae;
+}
+
+.btn-primary_header {
+  background-color: #aeaeae;
+}
+
+.btn-primary_ranking {
+  background-color: #aeaeae;
+}
+
+.btn-danger_base:hover {
+  background-color: salmon;
 }

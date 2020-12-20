@@ -21,6 +21,7 @@ const BarChart = () => {
     return five;
   };
 
+  //今日から一週間の日付とラベルを取得
   const init_arrayWeeks = () => {
     const jsWeekAgo = [];
     let today = new Date();
@@ -48,6 +49,7 @@ const BarChart = () => {
     return weeksObj;
   };
 
+  //一週間分のdotsをDBから取得
   useEffect(() => {
     if (user) {
       db.where("userId", "==", user.uid)
@@ -89,7 +91,7 @@ const BarChart = () => {
                 label: " # Your trajectory",
                 data: filledWeek,
                 backgroundColor: [
-                  "rgba(255, 99, 132, 0.2)",
+                  "rgba(28, 169, 212, 0.5)",
                   "rgba(54, 162, 235, 0.2)",
                   "rgba(255, 206, 86, 0.2)",
                   "rgba(75, 192, 192, 0.2)",
@@ -97,14 +99,14 @@ const BarChart = () => {
                   "rgba(255, 159, 64, 0.2)",
                 ],
                 borderColor: [
-                  "rgba(255, 99, 132, 1)",
+                  "#63ffea",
                   "rgba(54, 162, 235, 1)",
                   "rgba(255, 206, 86, 1)",
                   "rgba(75, 192, 192, 1)",
                   "rgba(153, 102, 255, 1)",
                   "rgba(255, 159, 64, 1)",
                 ],
-                borderWidth: 1,
+                borderWidth: 2,
               },
             ],
           }}
@@ -123,6 +125,10 @@ const BarChart = () => {
                   ticks: {
                     beginAtZero: true,
                     max: 8,
+                  },
+                  scaleLabel: {
+                    display: true,
+                    labelString: "(hour)",
                   },
                 },
               ],

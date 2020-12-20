@@ -59,18 +59,17 @@ export const NavBtnLink = styled(Link)`
   `;
 
 export const Icon = styled.i`
-  background-size: 5px;
+background-size: 5px;
 padding-top:5px;
-  `;
-
+`;
 export const Bodyleft = styled.div`
 float: right;
 `;
 
 export const LogoItem = styled.div`
-  display: flex;
+display: flex;
 justify-content: space-between;
- margin: 0px 20px 30px; 
+margin: 0px 20px 30px; 
 `
 export const ItemTop = styled.div`
  padding-top:4px;

@@ -194,9 +194,11 @@ const MydotsChart = () => {
               {
                 label: " #今週の学習状況 ",
                 data: filledWeek,
+                fill: false,
+
                 // lineTension: 0,
                 backgroundColor: [
-                  "rgb(255, 255, 0, 0.7)",
+                  "rgb(255, 255, 0, 0.25)",
                   "rgba(54, 162, 235, 0.2)",
                   "rgba(255, 206, 86, 0.2)",
                   "rgba(75, 192, 192, 0.2)",
@@ -216,9 +218,9 @@ const MydotsChart = () => {
                 label: " # 前週の学習状況",
                 data: filledWeek2,
                 // lineTension: 0,
-                // fill: false,
+                fill: false,
                 backgroundColor: [
-                  "rgba(0, 191, 255, 0.3)",
+                  "rgba(0, 191, 255, 0.05)",
                   "rgba(54, 162, 235, 0.2)",
                   "rgba(255, 206, 86, 0.2)",
                   "rgba(75, 192, 192, 0.2)",

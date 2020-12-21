@@ -26,12 +26,6 @@ export const StyledChart = styled.div`
   transform: translate(436px, 30px);
 `;
 
-export const StyledForm = styled.div`
-  position: absolute;
-  transform: translate(230px, -10px);
-  margin-top: 10px;
-`;
-
 export const StyledCalendar = styled.div`
   margin-right: 3rem;
   position: absolute;

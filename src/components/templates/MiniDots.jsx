@@ -36,6 +36,7 @@ export default function MiniDots() {
 
   const catch_myDot = dots.filter((dot) => {
     if (dot.userId === user.uid) {
+      console.log(dot)
       return dot;
     }
   });

@@ -235,6 +235,9 @@ export default function Base() {
         <div>
           <OurSideBar />
         </div>
+        <button style={{ width: "100px", height: "30px" }} onClick={logout}>
+          ログアウト
+        </button>
         <LeftItem>
           <UserIcon />
           <StyledDots>

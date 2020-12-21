@@ -32,7 +32,7 @@ const MyDots = () => {
   return (
     <React.Fragment>
       <Header />
-      <from className="MainFrom" style={MainStyle}>
+      <div className="MainFrom" style={MainStyle}>
         <div>
           <OurSideBar />
         </div>
@@ -55,7 +55,7 @@ const MyDots = () => {
             <li>データ4</li>
           </ul>
         </div>
-      </from>
+      </div>
       <Footer />
     </React.Fragment>
   );

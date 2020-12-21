@@ -2,21 +2,21 @@ import React from "react";
 import HeadProfile from "../icons/components/HeadProfile";
 import {
   Nav,
-  NavLink,
   NavBtn,
-  NavBtnLink,
   Icon,
   LogoItem,
   HoverText,
-  ItemTop,
-  // UserIcon
+  Item_star,
 } from "./HeaderElements";
-import UserIcon from "../icons/user/user";
 import Achievement from "./Achievement";
 import rogo from "../../pages/img/logo.png";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCrown, faClipboard } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCrown,
+  faClipboard,
+  faEdit,
+} from "@fortawesome/free-solid-svg-icons";
 
 const Header = () => {
   const items = {
@@ -44,8 +44,14 @@ const Header = () => {
             />
           </NavBtn>
         </Link>
-
         <LogoItem>
+          <Link style={items} to="/form">
+            {" "}
+            <HoverText>
+              <FontAwesomeIcon icon={faEdit} />
+              <h6 style={{ fontSize: "13px", marginTop: "2px" }}>Form</h6>
+            </HoverText>
+          </Link>
           <Link style={items} to="/ranking">
             {" "}
             <HoverText>
@@ -60,11 +66,11 @@ const Header = () => {
               <h6 style={{ fontSize: "13px", marginTop: "2px" }}>OurDots</h6>
             </HoverText>
           </Link>
-          <ItemTop>
+          <Item_star>
             <Achievement />
-          </ItemTop>
+          </Item_star>
           <Icon>
-            <UserIcon />
+            <HeadProfile />
           </Icon>
         </LogoItem>
       </Nav>

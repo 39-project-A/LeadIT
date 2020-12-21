@@ -76,6 +76,7 @@ const Form = () => {
           userName: user.displayName,
           createdAt: new Date(),
           getday: new Date().getDay(),
+          getDate: new Date().toDateString(),
         });
       dispatch(
         add_dot({
@@ -87,6 +88,7 @@ const Form = () => {
           userId: user.uid,
           userName: user.displayName,
           createdAt: new Date(),
+          getDate: new Date().toDateString(),
         })
       );
       dispatch(set_star());
@@ -96,13 +98,15 @@ const Form = () => {
   return (
     <BODY>
       <Header />
-      <div
-        style={{
-          float: "left",
-        }}
-      >
-        <FormSideBar tags={tags} set_tags={set_tags} />
-      </div>
+      {star === 0 && (
+        <div
+          style={{
+            float: "left",
+          }}
+        >
+          <FormSideBar tags={tags} set_tags={set_tags} />
+        </div>
+      )}
       {star === 0 && (
         <CONTAINER>
           <TITLE>What did you do today?</TITLE>

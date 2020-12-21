@@ -7,13 +7,11 @@ import firebase from "../../firebase/firebase";
 import { AuthContext } from "../../firebase/AuthService";
 import Header from "../templates/Header/Header";
 import Footer from "../templates/Footer/Footer";
+import DetailAvatar from "../templates/icons/components/DetailAvatar";
 import styled from "styled-components";
-import Avatar from "@material-ui/core/Avatar";
 import { makeStyles } from "@material-ui/core/styles";
 import oneWeekIcon from "../pages/img/one-week.png";
 import yayFrogIcon from "../pages/img/yayFrog.png";
-
-
 import Button from "@material-ui/core/Button";
 import EditSharpIcon from "@material-ui/icons/EditSharp";
 import DeleteSharpIcon from "@material-ui/icons/DeleteSharp";
@@ -26,8 +24,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const H3 = styled.h3`
-	text-align: center;
 	font-weight: bold;
+	padding-bottom: 3%;
 `;
 
 const INNER = styled.div`
@@ -35,11 +33,10 @@ const INNER = styled.div`
 	margin: auto;
 	width: 70%;
 	padding-top: 5%;
-	// padding: 6% 2%;
 `;
 const DETAIL_WRAPPER = styled.div`
 	padding-left: 8%;
-	width: 100%;
+	width: 90%;
 `;
 
 const TEXT = styled.p`
@@ -47,6 +44,8 @@ const TEXT = styled.p`
 	height: 30vh;
 	padding-bottom: 5%;
 	word-break: break-all;
+	overflow-wrap: break-word;
+}
 `;
 
 const TAGS = styled.div`
@@ -141,6 +140,12 @@ export default function DotDetail() {
 	}
 	// -----------------------
 
+	const renderName = () => {
+		if (clickedDot) {
+			return clickedDot.userName;
+		}
+	};
+
 	const renderText = () => {
 		if (clickedDot) {
 			return clickedDot.text;
@@ -155,10 +160,11 @@ export default function DotDetail() {
 
 	const renderWorkingTime = () => {
 		if (clickedDot) {
-			const createdAt = clickedDot.createdAt;
-			const year = createdAt.getFullYear();
-			const month = createdAt.getMonth() + 1;
-			const date = createdAt.getDate();
+			const stringTime = clickedDot.createdAt; //NEW
+			// const createdAt = new Date(clickedDot.createdAt.seconds * 1000);
+			const year = stringTime.getFullYear();
+			const month = stringTime.getMonth() + 1;
+			const date = stringTime.getDate();
 			return (
 				year +
 				"/" +
@@ -227,39 +233,33 @@ export default function DotDetail() {
 		<div style={{ height: "10vh" }}>
 			<Header />
 			<INNER>
-				{/* ----avatarの実装はここ👇----- */}
-				<diV>
-					<Avatar src="/broken-image.jpg" className={classes.large} />
+				<diV style={{ width: "10%" }}>
+					<DetailAvatar clickedDot={clickedDot} />
+					<p style={{ textAlignLast: "center" }}> {renderName()} </p>
 				</diV>
-				{/* ----------ここまで------------ */}
 				<DETAIL_WRAPPER>
 					<H3> {renderTitle()} </H3>
 					<TEXT>{renderText()}</TEXT>
-					<IMG_WRAPPER style={{ paddingBottom: "10%" }}>
+					<IMG_WRAPPER style={{ paddingBottom: "5%" }}>
 						<IMG
 							src={yayFrogIcon}
-							title="カレンダー"
-							alt="カレンダーのアイコン "
+							title="frog"
+							alt="超喜んでる変えるのアイコン"
 							align="middle"
 						/>
+						{renderWorkingTime()}
 					</IMG_WRAPPER>
 
 					<IMG_WRAPPER style={{ paddingBottom: "2%" }}>
 						<IMG
 							src={oneWeekIcon}
-							title="時計"
-							alt="時計のアイコン"
+							title="calendar"
+							alt="カレンダーのアイコン"
 							align="middle"
 						/>
 						今週の合計勉強時間： {workingTime} 時間
 					</IMG_WRAPPER>
 				</DETAIL_WRAPPER>
-
-				{/* {dot && <p>title : {dot.title}</p>}
-						{dot && <p>tag : {dot.tag}</p>}
-						{dot && <p>url : {dot.url}</p>}
-						{dot && <p>working : {dot.working}</p>}
-          {dot && <p>text : {dot.text}</p>} */}
 			</INNER>
 			<span>{show_editAndDeleteButtons()}</span>
 			<Footer />

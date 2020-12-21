@@ -24,22 +24,19 @@ export default function Dots({ dot }) {
   const handle_delete = () => {
     dispatch(delete_dot(dot));
 
-		// -----Star黒くする用-----//
-		const get_todayMidnight = () => {
-			const TODAY_MIDNIGHT = new Date();
-			TODAY_MIDNIGHT.setHours(0);
-			TODAY_MIDNIGHT.setMinutes(0);
-			return TODAY_MIDNIGHT.setSeconds(0);
-		};
+    // -----Star黒くする用-----//
+    const get_todayMidnight = () => {
+      const TODAY_MIDNIGHT = new Date();
+      TODAY_MIDNIGHT.setHours(0);
+      TODAY_MIDNIGHT.setMinutes(0);
+      return TODAY_MIDNIGHT.setSeconds(0);
+    };
 
-		const dotTime = new Date(dot.createdAt)
-		// 👇以前まで書いてたverもしばらく取っておきます
-		// if (new Date(dot.createdAt).toString() === "Invalid Date") {
-		// 	dotTime = new Date(dot.createdAt.seconds * 1000);
-		// } else {
-		// 	dotTime = new Date(dot.createdAt);
-		// }
-
+    if (new Date(dot.createdAt).toString() === "Invalid Date") {
+      dotTime = new Date(dot.createdAt.seconds * 1000);
+    } else {
+      dotTime = new Date(dot.createdAt);
+    }
 
     if (dotTime >= new Date(get_todayMidnight())) {
       dispatch(unset_star());

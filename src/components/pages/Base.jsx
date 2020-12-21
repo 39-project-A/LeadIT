@@ -2,7 +2,7 @@ import React, { useEffect, useContext, useState } from "react";
 import Header from "../templates/Header/Header";
 import Footer from "../templates/Footer/Footer";
 import { makeStyles } from "@material-ui/core/styles";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../firebase/AuthService";
 import { fetch_dots } from "../../reducks/dots/action";
@@ -191,7 +191,7 @@ export default function Base() {
 						working: doc.data().working,
 						tags: doc.data().tags,
 						userId: doc.data().userId,
-						userName: doc.data().displayName,
+						userName: doc.data().userName,
 						// createdAt: doc.data().createdAt,
 						createdAt: new Date(doc.data().createdAt.seconds * 1000), //こっちがNEW
 						getday: doc.data().getday,

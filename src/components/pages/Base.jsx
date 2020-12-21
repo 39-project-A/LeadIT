@@ -2,7 +2,7 @@ import React, { useEffect, useContext, useState } from "react";
 import Header from "../templates/Header/Header";
 import Footer from "../templates/Footer/Footer";
 import { makeStyles } from "@material-ui/core/styles";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../firebase/AuthService";
 import { fetch_dots } from "../../reducks/dots/action";
@@ -175,32 +175,31 @@ export default function Base() {
     firebase.auth().signOut();
   };
 
-  // // -----全てのdotをfetch(editして、baseに戻ったあとに反映させるために) refactoringの必要アリ?-----
-  useEffect(() => {
-    firebase
-      .firestore()
-      .collection("dots")
-      .get()
-      .then((data) => {
-        const RESPONSE = data.docs.map((doc) => {
-          return {
-            dotId: doc.data().dotId,
-            title: doc.data().title,
-            text: doc.data().text,
-            // url: data.url,
-            working: doc.data().working,
-            tags: doc.data().tags,
-            userId: doc.data().userId,
-            userName: doc.data().displayName,
-            // createdAt: doc.data().createdAt,
-            createdAt: new Date(doc.data().createdAt.seconds * 1000), //こっちがNEW
-            getday: doc.data().getday,
-            getDate: doc.data().getDate,
-          };
-        });
-        dispatch(fetch_dots(RESPONSE));
-      });
-  }, []);
+	// // -----全てのdotをfetch(editして、baseに戻ったあとに反映させるために) refactoringの必要アリ?-----
+	useEffect(() => {
+		firebase
+			.firestore()
+			.collection("dots")
+			.get()
+			.then((data) => {
+				const RESPONSE = data.docs.map((doc) => {
+					return {
+						dotId: doc.data().dotId,
+						title: doc.data().title,
+						text: doc.data().text,
+						// url: data.url,
+						working: doc.data().working,
+						tags: doc.data().tags,
+						userId: doc.data().userId,
+						userName: doc.data().userName,
+						// createdAt: doc.data().createdAt,
+						createdAt: new Date(doc.data().createdAt.seconds * 1000), //こっちがNEW
+						getday: doc.data().getday,
+					};
+				});
+				dispatch(fetch_dots(RESPONSE));
+			});
+	}, []);
 
   // -----今日のDotのfetch------
   useEffect(() => {

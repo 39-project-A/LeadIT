@@ -1,13 +1,17 @@
 import React, { useEffect, useContext, useState } from "react";
-import Header from "../templates/Header/Header";
+import { useParams, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Footer from "../templates/Footer/Footer";
+import Header from "../templates/Header/Header";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import { AuthContext } from "../../firebase/AuthService";
+import { Redirect } from "react-router-dom";
 import { fetch_dots } from "../../reducks/dots/action";
 import { fetch_todayDotLength } from "../../reducks/star/action";
-import firebase from "../../firebase/firebase";
+import firebase from "firebase/app";
+import "firebase/app";
+import "firebase/firestore";
 import MydotsChart from "../templates/graph/MydotsChart";
 import UserIcon from "../templates/icons/user/user";
 import OurSideBar from "../templates/OurSideBar";
@@ -48,18 +52,18 @@ const MainStyle = {
 };
 
 export default function Base() {
+  const user = useContext(AuthContext);
+  const history = useHistory();
   const dispatch = useDispatch();
   const dots = useSelector((state) => state.dots);
-  const user = useContext(AuthContext);
   const classes = useStyles();
   const [sortDots, set_sortDots] = useState([]);
   const [week_hours, setWeek_hours] = useState("");
   const [lastweek_hours, setLastweek_hours] = useState("");
   const [total_hours, setTotal_hours] = useState("");
   const db = firebase.firestore().collection("dots");
-
   const myDots = dots.filter((dot) => {
-    if (dot.userId === user.uid) {
+    if (user && dot.userId === user.uid) {
       console.log(dot);
       return dot;
     }
@@ -184,6 +188,7 @@ export default function Base() {
 
   const logout = () => {
     firebase.auth().signOut();
+    history.push("/home");
   };
 
   // // -----全てのdotをfetch(editして、baseに戻ったあとに反映させるために) refactoringの必要アリ?-----
@@ -215,18 +220,19 @@ export default function Base() {
 
   // -----今日のDotのfetch------
   useEffect(() => {
-    firebase
-      .firestore()
-      .collection("dots")
-      .where("userId", "==", user.uid)
-      .where("createdAt", ">=", new Date(get_todayMidnight()))
-      .get()
-      .then((data) => {
-        const todayDot = data.docs.map((doc) => {
-          return doc.data();
+    user &&
+      firebase
+        .firestore()
+        .collection("dots")
+        .where("userId", "==", user.uid)
+        .where("createdAt", ">=", new Date(get_todayMidnight()))
+        .get()
+        .then((data) => {
+          const todayDot = data.docs.map((doc) => {
+            return doc.data();
+          });
+          dispatch(fetch_todayDotLength(todayDot.length));
         });
-        dispatch(fetch_todayDotLength(todayDot.length));
-      });
   }, []);
 
   const jobstyle = {
@@ -238,7 +244,6 @@ export default function Base() {
     display: "flex",
     flexFlow: "column",
   };
-
   return (
     <React.Fragment>
       <Header />

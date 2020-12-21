@@ -13,6 +13,8 @@ import { Link, useHistory } from "react-router-dom";
 import { auth } from "../../firebase/firebase";
 import { AuthContext } from "../../firebase/AuthService";
 import { Redirect } from "react-router-dom";
+import { complete_loading } from "../../reducks/loading/action";
+import { useDispatch } from "react-redux";
 
 function Copyright() {
   return (
@@ -50,24 +52,26 @@ const useStyles = makeStyles((theme) => ({
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [, setLoading] = useState(false);
+  const dispatch = useDispatch();
+  // const [, setLoading] = useState(false);
   const classes = useStyles();
   const history = useHistory();
   const user = useContext(AuthContext);
-  if (user) {
-    return <Redirect to="/" />;
-  }
+  // if (user) {
+  //   return <Redirect to="/" />;
+  // }
   const handleSubmit = (e) => {
     e.preventDefault();
-    setLoading(true);
+    // setLoading(true);
     auth
       .signInWithEmailAndPassword(email, password)
       .then((response) => {
-        setLoading(false);
+        // setLoading(false);
+        dispatch(complete_loading("complete"));
         history.push("/");
       })
       .catch((e) => {
-        setLoading(false);
+        // setLoading(false);
         alert("メールアドレスかパスワードか違います");
       });
   };

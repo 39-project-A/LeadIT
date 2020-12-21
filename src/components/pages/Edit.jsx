@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useParams, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import {fetch_todayDotLength} from "../../reducks/star/action"
+import { fetch_todayDotLength } from "../../reducks/star/action";
 import { AuthContext } from "../../firebase/AuthService";
 import Header from "../templates/Header/Header.jsx";
 import Footer from "../templates/Footer/Footer.jsx";
@@ -14,7 +14,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import FormSideBar from "../templates/FormSideBar";
 import firebase from "firebase";
 import styled from "styled-components";
-
 
 const useStyles = makeStyles({
 	container: {
@@ -39,12 +38,12 @@ const bodyStyle = {
 	float: "left",
 };
 
-const H3 = styled.h3 `
+const H3 = styled.h3`
 	text-align: center;
 	padding-bottom: 5%;
 	color: #003399;
 	font-weight: bold;
-`
+`;
 
 const WRAPPER = styled.div`
 	margin-bottom: 7%;
@@ -91,16 +90,16 @@ const Edit = () => {
 		if (dot) {
 			set_tags(dot.tags);
 		}
-  }, [dot]);
-  
-  // starをリロードしても正常に表示させる
+	}, [dot]);
+
+	// starをリロードしても正常に表示させる
 	if (user) {
-    const get_todayMidnight = () => {
-      const TODAY_MIDNIGHT = new Date();
-      TODAY_MIDNIGHT.setHours(0);
-      TODAY_MIDNIGHT.setMinutes(0);
-      return TODAY_MIDNIGHT.setSeconds(0);
-    };
+		const get_todayMidnight = () => {
+			const TODAY_MIDNIGHT = new Date();
+			TODAY_MIDNIGHT.setHours(0);
+			TODAY_MIDNIGHT.setMinutes(0);
+			return TODAY_MIDNIGHT.setSeconds(0);
+		};
 
 		firebase
 			.firestore()
@@ -117,6 +116,7 @@ const Edit = () => {
 	}
 
 	const onSubmit = (data) => {
+		// console.log(new Date(dot.createdAt.seconds * 1000));
 		firebase
 			.firestore()
 			.collection("dots")
@@ -130,8 +130,8 @@ const Edit = () => {
 				tags: tags,
 				userId: user.uid,
 				userName: user.displayName,
-				createdAt: new Date(),
-				getday: new Date().getDay(),
+				createdAt: new Date(dot.createdAt.seconds * 1000),
+				getday: dot.getday,
 			})
 			.then(function () {
 				console.log("Document successfully edited!");

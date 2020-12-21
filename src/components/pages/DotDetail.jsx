@@ -13,7 +13,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import oneWeekIcon from "../pages/img/one-week.png";
 import yayFrogIcon from "../pages/img/yayFrog.png";
 
-
 import Button from "@material-ui/core/Button";
 import EditSharpIcon from "@material-ui/icons/EditSharp";
 import DeleteSharpIcon from "@material-ui/icons/DeleteSharp";
@@ -28,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
 const H3 = styled.h3`
 	text-align: center;
 	font-weight: bold;
+	padding-bottom: 3%;
 `;
 
 const INNER = styled.div`
@@ -154,11 +154,15 @@ export default function DotDetail() {
 	};
 
 	const renderWorkingTime = () => {
-		if (clickedDot) {
-			const createdAt = clickedDot.createdAt;
-			const year = createdAt.getFullYear();
-			const month = createdAt.getMonth() + 1;
-			const date = createdAt.getDate();
+		if (
+			clickedDot
+			// new Date(clickedDot.createdAt).toString() === "Invalid Date"
+		) {
+			const stringTime = clickedDot.createdAt; //NEW
+			// const createdAt = new Date(clickedDot.createdAt.seconds * 1000);
+			const year = stringTime.getFullYear();
+			const month = stringTime.getMonth() + 1;
+			const date = stringTime.getDate();
 			return (
 				year +
 				"/" +
@@ -172,6 +176,8 @@ export default function DotDetail() {
 			);
 		}
 	};
+
+	renderWorkingTime();
 
 	const onDelete_click = () => {
 		firebase
@@ -235,13 +241,14 @@ export default function DotDetail() {
 				<DETAIL_WRAPPER>
 					<H3> {renderTitle()} </H3>
 					<TEXT>{renderText()}</TEXT>
-					<IMG_WRAPPER style={{ paddingBottom: "10%" }}>
+					<IMG_WRAPPER style={{ paddingBottom: "5%" }}>
 						<IMG
 							src={yayFrogIcon}
 							title="カレンダー"
 							alt="カレンダーのアイコン "
 							align="middle"
 						/>
+						{renderWorkingTime()}
 					</IMG_WRAPPER>
 
 					<IMG_WRAPPER style={{ paddingBottom: "2%" }}>

@@ -37,6 +37,7 @@ export default function App() {
             userId: doc.data().userId,
             userName: doc.data().userName,
             createdAt: doc.data().createdAt,
+            getDate: doc.data().getDate,
             // createdAt: new Date(doc.data().createdAt.seconds * 1000),
             getday: doc.data().getday,
           };

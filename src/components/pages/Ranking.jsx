@@ -64,19 +64,30 @@ const Ranking = () => {
           if (a.working > b.working) return -1;
           return 0;
         });
-        const oneRank = group[0].userName;
-        setOneRank(oneRank);
-        const oneHours = group[0].working;
-        setOneHours(oneHours);
-        const twoRank = group[1].userName;
-        setTwoRank(twoRank);
-        const twoHours = group[1].working;
-        setTwoHours(twoHours);
-        const threeRank = group[2].userName;
-        setThreeRank(threeRank);
-        const threeHours = group[2].working;
-        setThreeHours(threeHours);
-      });
+        if (group.length >= 3) {
+          console.log("3つ以上あります");
+        } else {
+          console.log("3つ以上無いです");
+        }
+        if (group.length >= 1) {
+          const oneRank = group[0].userName;
+          setOneRank(oneRank);
+          const oneHours = group[0].working;
+          setOneHours(oneHours);
+        }
+        if (group.length >= 2) {
+          const twoRank = group[1].userName;
+          setTwoRank(twoRank);
+          const twoHours = group[1].working;
+          setTwoHours(twoHours);
+        }
+        if (group.length >= 3) {
+          const threeRank = group[2].userName;
+          setThreeRank(threeRank);
+          const threeHours = group[2].working;
+          setThreeHours(threeHours);
+        }
+      }); 
   }, []);
 
   return (
@@ -86,20 +97,26 @@ const Ranking = () => {
       <Container>
         <Rank_title>🏆 Weekly Ranking</Rank_title>
         <Count_Hours>
-          <UserList_one>
-            {" "}
-            🥇 <RankProfile oneRank={oneRank} /> {oneRank} / {oneHours}hours
-          </UserList_one>
-          <UserList_two>
-            🥈 <RankProfile twoRank={twoRank} /> {twoRank} / {twoHours}hours
-          </UserList_two>
-          <UserList_three>
-            🥉 <RankProfile threeRank={threeRank} /> {threeRank} / {threeHours}
-            hours
-          </UserList_three>
+          {oneRank && oneHours && (
+            <UserList_one>
+              {" "}
+              🥇 <RankProfile oneRank={oneRank} /> {oneRank} / {oneHours}hours
+            </UserList_one>
+          )}
+          {twoRank && twoHours && (
+            <UserList_two>
+              🥈 <RankProfile twoRank={twoRank} /> {twoRank} / {twoHours}hours
+            </UserList_two>
+          )}
+          {threeRank && threeHours && (
+            <UserList_three>
+              🥉 <RankProfile threeRank={threeRank} /> {threeRank} /{" "}
+              {threeHours}
+              hours
+            </UserList_three>
+          )}
         </Count_Hours>
       </Container>
-     
     </div>
   );
 };

@@ -26,32 +26,31 @@ export default function Base() {
   const logout = () => {
     firebase.auth().signOut();
   };
-
-  // // -----全てのdotをfetch(editして、baseに戻ったあとに反映させるために) refactoringの必要アリ?-----
-  useEffect(() => {
-    firebase
-      .firestore()
-      .collection("dots")
-      .get()
-      .then((data) => {
-        const RESPONSE = data.docs.map((doc) => {
-          return {
-            dotId: doc.data().dotId,
-            title: doc.data().title,
-            text: doc.data().text,
-            // url: data.url,
-            working: doc.data().working,
-            tags: doc.data().tags,
-            userId: doc.data().userId,
-            userName: doc.data().displayName,
-            createdAt: doc.data().createdAt,
-            // createdAt: new Date(doc.data().createdAt.seconds * 1000),
-            getday: doc.data().getday,
-          };
-        });
-        dispatch(fetch_dots(RESPONSE));
-      });
-  }, []);
+	// // -----全てのdotをfetch(editして、baseに戻ったあとに反映させるために) refactoringの必要アリ?-----
+	useEffect(() => {
+		firebase
+			.firestore()
+			.collection("dots")
+			.get()
+			.then((data) => {
+				const RESPONSE = data.docs.map((doc) => {
+					return {
+						dotId: doc.data().dotId,
+						title: doc.data().title,
+						text: doc.data().text,
+						// url: data.url,
+						working: doc.data().working,
+						tags: doc.data().tags,
+						userId: doc.data().userId,
+						userName: doc.data().displayName,
+						// createdAt: doc.data().createdAt,
+						createdAt: new Date(doc.data().createdAt.seconds * 1000), //こっちがNEW
+						getday: doc.data().getday,
+					};
+				});
+				dispatch(fetch_dots(RESPONSE));
+			});
+	}, []);
 
   // -----今日のDotのfetch------
   useEffect(() => {

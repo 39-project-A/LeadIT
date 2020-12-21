@@ -36,8 +36,8 @@ export default function App() {
 						tags: doc.data().tags,
 						userId: doc.data().userId,
             userName: doc.data().displayName,
-            createdAt: doc.data().createdAt,
-						// createdAt: new Date(doc.data().createdAt.seconds * 1000),
+            // createdAt: doc.data().createdAt,
+						createdAt: new Date(doc.data().createdAt.seconds * 1000), //こっちがNEW
 						getday: doc.data().getday,
 					};
 				});

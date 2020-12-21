@@ -12,7 +12,11 @@ import Achievement from "./Achievement";
 import rogo from "../../pages/img/logo.png";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCrown, faClipboard } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCrown,
+  faClipboard,
+  faEdit,
+} from "@fortawesome/free-solid-svg-icons";
 
 const Header = () => {
   const items = {
@@ -40,8 +44,14 @@ const Header = () => {
             />
           </NavBtn>
         </Link>
-
         <LogoItem>
+          <Link style={items} to="/form">
+            {" "}
+            <HoverText>
+              <FontAwesomeIcon icon={faEdit} />
+              <h6 style={{ fontSize: "13px", marginTop: "2px" }}>Form</h6>
+            </HoverText>
+          </Link>
           <Link style={items} to="/ranking">
             {" "}
             <HoverText>

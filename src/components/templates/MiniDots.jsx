@@ -40,15 +40,21 @@ export default function MiniDots() {
     }
   });
 
-  
-  // console.log(test);
+  //日付順にdotsを並び変え
+  catch_myDot.sort(function (a, b) {
+    if (a.createdAt < b.createdAt) {
+      return 1;
+    } else {
+      return -1;
+    }
+  });
 
   return (
     <>
       <div className={classes.root}>
         <List component="nav">
           {catch_myDot.map((dot) => {
-            return <Dots dot={dot} key={dot.dotId}  />;
+            return <Dots dot={dot} key={dot.dotId} />;
           })}
         </List>
       </div>

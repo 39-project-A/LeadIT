@@ -44,46 +44,43 @@ export default function OurDots() {
   const classes = useStyles();
   const userDataArr = [];
   const userIconArr = [];
-  dots.map((dot) => {
-    firebase
-      .firestore()
-      .collection("userIcon")
-      .where("userId", "==", dot.userId)
-      .get()
-      .then((data) => {
-        const res = data.docs.map((doc) => {
-          return doc.data();
-        });
-        userIconArr.push({
-          name: dot.userName,
-          title: dot.title,
-          createdAt: dot.getDate,
-          ...res[0],
-        });
-        console.log(userIconArr);
-        // userDataArr.push({
-        //   dotId: dot.dotId,
-        //   userName: dot.userName,
-        //   img: res[0].img,
-        //   text: dot.text,
-        //   createdAt: dot.getDate,
-        // });
+  function get_userArr() {
+    return new Promise((resolve, reject) => {
+      dots.map((dot) => {
+        firebase
+          .firestore()
+          .collection("userIcon")
+          .where("userId", "==", dot.userId)
+          .get()
+          .then((data) => {
+            const res = data.docs.map((doc) => {
+              return doc.data();
+            });
+            return {
+              name: dot.userName,
+              title: dot.title,
+              // createdAt: dot.createdAt,
+              ...res[0],
+            };
+            // userIconArr.push({
+            //   name: dot.userName,
+            //   title: dot.title,
+            //   // createdAt: dot.createdAt,
+            //   ...res[0],
+            // });
+          });
+        resolve(dots);
       });
+    });
+  }
+  async function set_userArr() {
+    const dataArr = await get_userArr();
+    const Arr = dataArr;
+    console.log(Arr);
+  }
+  set_userArr().then((result) => {
+    console.log(result);
   });
-  console.log(userDataArr);
-  // useEffect(() => {
-  //   set_sortDots(dots);
-  // }, [dots]);
-
-  // return (
-  //   <img
-  //     alt="profile"
-  //     src={img}
-  //     // className="rounded-circle"
-  //     width="100%"
-  //   />
-  // );
-  // for (let i = 0; i < array.length; i++) {}
   return (
     <React.Fragment>
       <Header />
@@ -97,16 +94,21 @@ export default function OurDots() {
       <div className="MainBody" style={bodyStyle}>
         <div className={classes.root}>
           <List component="nav">
-            {/* {sortDots.map((dot) => {
-              setTimeout(() => {
+            {userDataArr.length === dots.length &&
+              userDataArr.map((data) => {
                 return (
-                  <DOT key={dot.dotId}>
-                    <TITLE>{dot.userName}</TITLE>
-                    <TEXT>{dot.title}</TEXT>
+                  <DOT key={data.dotId}>
+                    <img
+                      alt="profile"
+                      src={data.img}
+                      className="rounded-circle"
+                      width="100%"
+                    />
+                    <TITLE>{data.userName}</TITLE>
+                    <TEXT>{data.title}</TEXT>
                   </DOT>
                 );
-              }, 2000);
-            })} */}
+              })}
           </List>
         </div>
       </div>

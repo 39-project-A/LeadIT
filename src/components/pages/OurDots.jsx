@@ -39,10 +39,12 @@ const sideBar = {
 };
 
 export default function OurDots() {
-  const [sortDots, set_sortDots] = useState([]);
   const dots = useSelector((state) => state.dots);
+  const [sortDots, set_sortDots] = useState([]);
   const classes = useStyles();
-
+  useEffect(() => {
+    set_sortDots(dots);
+  }, [dots]);
   return (
     <React.Fragment>
       <Header />
@@ -55,8 +57,8 @@ export default function OurDots() {
       </div>
       <div className="MainBody" style={bodyStyle}>
         <div className={classes.root}>
-          <List component="nav">
-            {dots.map((dot) => {
+          <List style={{ height: "80vh", overflow: "auto" }} component="nav">
+            {sortDots.map((dot) => {
               return <OurIcon dot={dot} />;
             })}
           </List>

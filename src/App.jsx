@@ -30,13 +30,13 @@ export default function App() {
             dotId: doc.data().dotId,
             title: doc.data().title,
             text: doc.data().text,
-            // url: data.url,
             working: doc.data().working,
             tags: doc.data().tags,
             userId: doc.data().userId,
             userName: doc.data().userName,
             // createdAt: doc.data().createdAt,
             createdAt: new Date(doc.data().createdAt.seconds * 1000), //new
+            getDate: doc.data().getDate,
             getday: doc.data().getday,
           };
         });

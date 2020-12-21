@@ -1,6 +1,9 @@
 import styled from "styled-components";
 export const DOT = styled.div`
   position: relative;
+  color: black;
+  text-decoration: none;
+  background-color: #f5fffa;
   padding: 0.25em 1em;
   text-align: center;
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
@@ -28,10 +31,19 @@ export const DOT = styled.div`
     right: 0;
   }
 `;
+export const TITLE = styled.p`
+  color: gray;
+  margin: 0;
+  text-align: left;
+`;
 export const TEXT = styled.p`
+  font-size: 1.4em;
+  fornt-family: serif;
   margin: 0;
   padding: auto;
 `;
-export const TITLE = styled.p`
-  
+export const TIME = styled.p`
+  color: gray;
+  text-align: right;
+  margin: 0;
 `;

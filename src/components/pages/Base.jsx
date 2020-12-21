@@ -241,14 +241,11 @@ export default function Base() {
           </StyledDots>
         </LeftItem>
         <StyledChart>
-          <StyledForm>
-            <MiniForm />
-          </StyledForm>
           <MydotsChart />
         </StyledChart>
         <StyledCalendar>
           <Calendar />
-          <ExplainCa>🟩：dot済み (クリックで確認)</ExplainCa>
+          <ExplainCa>🟧：dot済み (クリックで確認)</ExplainCa>
         </StyledCalendar>
         <WeekStudyHours>
           <StudyHours>今週の学習時間 / {week_hours}時間</StudyHours>

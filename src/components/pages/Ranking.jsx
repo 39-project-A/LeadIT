@@ -99,17 +99,7 @@ const Ranking = () => {
           </UserList_three>
         </Count_Hours>
       </Container>
-      {/* <h1 style={{ marginTop: "50px" }}>Ranking 👑</h1> */}
-      {/* <p style={{ marginTop: "50px", fontSize: "30px" }}> */}
-      {/* <RankProfile oneRank={oneRank} />
-        <RankProfile twoRank={twoRank} />
-        <RankProfile threeRank={threeRank} /> */}
-      {/* 🥇1st: {oneRank}さん {oneHours}hours
-        <br />
-        🥈2st: {twoRank}さん {twoHours}hours
-        <br />
-        🥉3st: {threeRank}さん {threeHours}hours
-      </p> */}
+     
     </div>
   );
 };

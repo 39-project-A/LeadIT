@@ -6,7 +6,6 @@ import Base from "./components/pages/Base";
 import Home from "./components/pages/Home";
 import SignIn from "./components/pages/SignIn";
 import SignUp from "./components/pages/SignUp";
-import MyDots from "./components/pages/MyDots";
 import DotDetail from "./components/pages/DotDetail";
 import Form from "./components/pages/Form";
 import OurDots from "./components/pages/OurDots";
@@ -18,49 +17,47 @@ import Ranking from "./components/pages/Ranking";
 
 export default function App() {
   const dispatch = useDispatch();
-  
-	// -----全てのdotをfetch-----
-	useEffect(() => {
-		firebase
-			.firestore()
-			.collection("dots")
-			.get()
-			.then((data) => {
-				const RESPONSE = data.docs.map((doc) => {
-					return {
-						dotId: doc.data().dotId,
-						title: doc.data().title,
-						text: doc.data().text,
-						// url: data.url,
-						working: doc.data().working,
-						tags: doc.data().tags,
-						userId: doc.data().userId,
+
+  // -----全てのdotをfetch-----
+  useEffect(() => {
+    firebase
+      .firestore()
+      .collection("dots")
+      .get()
+      .then((data) => {
+        const RESPONSE = data.docs.map((doc) => {
+          return {
+            dotId: doc.data().dotId,
+            title: doc.data().title,
+            text: doc.data().text,
+            // url: data.url,
+            working: doc.data().working,
+            tags: doc.data().tags,
+            userId: doc.data().userId,
             userName: doc.data().displayName,
-            // createdAt: doc.data().createdAt,
-						createdAt: new Date(doc.data().createdAt.seconds * 1000), //こっちがNEW
-						getday: doc.data().getday,
-					};
-				});
-				dispatch(fetch_dots(RESPONSE));
-			});
-	}, []);
-	return (
-		<AuthProvider>
-			<Router>
-				<Switch>
-					<LoggedInRoute exact path="/" component={Base} />
-					<Route exact path="/home" component={Home} />
-					<Route exact path="/signin" component={SignIn} />
-					<Route exact path="/signup" component={SignUp} />
-					<Route exact path="/mydots" component={MyDots} />
-					<Route exact path="/form" component={Form} />
-					<Route exact path="/dot/:id" component={DotDetail} />
-					<Route exact path="/dot/:id/edit" component={Edit} />
-					<Route exact path="/mydots" component={MyDots} />
-					<Route exact path="/ourdots" component={OurDots} />
-					<Route exact path="/ranking" component={Ranking} />
-				</Switch>
-			</Router>
-		</AuthProvider>
-	);
+            createdAt: doc.data().createdAt,
+            // createdAt: new Date(doc.data().createdAt.seconds * 1000),
+            getday: doc.data().getday,
+          };
+        });
+        dispatch(fetch_dots(RESPONSE));
+      });
+  }, []);
+  return (
+    <AuthProvider>
+      <Router>
+        <Switch>
+          <LoggedInRoute exact path="/" component={Base} />
+          <Route exact path="/home" component={Home} />
+          <Route exact path="/signin" component={SignIn} />
+          <Route exact path="/signup" component={SignUp} />
+          <Route exact path="/form" component={Form} />
+          <Route exact path="/dot/:id" component={DotDetail} />
+          <Route exact path="/dot/:id/edit" component={Edit} />
+          <Route exact path="/ourdots" component={OurDots} />
+          <Route exact path="/ranking" component={Ranking} />
+        </Switch>
+      </Router>
+    </AuthProvider>
+  );
 }

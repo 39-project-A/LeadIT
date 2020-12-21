@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import firebase from "../../firebase/firebase";
 import { useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
@@ -6,6 +7,7 @@ import Header from "../templates/Header/Header.jsx";
 import Footer from "../templates/Footer/Footer.jsx";
 import Dots from "../templates/Dots";
 import OurSideBar from "../templates/OurSideBar";
+import { DOT, TEXT, TITLE } from "../../style/OurDots";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,11 +41,49 @@ const sideBar = {
 export default function OurDots() {
   const [sortDots, set_sortDots] = useState([]);
   const dots = useSelector((state) => state.dots);
-  useEffect(() => {
-    set_sortDots(dots);
-  }, [dots]);
-
   const classes = useStyles();
+  const userDataArr = [];
+  const userIconArr = [];
+  dots.map((dot) => {
+    firebase
+      .firestore()
+      .collection("userIcon")
+      .where("userId", "==", dot.userId)
+      .get()
+      .then((data) => {
+        const res = data.docs.map((doc) => {
+          return doc.data();
+        });
+        userIconArr.push({
+          name: dot.userName,
+          title: dot.title,
+          createdAt: dot.getDate,
+          ...res[0],
+        });
+        console.log(userIconArr);
+        // userDataArr.push({
+        //   dotId: dot.dotId,
+        //   userName: dot.userName,
+        //   img: res[0].img,
+        //   text: dot.text,
+        //   createdAt: dot.getDate,
+        // });
+      });
+  });
+  console.log(userDataArr);
+  // useEffect(() => {
+  //   set_sortDots(dots);
+  // }, [dots]);
+
+  // return (
+  //   <img
+  //     alt="profile"
+  //     src={img}
+  //     // className="rounded-circle"
+  //     width="100%"
+  //   />
+  // );
+  // for (let i = 0; i < array.length; i++) {}
   return (
     <React.Fragment>
       <Header />
@@ -57,9 +97,16 @@ export default function OurDots() {
       <div className="MainBody" style={bodyStyle}>
         <div className={classes.root}>
           <List component="nav">
-            {sortDots.map((dot) => {
-              return <Dots dot={dot} key={dot.dotId} />;
-            })}
+            {/* {sortDots.map((dot) => {
+              setTimeout(() => {
+                return (
+                  <DOT key={dot.dotId}>
+                    <TITLE>{dot.userName}</TITLE>
+                    <TEXT>{dot.title}</TEXT>
+                  </DOT>
+                );
+              }, 2000);
+            })} */}
           </List>
         </div>
       </div>

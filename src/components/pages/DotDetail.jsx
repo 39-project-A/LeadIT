@@ -158,11 +158,11 @@ export default function DotDetail() {
 			clickedDot
 			// new Date(clickedDot.createdAt).toString() === "Invalid Date"
 		) {
-			// console.log(new Date(clickedDot.createdAt.seconds * 1000));
-			const createdAt = new Date(clickedDot.createdAt.seconds * 1000);
-			const year = createdAt.getFullYear();
-			const month = createdAt.getMonth() + 1;
-			const date = createdAt.getDate();
+			const stringTime = clickedDot.createdAt; //NEW
+			// const createdAt = new Date(clickedDot.createdAt.seconds * 1000);
+			const year = stringTime.getFullYear();
+			const month = stringTime.getMonth() + 1;
+			const date = stringTime.getDate();
 			return (
 				year +
 				"/" +

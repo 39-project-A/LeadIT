@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
+import firebase from "../../firebase/firebase";
 import { useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import Header from "../templates/Header/Header.jsx";
 import Footer from "../templates/Footer/Footer.jsx";
-import Dots from "../templates/Dots";
 import OurSideBar from "../templates/OurSideBar";
+import { DOT, TEXT, TITLE } from "../../style/OurDots";
+import OurIcon from "../templates/icons/components/OurIcon";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,13 +39,12 @@ const sideBar = {
 };
 
 export default function OurDots() {
-  const [sortDots, set_sortDots] = useState([]);
   const dots = useSelector((state) => state.dots);
+  const [sortDots, set_sortDots] = useState([]);
+  const classes = useStyles();
   useEffect(() => {
     set_sortDots(dots);
   }, [dots]);
-
-  const classes = useStyles();
   return (
     <React.Fragment>
       <Header />
@@ -56,9 +57,9 @@ export default function OurDots() {
       </div>
       <div className="MainBody" style={bodyStyle}>
         <div className={classes.root}>
-          <List component="nav">
+          <List style={{ height: "80vh", overflow: "auto" }} component="nav">
             {sortDots.map((dot) => {
-              return <Dots dot={dot} key={dot.dotId} />;
+              return <OurIcon dot={dot} />;
             })}
           </List>
         </div>

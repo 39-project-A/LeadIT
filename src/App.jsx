@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetch_dots } from "./reducks/dots/action";
+import { fetch_icons } from "./reducks/userIcon/action";
 import Base from "./components/pages/Base";
 import Home from "./components/pages/Home";
 import SignIn from "./components/pages/SignIn";
 import SignUp from "./components/pages/SignUp";
-import MyDots from "./components/pages/MyDots";
 import DotDetail from "./components/pages/DotDetail";
 import Form from "./components/pages/Form";
 import OurDots from "./components/pages/OurDots";
@@ -52,28 +52,6 @@ export default function App() {
     const user = await get_userPromise();
     set_loading(user);
   }
-  useEffect(() => {
-    get_userData()
-      .then(() => {
-        dispatch(complete_loading("complete"));
-        set_loading("complete");
-      })
-      .catch(() => {
-        dispatch(complete_loading("default"));
-        set_loading("default");
-      });
-  }, []);
-  firebase
-    .firestore()
-    .collection("dots")
-    .get()
-    .then((data) => {
-      const RESPONSE = data.docs.map((doc) => {
-        return doc.data();
-      });
-      dispatch(fetch_dots(RESPONSE));
-    });
-
   const LoggedInRoute = ({ component: Component }) => {
     useEffect(() => {
       set_loading(reduxLoading);
@@ -86,6 +64,53 @@ export default function App() {
       return <Route render={(props) => <Component {...props} />} />;
     }
   };
+  useEffect(() => {
+    get_userData()
+      .then(() => {
+        dispatch(complete_loading("complete"));
+        set_loading("complete");
+      })
+      .catch(() => {
+        dispatch(complete_loading("default"));
+        set_loading("default");
+      });
+  }, []);
+  useEffect(() => {
+    firebase
+      .firestore()
+      .collection("dots")
+      .get()
+      .then((data) => {
+        const dotData = data.docs.map((doc) => {
+          return {
+            dotId: doc.data().dotId,
+            title: doc.data().title,
+            text: doc.data().text,
+            working: doc.data().working,
+            tags: doc.data().tags,
+            userId: doc.data().userId,
+            userName: doc.data().userName,
+            // createdAt: doc.data().createdAt,
+            createdAt: new Date(doc.data().createdAt.seconds * 1000), //new
+            getDate: doc.data().getDate,
+            getday: doc.data().getday,
+          };
+        });
+        dispatch(fetch_dots(dotData));
+      });
+
+    firebase
+      .firestore()
+      .collection("userIcon")
+      .get()
+      .then((data) => {
+        const iconsData = data.docs.map((doc) => {
+          return doc.data();
+        });
+        dispatch(fetch_icons(iconsData));
+      });
+  }, []);
+
   return (
     <>
       {loading ? (
@@ -96,11 +121,9 @@ export default function App() {
               <Route exact path="/home" component={Home} />
               <Route exact path="/signin" component={SignIn} />
               <Route exact path="/signup" component={SignUp} />
-              <LoggedInRoute exact path="/mydots" component={MyDots} />
               <LoggedInRoute exact path="/form" component={Form} />
               <LoggedInRoute exact path="/dot/:id" component={DotDetail} />
               <LoggedInRoute exact path="/dot/:id/edit" component={Edit} />
-              <LoggedInRoute exact path="/mydots" component={MyDots} />
               <LoggedInRoute exact path="/ourdots" component={OurDots} />
               <LoggedInRoute exact path="/ranking" component={Ranking} />
             </Switch>

@@ -2,6 +2,14 @@ import React, { useEffect, useState } from "react";
 import firebase from "../../firebase/firebase";
 import Header from "../templates/Header/Header";
 import RankProfile from "../templates/icons/components/RankProfile";
+import {
+  Container,
+  Rank_title,
+  Count_Hours,
+  UserList_one,
+  UserList_two,
+  UserList_three,
+} from "../../style/StyledRank";
 
 const Ranking = () => {
   const db = firebase.firestore().collection("dots");
@@ -56,35 +64,54 @@ const Ranking = () => {
           if (a.working > b.working) return -1;
           return 0;
         });
-        const oneRank = group[0].userName;
-        setOneRank(oneRank);
-        const oneHours = group[0].working;
-        setOneHours(oneHours);
-        const twoRank = group[1].userName;
-        setTwoRank(twoRank);
-        const twoHours = group[1].working;
-        setTwoHours(twoHours);
-        const threeRank = group[2].userName;
-        setThreeRank(threeRank);
-        const threeHours = group[2].working;
-        setThreeHours(threeHours);
+        if (group.length >= 1) {
+          const oneRank = group[0].userName;
+          setOneRank(oneRank);
+          const oneHours = group[0].working;
+          setOneHours(oneHours);
+        }
+        if (group.length >= 2) {
+          const twoRank = group[1].userName;
+          setTwoRank(twoRank);
+          const twoHours = group[1].working;
+          setTwoHours(twoHours);
+        }
+        if (group.length >= 3) {
+          const threeRank = group[2].userName;
+          setThreeRank(threeRank);
+          const threeHours = group[2].working;
+          setThreeHours(threeHours);
+        }
       });
   }, []);
 
   return (
-    <div style={{ textAlign: "center" }}>
+    // <div style={{ textAlign: "center" }}>
+    <div>
       <Header />
-      <h1 style={{ marginTop: "50px" }}>Ranking 👑</h1>
-      <p style={{ marginTop: "100px", fontSize: "30px" }}>
-        <RankProfile oneRank={oneRank} />
-        <RankProfile twoRank={twoRank} />
-        <RankProfile threeRank={threeRank} />
-        🥇1st: {oneRank}さん {oneHours}hours
-        <br />
-        🥈2st: {twoRank}さん {twoHours}hours
-        <br />
-        🥉3st: {threeRank}さん {threeHours}hours
-      </p>
+      <Container>
+        <Rank_title>🏆 Weekly Ranking</Rank_title>
+        <Count_Hours>
+          {oneRank && oneHours && (
+            <UserList_one>
+              {" "}
+              🥇 <RankProfile oneRank={oneRank} /> {oneRank} / {oneHours}hours
+            </UserList_one>
+          )}
+          {twoRank && twoHours && (
+            <UserList_two>
+              🥈 <RankProfile twoRank={twoRank} /> {twoRank} / {twoHours}hours
+            </UserList_two>
+          )}
+          {threeRank && threeHours && (
+            <UserList_three>
+              🥉 <RankProfile threeRank={threeRank} /> {threeRank} /{" "}
+              {threeHours}
+              hours
+            </UserList_three>
+          )}
+        </Count_Hours>
+      </Container>
     </div>
   );
 };

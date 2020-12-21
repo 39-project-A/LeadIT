@@ -72,6 +72,7 @@ const SignIn = () => {
       })
       .catch((e) => {
         // setLoading(false);
+        alert("メールアドレスかパスワードか違います");
       });
   };
 

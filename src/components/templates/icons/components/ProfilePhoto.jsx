@@ -1,12 +1,16 @@
 import React, { useState, useEffect, useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUserAlt, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import {
+  faUserAlt,
+  faTrashAlt,
+  faUserEdit,
+  faUserPlus,
+} from "@fortawesome/free-solid-svg-icons";
 import firebase from "firebase";
 import { AuthContext } from "../../../../firebase/AuthService";
 
 const ProfilePhoto = ({ getData, imageSrc }) => {
   const [toggle, setToggle] = useState(false);
-  const [, setBlobKey] = useState("");
   const db = firebase.firestore().collection("userIcon");
   const currentUser = firebase.auth().currentUser;
   const user = useContext(AuthContext);
@@ -20,8 +24,6 @@ const ProfilePhoto = ({ getData, imageSrc }) => {
           data.docs.map((doc) => {
             const item = doc.data();
             const blob = item.img;
-            const getBlobId = item.blobId;
-            setBlobKey(getBlobId);
             if (!imageSrc && !toggle) {
               imageSrc = blob;
               setToggle(true);
@@ -51,7 +53,7 @@ const ProfilePhoto = ({ getData, imageSrc }) => {
         disabled={toggle && imageSrc}
       >
         {(!toggle || !imageSrc) && (
-          <FontAwesomeIcon icon={faUserAlt} color="white" size="3x" />
+          <FontAwesomeIcon icon={faUserAlt} color="white" size="5x" />
         )}
         {toggle && imageSrc && (
           <img
@@ -65,10 +67,11 @@ const ProfilePhoto = ({ getData, imageSrc }) => {
       {toggle && imageSrc && (
         <button
           type="button"
-          className="btn btn-danger rounded-circle position-relative delete-button"
+          className="btn btn-danger_base rounded-circle position-relative delete-button"
           onClick={deletePic}
+          
         >
-          <FontAwesomeIcon icon={faTrashAlt} color="white" size="xs" />
+          <FontAwesomeIcon icon={faUserPlus} color="white" size="xs" />
         </button>
       )}
     </div>

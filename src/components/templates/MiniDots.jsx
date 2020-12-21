@@ -1,8 +1,9 @@
-import React, { useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import Dots from "./Dots";
+import firebase from "../../firebase/firebase";
 import { AuthContext } from "../../firebase/AuthService";
 
 const useStyles = makeStyles((theme) => ({
@@ -28,21 +29,29 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MiniDots() {
-  const dots = useSelector((state) => state.dots);
+export default function MiniDots({ dots }) {
+  // const dots = useSelector((state) => state.dots);
   const classes = useStyles();
-  const user = useContext(AuthContext);
-  // console.log(user.uid);
+  // const user = useContext(AuthContext);
+
+  // const catch_myDot = dots.filter((dot) => {
+  //   if (dot.userId === user.uid) {
+  //     console.log(dot);
+  //     return dot;
+  //   }
+  // });
+
+  // console.log(test);
+
   return (
-    user && (
+    <>
       <div className={classes.root}>
-        {/* <List component="nav">
+        <List component="nav">
           {dots.map((dot) => {
-            if (dot.userId === user.uid)
-              return <Dots dot={dot} key={dot.dotId} />;
+            return <Dots dot={dot} key={dot.dotId} />;
           })}
-        </List> */}
+        </List>
       </div>
-    )
+    </>
   );
 }

@@ -2,56 +2,55 @@ import styled from "styled-components";
 import { NavLink as Link } from "react-router-dom";
 
 export const Nav = styled.nav`
-  background: #99ccff;
-  height: 80px;
+  background: #00daff;
+  width: 100%;
+  height: 64px;
   display: flex;
   justify-content: space-between;
-  padding: 0.5rem calc((100vw - 1000px) / 2);
-  z-index: 10;
-`;
-
-export const NavLink = styled(Link)`
-  color: #fff;
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  padding: 0 1rem;
-  height: 100%;
-  cursor: pointer;
-
-  &.active {
-    color: black;
-  }
+  text-align: center;
 `;
 
 export const NavBtn = styled.nav`
   display: flex;
   align-items: center;
-  margin-right: 24px;
-`;
-
-export const NavBtnLink = styled(Link)`
-  border-radius: 4px;
-  background: #256ce1;
-  padding: 10px 22px;
-  color: #fff;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-  text-decoration: none;
-
-  &:hover {
-    transition: all 0.2s ease-in-out;
-    background: #fff;
-    color: #010606;
+  margin-left: 24px;
+  :hover {
+    color: #008b8b;
+    cursor: pointer;
+    transform: scale(1.1);
+    transition-duration: 0.7s;
   }
 `;
 
 export const Icon = styled.i`
-  padding: 10px 22px;
+  background-size: 5px;
+  padding-top: 5px;
 `;
 
-export const Bodyleft = styled.div`
-  float: right;
+export const LogoItem = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin: 0px 200px 30px;
+`;
+
+export const HoverText = styled.p`
+  margin-right: 50px;
+  text-align: center;
+  color: "white";
+  :hover {
+    color: #008b8b;
+    cursor: pointer;
+    transform: scale(0.9);
+    transition-duration: 0.7s;
+  }
+`;
+
+export const Item_star = styled.div`
+  padding-top: 4px;
+  margin-right: 50px;
+`;
+
+export const UserIcon = styled.i`
+  background-size: 5px;
+  padding-top: 5px;
 `;

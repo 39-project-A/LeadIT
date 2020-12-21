@@ -64,11 +64,6 @@ const Ranking = () => {
           if (a.working > b.working) return -1;
           return 0;
         });
-        if (group.length >= 3) {
-          console.log("3つ以上あります");
-        } else {
-          console.log("3つ以上無いです");
-        }
         if (group.length >= 1) {
           const oneRank = group[0].userName;
           setOneRank(oneRank);
@@ -87,7 +82,7 @@ const Ranking = () => {
           const threeHours = group[2].working;
           setThreeHours(threeHours);
         }
-      }); 
+      });
   }, []);
 
   return (

@@ -98,13 +98,15 @@ const Form = () => {
   return (
     <BODY>
       <Header />
-      <div
-        style={{
-          float: "left",
-        }}
-      >
-        <FormSideBar tags={tags} set_tags={set_tags} />
-      </div>
+      {star === 0 && (
+        <div
+          style={{
+            float: "left",
+          }}
+        >
+          <FormSideBar tags={tags} set_tags={set_tags} />
+        </div>
+      )}
       {star === 0 && (
         <CONTAINER>
           <TITLE>What did you do today?</TITLE>

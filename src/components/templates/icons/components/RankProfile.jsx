@@ -47,7 +47,6 @@ const RankProfile = ({ oneRank, twoRank, threeRank }) => {
             src={imageSrc}
             className="rounded-circle"
             width="100%"
-
           />
         )}
       </button>

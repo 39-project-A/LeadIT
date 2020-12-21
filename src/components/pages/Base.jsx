@@ -49,13 +49,24 @@ const MainStyle = {
 
 export default function Base() {
   const dispatch = useDispatch();
+  const dots = useSelector((state) => state.dots);
   const user = useContext(AuthContext);
   const classes = useStyles();
+  const [sortDots, set_sortDots] = useState([]);
   const [week_hours, setWeek_hours] = useState("");
   const [lastweek_hours, setLastweek_hours] = useState("");
   const [total_hours, setTotal_hours] = useState("");
   const db = firebase.firestore().collection("dots");
 
+  const myDots = dots.filter((dot) => {
+    if (dot.userId === user.uid) {
+      console.log(dot);
+      return dot;
+    }
+  });
+  useEffect(() => {
+    set_sortDots(myDots);
+  }, [dots]);
   // 今日から一週間前の指定
   const specify_weekago = () => {
     let agoDate = new Date();
@@ -233,7 +244,11 @@ export default function Base() {
       <Header />
       <form className="MainFrom" style={MainStyle}>
         <div>
-          <OurSideBar />
+          <OurSideBar
+            dots={myDots}
+            sortDots={sortDots}
+            set_sortDots={set_sortDots}
+          />
         </div>
         <button style={{ width: "100px", height: "30px" }} onClick={logout}>
           ログアウト
@@ -241,7 +256,7 @@ export default function Base() {
         <LeftItem>
           <UserIcon />
           <StyledDots>
-            <MiniDots />
+            <MiniDots dots={sortDots} />
           </StyledDots>
         </LeftItem>
         <StyledChart>

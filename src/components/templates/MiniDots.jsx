@@ -29,27 +29,26 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MiniDots() {
-  const dots = useSelector((state) => state.dots);
+export default function MiniDots({ dots }) {
+  // const dots = useSelector((state) => state.dots);
   const classes = useStyles();
-  const user = useContext(AuthContext);
+  // const user = useContext(AuthContext);
 
-  const catch_myDot = dots.filter((dot) => {
-    if (dot.userId === user.uid) {
-      console.log(dot)
-      return dot;
-    }
-  });
+  // const catch_myDot = dots.filter((dot) => {
+  //   if (dot.userId === user.uid) {
+  //     console.log(dot);
+  //     return dot;
+  //   }
+  // });
 
-  
   // console.log(test);
 
   return (
     <>
       <div className={classes.root}>
         <List component="nav">
-          {catch_myDot.map((dot) => {
-            return <Dots dot={dot} key={dot.dotId}  />;
+          {dots.map((dot) => {
+            return <Dots dot={dot} key={dot.dotId} />;
           })}
         </List>
       </div>

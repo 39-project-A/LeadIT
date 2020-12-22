@@ -38,6 +38,14 @@ export default function MiniDots({ dots }) {
   //   }
   // });
 
+  //日付順にdotsを並び変え
+  dots.sort(function (a, b) {
+    if (a.createdAt < b.createdAt) {
+      return 1;
+    } else {
+      return -1;
+    }
+  });
 
   return (
     <>

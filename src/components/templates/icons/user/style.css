@@ -5,7 +5,7 @@
   z-index: 999;
   /* top: 0; */
   /* right: 0; */
-  width: 330%;
+  width: 160%;
   border: 1px solid grey;
   border-radius: 4px;
 }
@@ -60,7 +60,7 @@
 
 .delete-button {
   font-size: 25px;
-  top: -45px;
+  top: -46px;
   left: 110px;
   background-color: skyblue;
   svg {

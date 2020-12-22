@@ -21,6 +21,7 @@ import MiniForm from "../templates/MiniForm";
 import {
   LeftItem,
   Profile,
+  UserName,
   WeekStudyHours,
   StudyHours,
   StyledCalendar,
@@ -61,6 +62,7 @@ export default function Base() {
   const [week_hours, setWeek_hours] = useState("");
   const [lastweek_hours, setLastweek_hours] = useState("");
   const [total_hours, setTotal_hours] = useState("");
+  const [user_name, setUser_name] = useState("");
   const db = firebase.firestore().collection("dots");
   const myDots = dots.filter((dot) => {
     if (user && dot.userId === user.uid) {
@@ -80,6 +82,22 @@ export default function Base() {
     display: "flex",
     flexFlow: "column",
   };
+
+  //UserNameを取得
+  useEffect(() => {
+    if (user) {
+      db.where("userId", "==", user.uid)
+        .limit(1)
+        .get()
+        .then((data) => {
+          data.docs.map((doc) => {
+            const item = doc.data().userName;
+            setUser_name(item);
+          });
+        });
+    }
+  }, [user]);
+  console.log(user_name);
 
   // 今日から一週間前の指定
   const specify_weekago = () => {
@@ -259,23 +277,26 @@ export default function Base() {
           ログアウト
         </button>
         <LeftItem>
-          <UserIcon />
-          <StyledDots>
-            <MiniDots dots={sortDots} />
-          </StyledDots>
+          <Profile>
+            <UserIcon />
+            <UserName>{user_name}</UserName>
+          </Profile>
+          <WeekStudyHours>
+            <StudyHours>今週の学習時間 / {week_hours}時間</StudyHours>
+            <StudyHours>前週の学習時間 / {lastweek_hours}時間</StudyHours>
+            <StudyHours>総学習時間 / {total_hours}時間</StudyHours>
+          </WeekStudyHours>
         </LeftItem>
         <StyledChart>
           <MydotsChart />
         </StyledChart>
         <StyledCalendar>
           <Calendar />
-          <ExplainCa>🟧：dot済み (クリックで確認)</ExplainCa>
+          <ExplainCa>🟩：dot済み (クリックで確認)</ExplainCa>
         </StyledCalendar>
-        <WeekStudyHours>
-          <StudyHours>今週の学習時間 / {week_hours}時間</StudyHours>
-          <StudyHours>前週の学習時間 / {lastweek_hours}時間</StudyHours>
-          <StudyHours>総学習時間 / {total_hours}時間</StudyHours>
-        </WeekStudyHours>
+        <StyledDots>
+          <MiniDots dots={sortDots} />
+        </StyledDots>
       </form>
       <Footer />
     </React.Fragment>

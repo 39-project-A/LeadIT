@@ -122,7 +122,7 @@ export default function App() {
               <Route exact path="/signin" component={SignIn} />
               <Route exact path="/signup" component={SignUp} />
               <LoggedInRoute exact path="/form" component={Form} />
-              <LoggedInRoute exact path="/dot/:id" component={DotDetail} />
+              <Route exact path="/dot/:id" component={DotDetail} />
               <LoggedInRoute exact path="/dot/:id/edit" component={Edit} />
               <LoggedInRoute exact path="/ourdots" component={OurDots} />
               <LoggedInRoute exact path="/ranking" component={Ranking} />

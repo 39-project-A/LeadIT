@@ -72,6 +72,9 @@ export default function DotDetail() {
 	const clickedDot = dotsFromRedux.find(
 		(dotFromRedux) => dotFromRedux.dotId === id
 	);
+	// console.log(dotsFromRedux);
+	// console.log(id);
+	// console.log(clickedDot);
 
 	// -----一週間分の合計勉強時間------//
 	const zeroAdjust = () => {

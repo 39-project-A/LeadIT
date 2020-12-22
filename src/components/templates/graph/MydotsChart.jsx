@@ -278,5 +278,3 @@ export default function MydotsChart() {
     </div>
   );
 };
-
-export default MydotsChart;

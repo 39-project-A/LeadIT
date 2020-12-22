@@ -137,5 +137,3 @@ export default function Ranking() {
     </div>
   );
 };
-
-export default Ranking;

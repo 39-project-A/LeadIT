@@ -54,5 +54,3 @@ export default function RankProfile({ oneRank, twoRank, threeRank }) {
     </div>
   );
 };
-
-export default RankProfile;

@@ -50,7 +50,7 @@ const WRAPPER = styled.div`
 `;
 
 const LABEL = styled(InputLabel)`
-	font-size: 0.8rem;
+	font-size: 0.7rem !important;
 `;
 
 const ERROR = styled.p`
@@ -62,7 +62,7 @@ const ERROR = styled.p`
 	letter-spacing: 0.03333em;
 `;
 
-const Edit = () => {
+export default function Edit() {
 	const classes = useStyles();
 	const { id } = useParams();
 	const history = useHistory();
@@ -116,7 +116,6 @@ const Edit = () => {
 	}
 
 	const onSubmit = (data) => {
-		// console.log(new Date(dot.createdAt.seconds * 1000));
 		firebase
 			.firestore()
 			.collection("dots")
@@ -125,7 +124,6 @@ const Edit = () => {
 				dotId: dot.dotId,
 				title: data.title,
 				text: data.text,
-				// url: data.url,
 				working: Number(data.working),
 				tags: tags,
 				userId: user.uid,
@@ -134,7 +132,6 @@ const Edit = () => {
 				getday: dot.getday,
 			})
 			.then(function () {
-				console.log("Document successfully edited!");
 				history.push("/");
 			});
 	};
@@ -148,7 +145,7 @@ const Edit = () => {
 			<form className={classes.container} onSubmit={handleSubmit(onSubmit)}>
 				<div className={classes.div}> </div>
 				<H3>EDIT PAGE</H3>
-				<LABEL>タイトル</LABEL>
+				<LABEL>TITLE</LABEL>
 				<input
 					type="text"
 					name="title"
@@ -158,6 +155,7 @@ const Edit = () => {
 					ref={register({ required: true })}
 				/>
 				{errors.title && <ERROR>タイトルを記入してください</ERROR>}
+
 				<WRAPPER className={classes.div}>
 					{tags &&
 						tags.map((tag) => {
@@ -166,7 +164,6 @@ const Edit = () => {
 				</WRAPPER>
 				<WRAPPER>
 					<LABEL>勉強時間</LABEL>
-
 					<select
 						id="working"
 						name="working"
@@ -199,7 +196,8 @@ const Edit = () => {
 						<option value="10">9+</option>
 					</select>
 				</WRAPPER>
-				<LABEL>内容</LABEL>
+
+				<LABEL>WHAT I DID IS</LABEL>
 				<TextField
 					id="outlined-multiline-static"
 					name="text"
@@ -212,6 +210,7 @@ const Edit = () => {
 				/>
 				{errors.text && <ERROR>内容を記入してください</ERROR>}
 				<div className={classes.div}> </div>
+
 				<Button
 					variant="contained"
 					color="secondary"
@@ -225,5 +224,4 @@ const Edit = () => {
 			<Footer />
 		</React.Fragment>
 	);
-};
-export default Edit;
+}

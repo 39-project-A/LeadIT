@@ -1,10 +1,7 @@
-import React, { useState, useContext, useEffect } from "react";
-import { useSelector } from "react-redux";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import Dots from "./Dots";
-import firebase from "../../firebase/firebase";
-import { AuthContext } from "../../firebase/AuthService";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,19 +26,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MiniDots() {
-  const dots = useSelector((state) => state.dots);
+export default function MiniDots({ dots }) {
+  // const dots = useSelector((state) => state.dots);
   const classes = useStyles();
-  const user = useContext(AuthContext);
+  // const user = useContext(AuthContext);
 
-  const catch_myDot = dots.filter((dot) => {
-    if (dot.userId === user.uid) {
-      return dot;
-    }
-  });
+  // const catch_myDot = dots.filter((dot) => {
+  //   if (dot.userId === user.uid) {
+  //     console.log(dot);
+  //     return dot;
+  //   }
+  // });
 
   //日付順にdotsを並び変え
-  catch_myDot.sort(function (a, b) {
+  dots.sort(function (a, b) {
     if (a.createdAt < b.createdAt) {
       return 1;
     } else {
@@ -53,7 +51,7 @@ export default function MiniDots() {
     <>
       <div className={classes.root}>
         <List component="nav">
-          {catch_myDot.map((dot) => {
+          {dots.map((dot) => {
             return <Dots dot={dot} key={dot.dotId} />;
           })}
         </List>

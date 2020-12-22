@@ -34,7 +34,7 @@ export default function OurSideBar({ dots, sortDots, set_sortDots }) {
   const classes = useStyles();
   const sort_dots = (tag) => {
     set_sortDots(
-      sortDots.filter((dot) => {
+      dots.filter((dot) => {
         if (dot.tags.indexOf(tag) !== -1) return dot;
       })
     );

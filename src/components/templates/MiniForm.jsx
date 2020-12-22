@@ -3,7 +3,9 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import shortid from "shortid";
 import { AuthContext } from "../../firebase/AuthService";
-import firebase from "../../firebase/firebase";
+import firebase from "firebase/app";
+import "firebase/app";
+import "firebase/firestore";
 import { add_dot } from "../../reducks/dots/action";
 import { set_star } from "../../reducks/star/action";
 import "../../style/Miniform.css";
@@ -53,7 +55,6 @@ export default function MiniForm() {
           dotId: dotId,
           title: data.title,
           text: "",
-          url: "",
           working: Number(data.working),
           tags: [],
           userId: user.uid,
@@ -67,7 +68,6 @@ export default function MiniForm() {
           dotId: dotId,
           title: data.title,
           text: "",
-          url: "",
           working: Number(data.working),
           tags: [],
           userId: user.uid,

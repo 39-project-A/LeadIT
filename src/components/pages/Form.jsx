@@ -133,7 +133,7 @@ const Form = () => {
                 />
               </LI>
               <LI>
-                <LABEL>&emsp;Tags: please select tags from left bar</LABEL>
+                <LABEL>&emsp;Tags: please select tags from the left bar</LABEL>
                 <TAGS>
                   <span>
                     {tags &&

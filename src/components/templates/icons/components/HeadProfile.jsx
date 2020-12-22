@@ -4,10 +4,10 @@ import { faUserAlt } from "@fortawesome/free-solid-svg-icons";
 import firebase from "firebase";
 import { AuthContext } from "../../../../firebase/AuthService";
 
-const HeadProfile = () => {
+export default function HeadProfile()  {
   const [imageSrc, setImageSrc] = useState("");
-  const db = firebase.firestore().collection("userIcon");
   const user = useContext(AuthContext);
+  const db = firebase.firestore().collection("userIcon");
 
   useEffect(() => {
     if (user) {
@@ -49,4 +49,3 @@ const HeadProfile = () => {
   );
 };
 
-export default HeadProfile;

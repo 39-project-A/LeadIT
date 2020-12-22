@@ -1,13 +1,17 @@
 import React, { useEffect, useContext, useState } from "react";
-import Header from "../templates/Header/Header";
-import Footer from "../templates/Footer/Footer";
-import { makeStyles } from "@material-ui/core/styles";
-import { useDispatch } from "react-redux";
+import { useParams, useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
+import Footer from "../templates/Footer/Footer";
+import Header from "../templates/Header/Header";
+import { makeStyles } from "@material-ui/core/styles";
+import { useDispatch, useSelector } from "react-redux";
 import { AuthContext } from "../../firebase/AuthService";
+import { Redirect } from "react-router-dom";
 import { fetch_dots } from "../../reducks/dots/action";
 import { fetch_todayDotLength } from "../../reducks/star/action";
-import firebase from "../../firebase/firebase";
+import firebase from "firebase/app";
+import "firebase/app";
+import "firebase/firestore";
 import MydotsChart from "../templates/graph/MydotsChart";
 import UserIcon from "../templates/icons/user/user";
 import OurSideBar from "../templates/OurSideBar";
@@ -49,14 +53,35 @@ const MainStyle = {
 };
 
 export default function Base() {
-  const dispatch = useDispatch();
   const user = useContext(AuthContext);
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const dots = useSelector((state) => state.dots);
   const classes = useStyles();
+  const [sortDots, set_sortDots] = useState([]);
   const [week_hours, setWeek_hours] = useState("");
   const [lastweek_hours, setLastweek_hours] = useState("");
   const [total_hours, setTotal_hours] = useState("");
   const [user_name, setUser_name] = useState("");
   const db = firebase.firestore().collection("dots");
+  const myDots = dots.filter((dot) => {
+    if (user && dot.userId === user.uid) {
+      return dot;
+    }
+  });
+  useEffect(() => {
+    set_sortDots(myDots);
+  }, [dots]);
+
+  const jobstyle = {
+    display: "flex",
+    JustifyContent: "flex-end",
+  };
+
+  const topjobstyle = {
+    display: "flex",
+    flexFlow: "column",
+  };
 
   //UserNameを取得
   useEffect(() => {
@@ -191,6 +216,7 @@ export default function Base() {
 
   const logout = () => {
     firebase.auth().signOut();
+    history.push("/home");
   };
 
   // // -----全てのdotをfetch(editして、baseに戻ったあとに反映させるために) refactoringの必要アリ?-----
@@ -205,15 +231,13 @@ export default function Base() {
             dotId: doc.data().dotId,
             title: doc.data().title,
             text: doc.data().text,
-            // url: data.url,
             working: doc.data().working,
             tags: doc.data().tags,
             userId: doc.data().userId,
-            userName: doc.data().displayName,
-            // createdAt: doc.data().createdAt,
-            createdAt: new Date(doc.data().createdAt.seconds * 1000), //こっちがNEW
-            getday: doc.data().getday,
+            userName: doc.data().userName,
+            createdAt: new Date(doc.data().createdAt.seconds * 1000), 
             getDate: doc.data().getDate,
+            getday: doc.data().getday,
           };
         });
         dispatch(fetch_dots(RESPONSE));
@@ -222,37 +246,36 @@ export default function Base() {
 
   // -----今日のDotのfetch------
   useEffect(() => {
-    firebase
-      .firestore()
-      .collection("dots")
-      .where("userId", "==", user.uid)
-      .where("createdAt", ">=", new Date(get_todayMidnight()))
-      .get()
-      .then((data) => {
-        const todayDot = data.docs.map((doc) => {
-          return doc.data();
+    user &&
+      firebase
+        .firestore()
+        .collection("dots")
+        .where("userId", "==", user.uid)
+        .where("createdAt", ">=", new Date(get_todayMidnight()))
+        .get()
+        .then((data) => {
+          const todayDot = data.docs.map((doc) => {
+            return doc.data();
+          });
+          dispatch(fetch_todayDotLength(todayDot.length));
         });
-        dispatch(fetch_todayDotLength(todayDot.length));
-      });
   }, []);
 
-  const jobstyle = {
-    display: "flex",
-    JustifyContent: "flex-end",
-  };
-
-  const topjobstyle = {
-    display: "flex",
-    flexFlow: "column",
-  };
-
+  
   return (
     <React.Fragment>
       <Header />
       <form className="MainFrom" style={MainStyle}>
         <div>
-          <OurSideBar />
+          <OurSideBar
+            dots={myDots}
+            sortDots={sortDots}
+            set_sortDots={set_sortDots}
+          />
         </div>
+        <button style={{ width: "100px", height: "30px" }} onClick={logout}>
+          ログアウト
+        </button>
         <LeftItem>
           <Profile>
             <UserIcon />
@@ -272,7 +295,7 @@ export default function Base() {
           <ExplainCa>🟩：dot済み (クリックで確認)</ExplainCa>
         </StyledCalendar>
         <StyledDots>
-          <MiniDots />
+          <MiniDots dots={sortDots} />
         </StyledDots>
       </form>
       <Footer />

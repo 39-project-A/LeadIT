@@ -39,7 +39,7 @@ const RankProfile = ({ oneRank, twoRank, threeRank }) => {
         disabled={imageSrc}
       >
         {!imageSrc && (
-          <FontAwesomeIcon icon={faUserAlt} color="white" size="2px" />
+          <FontAwesomeIcon icon={faUserAlt} color="white" size="5x" />
         )}
         {imageSrc && (
           <img

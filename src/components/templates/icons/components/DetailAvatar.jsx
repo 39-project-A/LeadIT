@@ -58,6 +58,5 @@ export default function DetailAvatar({ clickedDot }) {
 			);
 		}
 	};
-	// return <div>a</div>;
 	return <>{renderImg()}</>;
 }

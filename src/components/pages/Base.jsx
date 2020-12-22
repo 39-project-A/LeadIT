@@ -64,7 +64,7 @@ export default function Base() {
   const db = firebase.firestore().collection("dots");
   const myDots = dots.filter((dot) => {
     if (user && dot.userId === user.uid) {
-      console.log(dot);
+      // console.log(dot);
       return dot;
     }
   });

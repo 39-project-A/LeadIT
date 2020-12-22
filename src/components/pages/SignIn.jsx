@@ -113,6 +113,7 @@ const SignIn = () => {
                 id="password"
                 autoComplete="current-password"
                 value={password}
+                inputProps={{ maxLength: 20, minLength: 4 }}
                 onChange={(e) => setPassword(e.target.value)}
               />
             </Grid>

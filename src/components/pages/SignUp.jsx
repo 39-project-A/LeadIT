@@ -96,9 +96,10 @@ const SignUp = () => {
                 required
                 fullWidth
                 id="Name"
-                label=" Name"
+                label=" Name in 10 words or less "
                 autoFocus
                 value={username}
+                inputProps={{ maxLength: 10 }}
                 onChange={(e) => {
                   setUsername(e.target.value);
                 }}
@@ -131,17 +132,13 @@ const SignUp = () => {
                 id="password"
                 autoComplete="current-password"
                 value={password}
+                inputProps={{ maxLength: 20, minLength: 4 }}
                 onChange={(e) => {
                   setPssword(e.target.value);
                 }}
               />
             </Grid>
-            <Grid item xs={12}>
-              {/* <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label="I want to receive inspiration, marketing promotions and updates via email."
-              /> */}
-            </Grid>
+            <Grid item xs={12}></Grid>
           </Grid>
           <Button
             type="submit"

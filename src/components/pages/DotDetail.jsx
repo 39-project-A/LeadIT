@@ -72,9 +72,6 @@ export default function DotDetail() {
 	const clickedDot = dotsFromRedux.find(
 		(dotFromRedux) => dotFromRedux.dotId === id
 	);
-	// console.log(dotsFromRedux);
-	// console.log(id);
-	// console.log(clickedDot);
 
 	// -----一週間分の合計勉強時間------//
 	const zeroAdjust = () => {
@@ -142,24 +139,6 @@ export default function DotDetail() {
 			});
 	}
 	// -----------------------
-
-	const renderName = () => {
-		if (clickedDot) {
-			return clickedDot.userName;
-		}
-	};
-
-	const renderText = () => {
-		if (clickedDot) {
-			return clickedDot.text;
-		}
-	};
-
-	const renderTitle = () => {
-		if (clickedDot) {
-			return clickedDot.title;
-		}
-	};
 
 	const renderWorkingTime = () => {
 		if (clickedDot) {
@@ -238,16 +217,16 @@ export default function DotDetail() {
 			<INNER>
 				<diV style={{ width: "10%" }}>
 					<DetailAvatar clickedDot={clickedDot} />
-					<p style={{ textAlignLast: "center" }}> {renderName()} </p>
+					<p style={{ textAlignLast: "center" }}> {clickedDot.userName} </p>
 				</diV>
 				<DETAIL_WRAPPER>
-					<H3> {renderTitle()} </H3>
-					<TEXT>{renderText()}</TEXT>
+					<H3> {clickedDot.title} </H3>
+					<TEXT>{clickedDot.text}</TEXT>
 					<IMG_WRAPPER style={{ paddingBottom: "5%" }}>
 						<IMG
 							src={yayFrogIcon}
 							title="frog"
-							alt="超喜んでる変えるのアイコン"
+							alt="超喜んでるカエルのアイコン"
 							align="middle"
 						/>
 						{renderWorkingTime()}

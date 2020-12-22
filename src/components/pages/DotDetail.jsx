@@ -11,7 +11,7 @@ import DetailAvatar from "../templates/icons/components/DetailAvatar";
 import styled from "styled-components";
 import { makeStyles } from "@material-ui/core/styles";
 import oneWeekIcon from "../pages/img/one-week.png";
-import yayFrogIcon from "../pages/img/yayFrog.png";
+import clockIcon from "../pages/img/clock.png";
 import Button from "@material-ui/core/Button";
 import EditSharpIcon from "@material-ui/icons/EditSharp";
 import DeleteSharpIcon from "@material-ui/icons/DeleteSharp";
@@ -142,8 +142,7 @@ export default function DotDetail() {
 
 	const renderWorkingTime = () => {
 		if (clickedDot) {
-			const stringTime = clickedDot.createdAt; //NEW
-			// const createdAt = new Date(clickedDot.createdAt.seconds * 1000);
+			const stringTime = clickedDot.createdAt;
 			const year = stringTime.getFullYear();
 			const month = stringTime.getMonth() + 1;
 			const date = stringTime.getDate();
@@ -159,22 +158,6 @@ export default function DotDetail() {
 				" 時間"
 			);
 		}
-	};
-
-	const onDelete_click = () => {
-		firebase
-			.firestore()
-			.collection("dots")
-			.doc(clickedDot.dotId)
-			.delete()
-			.then(function () {
-				console.log("Document successfully deleted!");
-				dispatch(delete_dot(clickedDot));
-				history.push("/");
-			})
-			.catch(function (error) {
-				console.error("Error removing document: ", error);
-			});
 	};
 
 	const show_editAndDeleteButtons = () => {
@@ -206,9 +189,43 @@ export default function DotDetail() {
 		}
 	};
 
+	const onDelete_click = () => {
+		firebase
+			.firestore()
+			.collection("dots")
+			.doc(clickedDot.dotId)
+			.delete()
+			.then(function () {
+				console.log("Document successfully deleted!");
+				dispatch(delete_dot(clickedDot));
+				history.push("/");
+			})
+			.catch(function (error) {
+				console.error("Error removing document: ", error);
+			});
+	};
+
 	const onEdit_click = () => {
 		console.log("edit click");
 		history.push(`/dot/${id}/edit`);
+	};
+
+	const renderName = () => {
+		if (clickedDot) {
+			return <p style={{ textAlignLast: "center" }}> {clickedDot.userName} </p>;
+		}
+	};
+
+	const renderTitle = () => {
+		if (clickedDot) {
+			return <H3> {clickedDot.title} </H3>;
+		}
+	};
+
+	const renderText = () => {
+		if (clickedDot) {
+			return <TEXT>{clickedDot.text}</TEXT>;
+		}
 	};
 
 	return (
@@ -217,21 +234,20 @@ export default function DotDetail() {
 			<INNER>
 				<diV style={{ width: "10%" }}>
 					<DetailAvatar clickedDot={clickedDot} />
-					<p style={{ textAlignLast: "center" }}> {clickedDot.userName} </p>
+					{renderName()}
 				</diV>
 				<DETAIL_WRAPPER>
-					<H3> {clickedDot.title} </H3>
-					<TEXT>{clickedDot.text}</TEXT>
+					{renderTitle()}
+					{renderText()}
 					<IMG_WRAPPER style={{ paddingBottom: "5%" }}>
 						<IMG
-							src={yayFrogIcon}
-							title="frog"
-							alt="超喜んでるカエルのアイコン"
+							src={clockIcon}
+							title="clock"
+							alt="時計のアイコン"
 							align="middle"
 						/>
 						{renderWorkingTime()}
 					</IMG_WRAPPER>
-
 					<IMG_WRAPPER style={{ paddingBottom: "2%" }}>
 						<IMG
 							src={oneWeekIcon}

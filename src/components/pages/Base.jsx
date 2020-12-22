@@ -64,13 +64,23 @@ export default function Base() {
   const db = firebase.firestore().collection("dots");
   const myDots = dots.filter((dot) => {
     if (user && dot.userId === user.uid) {
-      // console.log(dot);
       return dot;
     }
   });
   useEffect(() => {
     set_sortDots(myDots);
   }, [dots]);
+
+  const jobstyle = {
+    display: "flex",
+    JustifyContent: "flex-end",
+  };
+
+  const topjobstyle = {
+    display: "flex",
+    flexFlow: "column",
+  };
+
   // 今日から一週間前の指定
   const specify_weekago = () => {
     let agoDate = new Date();
@@ -203,13 +213,11 @@ export default function Base() {
             dotId: doc.data().dotId,
             title: doc.data().title,
             text: doc.data().text,
-            // url: data.url,
             working: doc.data().working,
             tags: doc.data().tags,
             userId: doc.data().userId,
             userName: doc.data().userName,
-            // createdAt: doc.data().createdAt,
-            createdAt: new Date(doc.data().createdAt.seconds * 1000), //こっちがNEW
+            createdAt: new Date(doc.data().createdAt.seconds * 1000), 
             getDate: doc.data().getDate,
             getday: doc.data().getday,
           };
@@ -235,15 +243,7 @@ export default function Base() {
         });
   }, []);
 
-  const jobstyle = {
-    display: "flex",
-    JustifyContent: "flex-end",
-  };
-
-  const topjobstyle = {
-    display: "flex",
-    flexFlow: "column",
-  };
+  
   return (
     <React.Fragment>
       <Header />

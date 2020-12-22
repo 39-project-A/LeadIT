@@ -9,7 +9,7 @@ import {
 import firebase from "firebase";
 import { AuthContext } from "../../../../firebase/AuthService";
 
-const ProfilePhoto = ({ getData, imageSrc }) => {
+export default function ProfilePhoto({ getData, imageSrc }) {
   const [toggle, setToggle] = useState(false);
   const db = firebase.firestore().collection("userIcon");
   const currentUser = firebase.auth().currentUser;
@@ -44,6 +44,7 @@ const ProfilePhoto = ({ getData, imageSrc }) => {
     getData(false, "");
     db.doc(currentUser.uid).delete();
   };
+
   return (
     <div className="container">
       <button
@@ -78,4 +79,3 @@ const ProfilePhoto = ({ getData, imageSrc }) => {
   );
 };
 
-export default ProfilePhoto;

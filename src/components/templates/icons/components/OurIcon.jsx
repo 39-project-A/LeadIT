@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 
 export default function OurIcon({ dot }) {
   const iconsData = useSelector((state) => state.icons);
-  console.log(dot);
   const thisUserIcon = iconsData.find(
     (iconData) => iconData.userId === dot.userId
   );

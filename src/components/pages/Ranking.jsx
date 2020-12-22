@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "../../style/Ranking.css";
 import firebase from "../../firebase/firebase";
 import Header from "../templates/Header/Header";
 import RankProfile from "../templates/icons/components/RankProfile";
-import {
-	Container,
-	Rank_title,
-	Count_Hours,
-	UserList_one,
-	UserList_two,
-	UserList_three,
-} from "../../style/StyledRank";
+// import {
+//   Container,
+//   Rank_title,
+//   Count_Hours,
+//   UserList_one,
+//   UserList_two,
+//   UserList_three,
+// } from "../../style/StyledRank";
+import Footer from "../templates/Footer/Footer";
+{
+  /* <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> */
+}
 
 export default function Ranking() {
 	const db = firebase.firestore().collection("dots");
@@ -85,31 +91,51 @@ export default function Ranking() {
 			});
 	}, []);
 
-	return (
-		<div>
-			<Header />
-			<Container>
-				<Rank_title>🏆 Weekly Ranking</Rank_title>
-				<Count_Hours>
-					{oneRank && oneHours && (
-						<UserList_one>
-							🥇 <RankProfile oneRank={oneRank} /> {oneRank} / {oneHours}hours
-						</UserList_one>
-					)}
-					{twoRank && twoHours && (
-						<UserList_two>
-							🥈 <RankProfile twoRank={twoRank} /> {twoRank} / {twoHours}hours
-						</UserList_two>
-					)}
-					{threeRank && threeHours && (
-						<UserList_three>
-							🥉 <RankProfile threeRank={threeRank} /> {threeRank} /{" "}
-							{threeHours}
-							hours
-						</UserList_three>
-					)}
-				</Count_Hours>
-			</Container>
-		</div>
-	);
-}
+  return (
+    <div class="wrapper">
+      <Header />
+      <p class="rank_title">🏆 Weekly Ranking </p>
+      <>
+        <div id="podium-box" class="row" style={{ height: "600px" }}>
+          <div class="col-md-4 step-container m-0 p-0">
+            <div>
+              <p class="two_username">
+                🥈{twoRank} / {twoHours}hours
+              </p>{" "}
+              <RankProfile twoRank={twoRank} />
+            </div>
+            <div id="second-step" class="bg-blue step centerBoth podium-number">
+              2
+            </div>
+          </div>
+          <div class="col-md-4 step-container m-0 p-0">
+            <div>
+              <p class="one_username">
+                🥇{oneRank} / {oneHours}hours
+              </p>{" "}
+              <RankProfile oneRank={oneRank} />{" "}
+            </div>
+            <div id="first-step" class="bg-blue step centerBoth podium-number">
+              1
+            </div>
+          </div>
+          <div class="col-md-4 step-container m-0 p-0">
+            <div>
+              {" "}
+              <p class="three_username">
+                🥉{threeRank} / {threeHours}hours
+              </p>{" "}
+              <RankProfile threeRank={threeRank} />
+            </div>
+            <div id="third-step" class="bg-blue step centerBoth podium-number">
+              3
+            </div>
+          </div>
+        </div>
+      </>
+      <Footer />
+    </div>
+  );
+};
+
+export default Ranking;

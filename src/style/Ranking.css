@@ -1,0 +1,71 @@
+.rank_title {
+  font-size: 30px;
+  margin-left: 30px;
+  margin-top: 10px;
+}
+
+.warpper {
+  position: relative;
+  min-height: 100vh;
+}
+
+#podium-box {
+  margin: 0 auto;
+  display: flex;
+}
+
+.podium-number {
+  font-family: DaggerSquare;
+  font-weight: bold;
+  font-size: 4em;
+  color: white;
+}
+
+.step-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.step-container > div:first-child {
+  margin-top: auto;
+  text-align: center;
+}
+
+.step {
+  text-align: center;
+}
+
+.bg-blue {
+  /* background-color: tomato; */
+}
+
+#first-step {
+  height: 50%;
+  background-color: gold;
+}
+
+#second-step {
+  height: 35%;
+  background-color: silver;
+}
+
+#third-step {
+  height: 30%;
+  background-color: #815a2b;
+}
+
+.one_username {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.two_username {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.three_username {
+  font-size: 30px;
+  font-weight: bold;
+}

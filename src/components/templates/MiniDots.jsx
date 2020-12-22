@@ -1,10 +1,7 @@
-import React, { useState, useContext, useEffect } from "react";
-import { useSelector } from "react-redux";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import Dots from "./Dots";
-import firebase from "../../firebase/firebase";
-import { AuthContext } from "../../firebase/AuthService";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,7 +38,14 @@ export default function MiniDots({ dots }) {
   //   }
   // });
 
-  // console.log(test);
+  //日付順にdotsを並び変え
+  dots.sort(function (a, b) {
+    if (a.createdAt < b.createdAt) {
+      return 1;
+    } else {
+      return -1;
+    }
+  });
 
   return (
     <>

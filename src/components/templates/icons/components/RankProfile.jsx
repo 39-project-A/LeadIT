@@ -3,33 +3,34 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserAlt } from "@fortawesome/free-solid-svg-icons";
 import firebase from "firebase";
 
-const RankProfile = ({ oneRank, twoRank, threeRank }) => {
-  const [imageSrc, setImageSrc] = useState("");
+export default function RankProfile({ oneRank, twoRank, threeRank }) {
+	const [imageSrc, setImageSrc] = useState("");
   const db = firebase.firestore().collection("userIcon");
-  useEffect(() => {
-    db.get().then((data) => {
-      data.docs.map((doc) => {
-        const item = doc.data();
-        const name = item.userName;
-        if (name === oneRank) {
-          const blob = item.img;
-          if (!imageSrc) {
-            setImageSrc(blob);
-          }
-        } else if (name === twoRank) {
-          const blob = item.img;
-          if (!imageSrc) {
-            setImageSrc(blob);
-          }
-        } else if (name === threeRank) {
-          const blob = item.img;
-          if (!imageSrc) {
-            setImageSrc(blob);
-          }
-        }
-      });
-    });
-  }, [oneRank, twoRank, threeRank]);
+  
+	useEffect(() => {
+		db.get().then((data) => {
+			data.docs.map((doc) => {
+				const item = doc.data();
+				const name = item.userName;
+				if (name === oneRank) {
+					const blob = item.img;
+					if (!imageSrc) {
+						setImageSrc(blob);
+					}
+				} else if (name === twoRank) {
+					const blob = item.img;
+					if (!imageSrc) {
+						setImageSrc(blob);
+					}
+				} else if (name === threeRank) {
+					const blob = item.img;
+					if (!imageSrc) {
+						setImageSrc(blob);
+					}
+				}
+			});
+		});
+	}, [oneRank, twoRank, threeRank]);
 
   return (
     <div className="container_rank">

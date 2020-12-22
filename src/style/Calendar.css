@@ -568,7 +568,7 @@
 .react-datepicker__quarter-text--highlighted,
 .react-datepicker__year-text--highlighted {
   border-radius: 0.3rem;
-  background-color: rgba(219, 186, 96, 0.795);
+  background-color: rgba(116, 219, 96, 0.795);
   color: white;
 }
 

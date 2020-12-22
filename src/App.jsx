@@ -60,10 +60,10 @@ export default function App() {
       console.log(loading);
       return <Route render={(props) => <Redirect to={"/home"} />} />;
     } else {
-      console.log(loading);
       return <Route render={(props) => <Component {...props} />} />;
     }
   };
+
   useEffect(() => {
     get_userData()
       .then(() => {
@@ -75,6 +75,7 @@ export default function App() {
         set_loading("default");
       });
   }, []);
+
   useEffect(() => {
     firebase
       .firestore()
@@ -90,8 +91,7 @@ export default function App() {
             tags: doc.data().tags,
             userId: doc.data().userId,
             userName: doc.data().userName,
-            // createdAt: doc.data().createdAt,
-            createdAt: new Date(doc.data().createdAt.seconds * 1000), //new
+            createdAt: new Date(doc.data().createdAt.seconds * 1000),
             getDate: doc.data().getDate,
             getday: doc.data().getday,
           };
@@ -122,8 +122,8 @@ export default function App() {
               <Route exact path="/signin" component={SignIn} />
               <Route exact path="/signup" component={SignUp} />
               <LoggedInRoute exact path="/form" component={Form} />
-              <LoggedInRoute exact path="/dot/:id" component={DotDetail} />
-              <LoggedInRoute exact path="/dot/:id/edit" component={Edit} />
+              <Route exact path="/dot/:id" component={DotDetail} />
+              <Route exact path="/dot/:id/edit" component={Edit} />
               <LoggedInRoute exact path="/ourdots" component={OurDots} />
               <LoggedInRoute exact path="/ranking" component={Ranking} />
             </Switch>

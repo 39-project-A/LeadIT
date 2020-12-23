@@ -39,5 +39,5 @@ export default function DetailAvatar({ clickedDot }) {
 		}
 	};
 
-	return <>{renderImg()}</>;
+	return <div style={{ width: "60%" }}>{renderImg()}</div>;
 }

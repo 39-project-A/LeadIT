@@ -3,6 +3,8 @@ import { useParams, useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Footer from "../templates/Footer/Footer";
 import Header from "../templates/Header/Header";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faDoorOpen, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { AuthContext } from "../../firebase/AuthService";
@@ -19,6 +21,8 @@ import Calendar from "../templates/Calendar";
 import MiniDots from "../templates/MiniDots";
 import MiniForm from "../templates/MiniForm";
 import {
+  Base_wrapper,
+  Signout,
   LeftItem,
   Profile,
   UserName,
@@ -235,7 +239,7 @@ export default function Base() {
             tags: doc.data().tags,
             userId: doc.data().userId,
             userName: doc.data().userName,
-            createdAt: new Date(doc.data().createdAt.seconds * 1000), 
+            createdAt: new Date(doc.data().createdAt.seconds * 1000),
             getDate: doc.data().getDate,
             getday: doc.data().getday,
           };
@@ -261,44 +265,64 @@ export default function Base() {
         });
   }, []);
 
-  
   return (
     <React.Fragment>
-      <Header />
-      <form className="MainFrom" style={MainStyle}>
-        <div>
-          <OurSideBar
-            dots={myDots}
-            sortDots={sortDots}
-            set_sortDots={set_sortDots}
-          />
-        </div>
-        <button style={{ width: "100px", height: "30px" }} onClick={logout}>
-          ログアウト
-        </button>
-        <LeftItem>
-          <Profile>
-            <UserIcon />
-            <UserName>{user_name}</UserName>
-          </Profile>
-          <WeekStudyHours>
-            <StudyHours>今週の学習時間 / {week_hours}時間</StudyHours>
-            <StudyHours>前週の学習時間 / {lastweek_hours}時間</StudyHours>
-            <StudyHours>総学習時間 / {total_hours}時間</StudyHours>
-          </WeekStudyHours>
-        </LeftItem>
-        <StyledChart>
-          <MydotsChart />
-        </StyledChart>
-        <StyledCalendar>
-          <Calendar />
-          <ExplainCa>🟩：dot済み (クリックで確認)</ExplainCa>
-        </StyledCalendar>
-        <StyledDots>
-          <MiniDots dots={sortDots} />
-        </StyledDots>
-      </form>
-      <Footer />
+      <Base_wrapper>
+        <Header />
+        <form className="MainFrom" style={MainStyle}>
+          <div>
+            <OurSideBar
+              dots={myDots}
+              sortDots={sortDots}
+              set_sortDots={set_sortDots}
+            />
+          </div>
+          <button
+            style={{
+              width: "130px",
+              height: "30px",
+              boxShadow: "5px 5px 5px rgba(0,0,0,0.4)",
+              backgroundColor: "aqua",
+              borderRadius: "5px",
+            }}
+            onClick={logout}
+          >
+            {" "}
+            <Signout>
+              {" "}
+              <FontAwesomeIcon
+                icon={faSignOutAlt}
+                color="black"
+                size="1x"
+                style={{ marginRight: "10px" }}
+              />
+              ログアウト
+            </Signout>
+          </button>
+          <LeftItem>
+            <Profile>
+              <UserIcon />
+              <UserName>{user_name}</UserName>
+            </Profile>
+            <WeekStudyHours>
+              <StudyHours>今週の学習時間 / {week_hours}時間</StudyHours>
+              <StudyHours>前週の学習時間 / {lastweek_hours}時間</StudyHours>
+              <StudyHours>総学習時間 / {total_hours}時間</StudyHours>
+            </WeekStudyHours>
+          </LeftItem>
+          <StyledChart>
+            <MydotsChart />
+          </StyledChart>
+          <StyledCalendar>
+            <Calendar />
+            <ExplainCa>🟩：dot済み (クリックで確認)</ExplainCa>
+          </StyledCalendar>
+          <StyledDots>
+            <MiniDots dots={sortDots} />
+          </StyledDots>
+        </form>
+        <Footer />
+      </Base_wrapper>
     </React.Fragment>
   );
 }

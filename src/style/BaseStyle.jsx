@@ -1,5 +1,23 @@
 import styled from "styled-components";
 
+export const Base_wrapper = styled.div`
+  position: fixed;
+  height: 100vh;
+  width: 100%;
+`;
+
+export const Signout = styled.p`
+  font-size: 15px;
+  font-weight:bold;
+  :hover {
+    :hover {
+    color: #ca1c81;
+    cursor: pointer;
+    transform: scale(0.9);
+    transition-duration: 0.7s;
+  }
+`;
+
 export const LeftItem = styled.div`
   position: absolute;
   height: 100vh;

@@ -3,9 +3,7 @@
   position: absolute;
   transform: translate(-250px, -300px);
   z-index: 999;
-  /* top: 0; */
-  /* right: 0; */
-  width: 160%;
+  width: 290%;
   border: 1px solid grey;
   border-radius: 4px;
 }
@@ -19,7 +17,6 @@
 }
 
 .container3 {
-  /* margin: 30px 30px; */
   width: 30%;
 }
 

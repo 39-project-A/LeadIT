@@ -23,7 +23,6 @@ import MiniForm from "../templates/MiniForm";
 import {
   Base_wrapper,
   Signout,
-  LeftItem,
   Profile,
   UserName,
   WeekStudyHours,
@@ -31,8 +30,8 @@ import {
   StyledCalendar,
   ExplainCa,
   StyledChart,
-  StyledForm,
   StyledDots,
+  Mydots,
 } from "../../style/BaseStyle";
 
 const useStyles = makeStyles({
@@ -101,7 +100,6 @@ export default function Base() {
         });
     }
   }, [user]);
-  console.log(user_name);
 
   // 今日から一週間前の指定
   const specify_weekago = () => {
@@ -299,24 +297,23 @@ export default function Base() {
               ログアウト
             </Signout>
           </button>
-          <LeftItem>
-            <Profile>
-              <UserIcon />
-              <UserName>{user_name}</UserName>
-            </Profile>
-            <WeekStudyHours>
-              <StudyHours>今週の学習時間 / {week_hours}時間</StudyHours>
-              <StudyHours>前週の学習時間 / {lastweek_hours}時間</StudyHours>
-              <StudyHours>総学習時間 / {total_hours}時間</StudyHours>
-            </WeekStudyHours>
-          </LeftItem>
+          <Profile>
+            <UserIcon />
+            <UserName>{user_name}</UserName>
+          </Profile>
+          <WeekStudyHours>
+            <StudyHours>今週の学習時間 / {week_hours}時間</StudyHours>
+            <StudyHours>前週の学習時間 / {lastweek_hours}時間</StudyHours>
+            <StudyHours>総学習時間 / {total_hours}時間</StudyHours>
+          </WeekStudyHours>
           <StyledChart>
             <MydotsChart />
           </StyledChart>
           <StyledCalendar>
             <Calendar />
-            <ExplainCa>🟩：dot済み (クリックで確認)</ExplainCa>
+            <ExplainCa>🟩 # dot済み (クリックで確認)</ExplainCa>
           </StyledCalendar>
+          <Mydots>📝 Mydots </Mydots>
           <StyledDots>
             <MiniDots dots={sortDots} />
           </StyledDots>

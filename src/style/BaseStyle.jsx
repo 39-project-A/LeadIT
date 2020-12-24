@@ -8,9 +8,8 @@ export const Base_wrapper = styled.div`
 
 export const Signout = styled.p`
   font-size: 15px;
-  font-weight:bold;
+  font-weight: bold;
   :hover {
-    :hover {
     color: #ca1c81;
     cursor: pointer;
     transform: scale(0.9);
@@ -18,20 +17,12 @@ export const Signout = styled.p`
   }
 `;
 
-export const LeftItem = styled.div`
-  position: absolute;
-  height: 100vh;
-  width: 20%;
-  top: 95px;
-  transform: translate(230px, 30px);
-  /* margin-top: 10px; */
-`;
-
 export const Profile = styled.div`
-  position: relative;
-  width: 58%;
+  position: absolute;
   height: 100%;
-  right: 13px;
+  width: 12%;
+  top: 120px;
+  left: 220px;
 `;
 
 export const UserName = styled.p`
@@ -42,11 +33,12 @@ export const UserName = styled.p`
   font-size: 25px;
   font-weight: bold;
 `;
+
 export const WeekStudyHours = styled.ul`
   position: absolute;
-  width: 75%;
-  top: 240px;
-  right: 110px;
+  width: 15%;
+  top: 365px;
+  left: 193px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -84,11 +76,20 @@ export const ExplainCa = styled.p`
   font-weight: bold;
 `;
 
+export const Mydots = styled.p`
+  font-size: 20px;
+  font-family: cursive;
+  font-weight: bold;
+  position: absolute;
+  top: 421px;
+  right: 107px;
+`;
+
 export const StyledDots = styled.div`
   position: absolute;
   width: 15.5%;
   height: 28%;
-  top: 395px;
+  top: 450px;
   right: 30px;
   overflow: auto;
 `;

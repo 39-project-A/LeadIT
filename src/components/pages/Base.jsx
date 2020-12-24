@@ -14,12 +14,11 @@ import { fetch_todayDotLength } from "../../reducks/star/action";
 import firebase from "firebase/app";
 import "firebase/app";
 import "firebase/firestore";
-import MydotsChart from "../templates/graph/MydotsChart";
+import BarChart from "../templates/graph/BarChart";
 import UserIcon from "../templates/icons/user/user";
 import OurSideBar from "../templates/OurSideBar";
 import Calendar from "../templates/Calendar";
 import MiniDots from "../templates/MiniDots";
-import MiniForm from "../templates/MiniForm";
 import {
   Base_wrapper,
   Signout,
@@ -307,7 +306,7 @@ export default function Base() {
             <StudyHours>総学習時間 / {total_hours}時間</StudyHours>
           </WeekStudyHours>
           <StyledChart>
-            <MydotsChart />
+            <BarChart />
           </StyledChart>
           <StyledCalendar>
             <Calendar />

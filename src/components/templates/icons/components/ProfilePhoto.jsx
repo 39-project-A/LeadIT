@@ -2,9 +2,10 @@ import React, { useState, useEffect, useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUserAlt,
-  faTrashAlt,
   faUserEdit,
   faUserPlus,
+  faEdit,
+  faCamera,
 } from "@fortawesome/free-solid-svg-icons";
 import firebase from "firebase";
 import { AuthContext } from "../../../../firebase/AuthService";
@@ -47,6 +48,16 @@ export default function ProfilePhoto({ getData, imageSrc }) {
 
   return (
     <div className="container">
+      {(!toggle || !imageSrc) && (
+        <button
+          type="button"
+          onClick={handleToggleClick}
+          className="btn  rounded-circle  edit-button"
+          disabled={toggle && imageSrc}
+        >
+          <FontAwesomeIcon icon={faCamera} color="white" size="xs" />
+        </button>
+      )}
       <button
         type="button"
         onClick={handleToggleClick}
@@ -70,12 +81,10 @@ export default function ProfilePhoto({ getData, imageSrc }) {
           type="button"
           className="btn btn-danger_base rounded-circle position-relative delete-button"
           onClick={deletePic}
-          
         >
           <FontAwesomeIcon icon={faUserPlus} color="white" size="xs" />
         </button>
       )}
     </div>
   );
-};
-
+}

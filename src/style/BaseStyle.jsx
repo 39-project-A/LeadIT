@@ -26,10 +26,8 @@ export const Profile = styled.div`
 `;
 
 export const UserName = styled.p`
-  /* position: absolute; */
   font-family: cursive;
   text-align: center;
-  /* margin-left: 10px; */
   font-size: 25px;
   font-weight: bold;
 `;
@@ -58,9 +56,11 @@ export const StudyHours = styled.li`
   list-style-type: none;
 `;
 
-export const StyledChart = styled.div`
-  position: absolute;
-  transform: translate(436px, 30px);
+export const RightItem = styled.div`
+  width: 15%;
+  height: 30%;
+  top: 0;
+  right: 0;
 `;
 
 export const StyledCalendar = styled.div`
@@ -70,10 +70,13 @@ export const StyledCalendar = styled.div`
   top: 112px;
 `;
 
-export const ExplainCa = styled.p`
-  width: 100%;
-  text-align: center;
-  font-weight: bold;
+export const StyledDots = styled.div`
+  position: absolute;
+  width: 15.5%;
+  height: 28%;
+  top: 450px;
+  right: 30px;
+  overflow: auto;
 `;
 
 export const Mydots = styled.p`
@@ -85,11 +88,8 @@ export const Mydots = styled.p`
   right: 107px;
 `;
 
-export const StyledDots = styled.div`
-  position: absolute;
-  width: 15.5%;
-  height: 28%;
-  top: 450px;
-  right: 30px;
-  overflow: auto;
+export const ExplainCa = styled.p`
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
 `;

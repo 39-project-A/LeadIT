@@ -1,12 +1,53 @@
-.rank_title {
-  font-size: 30px;
-  margin-left: 30px;
-  margin-top: 10px;
-}
-
 .warpper {
   position: relative;
   min-height: 100vh;
+  /* background-size: contain; */
+}
+
+.decoration {
+  /* position: absolute;
+  top: 0;
+  right: 0;
+  background-repeat: no-repeat;
+  width: 50px;
+  height: 50px; */
+  /* background-size: 512px 300px; */
+}
+
+.rank_title {
+  font-weight: bold;
+  text-align: center;
+  font-size: 30px;
+  /* margin-left: 30px; */
+  margin-top: 10px;
+  font-family: cursive;
+  /* background-image: url(../components/pages/img/flag.png); */
+  /* background-size: contain; */
+}
+
+.rank_title:before {
+  content: "";
+  display: inline-block;
+  width: 40%;
+  height: 40px;
+  background-image: url(../components/pages/img/flag.png);
+  background-size: contain;
+}
+
+.rank_title:after {
+  content: "";
+  display: inline-block;
+  width: 40%;
+  height: 40px;
+  background-image: url(../components/pages/img/flag.png);
+  background-size: contain;
+}
+
+.rank_title2 {
+  font-size: 30px;
+  /* margin-left: 30px; */
+  margin-top: 30px;
+  font-family: cursive;
 }
 
 #podium-box {
@@ -27,6 +68,15 @@
   flex-direction: column;
 }
 
+.step-container:nth-child(2) {
+  background-image: url(../components/pages/img/ranking-background.png);
+  background-size: 512px 329px;
+}
+/* .step-container:nth-child(3) {
+  background-image: url(../components/pages/img/congratu.png);
+  background-size: 512px 300px;
+} */
+
 .step-container > div:first-child {
   margin-top: auto;
   text-align: center;
@@ -41,31 +91,34 @@
 }
 
 #first-step {
-  height: 50%;
+  height: 45%;
   background-color: gold;
 }
 
 #second-step {
-  height: 35%;
+  height: 30%;
   background-color: silver;
 }
 
 #third-step {
-  height: 30%;
+  height: 25%;
   background-color: #815a2b;
 }
 
 .one_username {
   font-size: 30px;
   font-weight: bold;
+  font-family: cursive;
 }
 
 .two_username {
   font-size: 30px;
   font-weight: bold;
+  font-family: cursive;
 }
 
 .three_username {
   font-size: 30px;
   font-weight: bold;
+  font-family: cursive;
 }

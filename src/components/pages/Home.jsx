@@ -1,20 +1,21 @@
 import React from "react";
+import Header from "../templates/Header/Header";
+import { Link } from "react-router-dom";
 import {
-  Header,
-  HeaderTitle,
   Img,
   Explain,
   TextTilte,
   AboutLeadIT,
+  ButtonArea,
+  Button,
+  ButtonText,
   Footer,
 } from "../../style/Home";
 
 const Home = () => {
   return (
     <>
-      <Header>
-        <HeaderTitle>LeadIT</HeaderTitle>
-      </Header>
+      <Header />
       <Img src="https://source.unsplash.com/random" alt="画像"></Img>
 
       <Explain>
@@ -26,6 +27,14 @@ const Home = () => {
           に対してのモチベーションを保ってもらえるように様々な機能を駆使し作り上げました。
         </AboutLeadIT>
       </Explain>
+
+      <ButtonArea>
+        <Link to="/signin">
+          <Button>
+            <ButtonText>Let`s Start!!</ButtonText>
+          </Button>
+        </Link>
+      </ButtonArea>
       <Footer></Footer>
     </>
   );

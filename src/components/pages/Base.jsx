@@ -3,6 +3,8 @@ import { useParams, useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Footer from "../templates/Footer/Footer";
 import Header from "../templates/Header/Header";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faDoorOpen, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { AuthContext } from "../../firebase/AuthService";
@@ -12,14 +14,14 @@ import { fetch_todayDotLength } from "../../reducks/star/action";
 import firebase from "firebase/app";
 import "firebase/app";
 import "firebase/firestore";
-import MydotsChart from "../templates/graph/MydotsChart";
+import BarChart from "../templates/graph/BarChart";
 import UserIcon from "../templates/icons/user/user";
 import OurSideBar from "../templates/OurSideBar";
 import Calendar from "../templates/Calendar";
 import MiniDots from "../templates/MiniDots";
-import MiniForm from "../templates/MiniForm";
 import {
-  LeftItem,
+  Base_wrapper,
+  Signout,
   Profile,
   UserName,
   WeekStudyHours,
@@ -27,8 +29,8 @@ import {
   StyledCalendar,
   ExplainCa,
   StyledChart,
-  StyledForm,
   StyledDots,
+  Mydots,
 } from "../../style/BaseStyle";
 
 const useStyles = makeStyles({
@@ -234,7 +236,7 @@ export default function Base() {
             tags: doc.data().tags,
             userId: doc.data().userId,
             userName: doc.data().userName,
-            createdAt: new Date(doc.data().createdAt.seconds * 1000), 
+            createdAt: new Date(doc.data().createdAt.seconds * 1000),
             getDate: doc.data().getDate,
             getday: doc.data().getday,
           };
@@ -260,22 +262,40 @@ export default function Base() {
         });
   }, []);
 
-  
   return (
     <React.Fragment>
-      <Header />
-      <form className="MainFrom" style={MainStyle}>
-        <div>
-          <OurSideBar
-            dots={myDots}
-            sortDots={sortDots}
-            set_sortDots={set_sortDots}
-          />
-        </div>
-        <button style={{ width: "100px", height: "30px" }} onClick={logout}>
-          ログアウト
-        </button>
-        <LeftItem>
+      <Base_wrapper>
+        <Header />
+        <form className="MainFrom" style={MainStyle}>
+          <div>
+            <OurSideBar
+              dots={myDots}
+              sortDots={sortDots}
+              set_sortDots={set_sortDots}
+            />
+          </div>
+          <button
+            style={{
+              width: "130px",
+              height: "30px",
+              boxShadow: "5px 5px 5px rgba(0,0,0,0.4)",
+              backgroundColor: "aqua",
+              borderRadius: "5px",
+            }}
+            onClick={logout}
+          >
+            {" "}
+            <Signout>
+              {" "}
+              <FontAwesomeIcon
+                icon={faSignOutAlt}
+                color="black"
+                size="1x"
+                style={{ marginRight: "10px" }}
+              />
+              ログアウト
+            </Signout>
+          </button>
           <Profile>
             <UserIcon />
             <UserName>{user_name}</UserName>
@@ -285,19 +305,20 @@ export default function Base() {
             <StudyHours>前週の学習時間 / {lastweek_hours}時間</StudyHours>
             <StudyHours>総学習時間 / {total_hours}時間</StudyHours>
           </WeekStudyHours>
-        </LeftItem>
-        <StyledChart>
-          <MydotsChart />
-        </StyledChart>
-        <StyledCalendar>
-          <Calendar />
-          <ExplainCa>🟩：dot済み (クリックで確認)</ExplainCa>
-        </StyledCalendar>
-        <StyledDots>
-          <MiniDots dots={sortDots} />
-        </StyledDots>
-      </form>
-      <Footer />
+          <StyledChart>
+            <BarChart />
+          </StyledChart>
+          <StyledCalendar>
+            <Calendar />
+            <ExplainCa>🟩 # dot済み (クリックで確認)</ExplainCa>
+          </StyledCalendar>
+          <Mydots>📝 Mydots </Mydots>
+          <StyledDots>
+            <MiniDots dots={sortDots} />
+          </StyledDots>
+        </form>
+        <Footer />
+      </Base_wrapper>
     </React.Fragment>
   );
 }

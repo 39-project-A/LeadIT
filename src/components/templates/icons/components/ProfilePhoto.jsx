@@ -4,9 +4,10 @@ import { delete_icon } from "../../../../reducks/userIcon/action";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
 	faUserAlt,
-	faTrashAlt,
 	faUserEdit,
 	faUserPlus,
+	faEdit,
+	faCamera,
 } from "@fortawesome/free-solid-svg-icons";
 import firebase from "firebase";
 import { AuthContext } from "../../../../firebase/AuthService";
@@ -57,13 +58,23 @@ export default function ProfilePhoto({ getData, imageSrc }) {
 
 	const deletePic = () => {
 		setToggle(false);
-    getData(false, "");
-    userIcon &&	dispatch(delete_icon(userIcon));
+		getData(false, "");
+		userIcon && dispatch(delete_icon(userIcon));
 		db.doc(currentUser.uid).delete();
 	};
 
 	return (
 		<div className="container">
+			{(!toggle || !imageSrc) && (
+				<button
+					type="button"
+					onClick={handleToggleClick}
+					className="btn  rounded-circle  edit-button"
+					disabled={toggle && imageSrc}
+				>
+					<FontAwesomeIcon icon={faCamera} color="white" size="xs" />
+				</button>
+			)}
 			<button
 				type="button"
 				onClick={handleToggleClick}

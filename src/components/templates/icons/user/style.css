@@ -1,7 +1,7 @@
 .createAvatarDiv_content {
   background-color: #e8fff8;
   position: absolute;
-  transform: translate(-250px, -300px);
+  transform: translate(-186px, -213px);
   z-index: 999;
   width: 290%;
   border: 1px solid grey;
@@ -14,6 +14,7 @@
 
 .container {
   height: 20%;
+  z-index: 999;
 }
 
 .container3 {
@@ -39,7 +40,7 @@
 .profile-pic_rank {
   width: 200px;
   height: 200px;
-  margin: 30px;
+  margin: 25px;
   padding: 0;
   border: none;
 }
@@ -57,12 +58,29 @@
 
 .delete-button {
   font-size: 25px;
-  top: -46px;
-  left: 110px;
+  top: -44px;
+  left: 104px;
   background-color: skyblue;
   svg {
     margin-bottom: 0.1rem;
   }
+}
+
+.edit-button {
+  position: absolute;
+  font-size: 25px;
+  top: 111px;
+  left: 127px;
+  background-color: skyblue;
+  svg {
+    margin-bottom: 0.1rem;
+  }
+}
+
+.edit-button:hover {
+  background-color: salmon;
+  cursor: pointer;
+  transition-duration: 0.7s;
 }
 
 .btn-primary {

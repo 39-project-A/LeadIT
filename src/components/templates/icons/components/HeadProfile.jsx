@@ -1,30 +1,32 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserAlt } from "@fortawesome/free-solid-svg-icons";
 import firebase from "firebase";
-import { AuthContext } from "../../../../firebase/AuthService";
+// import { AuthContext } from "../../../../firebase/AuthService";
 
-export default function HeadProfile()  {
+export default function HeadProfile() {
   const [imageSrc, setImageSrc] = useState("");
-  const user = useContext(AuthContext);
+  // const user = useContext(AuthContext);
+  const userId = firebase.auth().currentUser.uid;
   const db = firebase.firestore().collection("userIcon");
 
+  // console.log(user2.uid);
+
   useEffect(() => {
-    if (user) {
-      db.where("userId", "==", user.uid)
-        .limit(1)
-        .get()
-        .then((data) => {
-          data.docs.map((doc) => {
-            const item = doc.data();
-            const blob = item.img;
-            if (!imageSrc) {
-              setImageSrc(blob);
-            }
-          });
+    db.where("userId", "==", userId)
+      .limit(1)
+      .get()
+      .then((data) => {
+        const thisUserData = data.docs.map((doc) => {
+          const item = doc.data();
+          const blob = item.img;
+          return blob;
         });
-    }
-  }, [user]);
+        if (!imageSrc) {
+          setImageSrc(thisUserData);
+        }
+      });
+  }, []);
 
   return (
     <div className="container3">
@@ -47,5 +49,4 @@ export default function HeadProfile()  {
       </button>
     </div>
   );
-};
-
+}

@@ -15,7 +15,7 @@ export default function Ranking() {
   const [threeRank, setThreeRank] = useState("");
   const [threeHours, setThreeHours] = useState("");
 
-  const zeroAdjust = () => {
+  const specify_weekago = () => {
     let agoDate = new Date();
     let agoWeek = agoDate.setDate(agoDate.getDate() - 6);
     let hope = new Date(agoWeek);
@@ -28,20 +28,21 @@ export default function Ranking() {
     return five;
   };
 
-  const hoge = [];
+  // const hoge = [];
   useEffect(() => {
     db.where(
       "createdAt",
       ">",
-      firebase.firestore.Timestamp.fromDate(zeroAdjust())
+      firebase.firestore.Timestamp.fromDate(specify_weekago())
     )
       .get()
       .then((data) => {
-        data.docs.map((doc) => {
+       const dot_data= data.docs.map((doc) => {
           const item = doc.data();
-          hoge.push(item);
+          return item
+          // hoge.push(item);
         });
-        const group = hoge.reduce((result, current) => {
+        const convert_dot_data = dot_data.reduce((result, current) => {
           const element = result.find((p) => p.userId === current.userId);
           if (element) {
             element.working += current.working;
@@ -54,27 +55,27 @@ export default function Ranking() {
           }
           return result;
         }, []);
-        group.sort(function (a, b) {
+        convert_dot_data.sort(function (a, b) {
           if (a.working < b.working) return 1;
           if (a.working > b.working) return -1;
           return 0;
         });
-        if (group.length >= 1) {
-          const oneRank = group[0].userName;
+        if (convert_dot_data.length >= 1) {
+          const oneRank = convert_dot_data[0].userName;
           setOneRank(oneRank);
-          const oneHours = group[0].working;
+          const oneHours = convert_dot_data[0].working;
           setOneHours(oneHours);
         }
-        if (group.length >= 2) {
-          const twoRank = group[1].userName;
+        if (convert_dot_data.length >= 2) {
+          const twoRank = convert_dot_data[1].userName;
           setTwoRank(twoRank);
-          const twoHours = group[1].working;
+          const twoHours = convert_dot_data[1].working;
           setTwoHours(twoHours);
         }
-        if (group.length >= 3) {
-          const threeRank = group[2].userName;
+        if (convert_dot_data.length >= 3) {
+          const threeRank = convert_dot_data[2].userName;
           setThreeRank(threeRank);
-          const threeHours = group[2].working;
+          const threeHours = convert_dot_data[2].working;
           setThreeHours(threeHours);
         }
       });

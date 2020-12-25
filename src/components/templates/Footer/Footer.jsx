@@ -1,16 +1,10 @@
 import React from "react";
-import { FooterParent, FooterWrapper } from "./FooterElements";
-import Icon from "../icons/index";
+import { FOOTER } from "./FooterElements";
 
 const Footer = () => {
   return (
     <>
-      <FooterParent>
-        <FooterWrapper>
-          <Icon className="fas fa-heart" />
-          <Icon className="fas fa-bolt" />
-        </FooterWrapper>
-      </FooterParent>
+      <FOOTER>© 2020 39-project-A All Rights Reserved.</FOOTER>
     </>
   );
 };

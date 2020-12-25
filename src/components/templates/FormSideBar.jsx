@@ -22,6 +22,7 @@ import { faCss3 } from "@fortawesome/free-brands-svg-icons";
 import { faDocker } from "@fortawesome/free-brands-svg-icons";
 import { faGlobe } from "@fortawesome/free-solid-svg-icons";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import styled from "styled-components";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,6 +32,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const TAGLISTS = styled(ListItem)`
+  height: 5vh;
+`;
 export default function FormSideBar({ tags, set_tags }) {
   const classes = useStyles();
   const adjust_tags = (tag) => {
@@ -68,117 +72,117 @@ export default function FormSideBar({ tags, set_tags }) {
   return (
     <div className={classes.root}>
       <List component="nav" aria-label="main mailbox folders">
-        <ListItem button onClick={() => adjust_AllTags()}>
+        <TAGLISTS button onClick={() => adjust_AllTags()}>
           <ListItemIcon>
             <FontAwesomeIcon icon={faGlobe} />
           </ListItemIcon>
           <ListItemText primary="ALL" />
-        </ListItem>
+        </TAGLISTS>
         <Divider />
-        <ListItem button onClick={() => clear_tags()}>
+        <TAGLISTS button onClick={() => clear_tags()}>
           <ListItemIcon>
             <FontAwesomeIcon icon={faTrash} />
           </ListItemIcon>
           <ListItemText primary="clear" />
-        </ListItem>
+        </TAGLISTS>
         <Divider />
-        <ListItem button onClick={() => adjust_tags("HTML5")}>
+        <TAGLISTS button onClick={() => adjust_tags("HTML5")}>
           <ListItemIcon>
             <FontAwesomeIcon icon={faHtml5} />
           </ListItemIcon>
           <ListItemText primary="HTML5" />
-        </ListItem>
+        </TAGLISTS>
         <Divider />
-        <ListItem button onClick={() => adjust_tags("CSS3")}>
+        <TAGLISTS button onClick={() => adjust_tags("CSS3")}>
           <ListItemIcon>
             <FontAwesomeIcon icon={faCss3} />
           </ListItemIcon>
           <ListItemText primary="CSS3" />
-        </ListItem>
+        </TAGLISTS>
         <Divider />
-        <ListItem button onClick={() => adjust_tags("JavaScript")}>
+        <TAGLISTS button onClick={() => adjust_tags("JavaScript")}>
           <ListItemIcon>
             <FontAwesomeIcon icon={faJs} />
           </ListItemIcon>
           <ListItemText primary="JavaScript" />
-        </ListItem>
+        </TAGLISTS>
         <Divider />
-        <ListItem button onClick={() => adjust_tags("React")}>
+        <TAGLISTS button onClick={() => adjust_tags("React")}>
           <ListItemIcon>
             <FontAwesomeIcon icon={faReact} />
           </ListItemIcon>
           <ListItemText primary="React" />
-        </ListItem>
+        </TAGLISTS>
         <Divider />
-        <ListItem button onClick={() => adjust_tags("Vue")}>
+        <TAGLISTS button onClick={() => adjust_tags("Vue")}>
           <ListItemIcon>
             <FontAwesomeIcon icon={faVuejs} />
           </ListItemIcon>
           <ListItemText primary="Vue" />
-        </ListItem>
+        </TAGLISTS>
         <Divider />
-        <ListItem button onClick={() => adjust_tags("Angular")}>
+        <TAGLISTS button onClick={() => adjust_tags("Angular")}>
           <ListItemIcon>
             <FontAwesomeIcon icon={faAngular} />
           </ListItemIcon>
           <ListItemText primary="Angular" />
-        </ListItem>
+        </TAGLISTS>
         <Divider />
-        <ListItem button onClick={() => adjust_tags("PHP")}>
+        <TAGLISTS button onClick={() => adjust_tags("PHP")}>
           <ListItemIcon>
             <FontAwesomeIcon icon={faPhp} />
           </ListItemIcon>
           <ListItemText primary="PHP" />
-        </ListItem>
+        </TAGLISTS>
         <Divider />
-        <ListItem button onClick={() => adjust_tags("Laravel")}>
+        <TAGLISTS button onClick={() => adjust_tags("Laravel")}>
           <ListItemIcon>
             <FontAwesomeIcon icon={faLaravel} />
           </ListItemIcon>
           <ListItemText primary="Laravel" />
-        </ListItem>
+        </TAGLISTS>
         <Divider />
-        <ListItem button onClick={() => adjust_tags("Python")}>
+        <TAGLISTS button onClick={() => adjust_tags("Python")}>
           <ListItemIcon>
             <FontAwesomeIcon icon={faPython} />
           </ListItemIcon>
           <ListItemText primary="Python" />
-        </ListItem>
+        </TAGLISTS>
         <Divider />
-        <ListItem button onClick={() => adjust_tags("Java")}>
+        <TAGLISTS button onClick={() => adjust_tags("Java")}>
           <ListItemIcon>
             <FontAwesomeIcon icon={faJava} />
           </ListItemIcon>
           <ListItemText primary="Java" />
-        </ListItem>
+        </TAGLISTS>
         <Divider />
-        <ListItem button onClick={() => adjust_tags("Swift")}>
+        <TAGLISTS button onClick={() => adjust_tags("Swift")}>
           <ListItemIcon>
             <FontAwesomeIcon icon={faSwift} />
           </ListItemIcon>
           <ListItemText primary="Swift" />
-        </ListItem>
+        </TAGLISTS>
         <Divider />
-        <ListItem button onClick={() => adjust_tags("Git")}>
+        <TAGLISTS button onClick={() => adjust_tags("Git")}>
           <ListItemIcon>
             <FontAwesomeIcon icon={faGit} />
           </ListItemIcon>
           <ListItemText primary="Git" />
-        </ListItem>
+        </TAGLISTS>
         <Divider />
-        <ListItem button onClick={() => adjust_tags("Github")}>
+        <TAGLISTS button onClick={() => adjust_tags("Github")}>
           <ListItemIcon>
             <FontAwesomeIcon icon={faGithub} />
           </ListItemIcon>
           <ListItemText primary="Github" />
-        </ListItem>
+        </TAGLISTS>
         <Divider />
-        <ListItem button onClick={() => adjust_tags("Docker")}>
+        <TAGLISTS button onClick={() => adjust_tags("Docker")}>
           <ListItemIcon>
             <FontAwesomeIcon icon={faDocker} />
           </ListItemIcon>
           <ListItemText primary="Docker" />
-        </ListItem>
+        </TAGLISTS>
         <Divider />
       </List>
     </div>

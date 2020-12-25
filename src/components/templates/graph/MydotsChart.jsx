@@ -1,14 +1,15 @@
 import React, { useEffect, useState, useContext } from "react";
+import { useSelector } from "react-redux";
 import { Line } from "react-chartjs-2";
 import firebase from "firebase";
 import { AuthContext } from "../../../firebase/AuthService";
 
 export default function MydotsChart() {
 	const db = firebase.firestore().collection("dots");
-	const [filledWeek, set_filledWeek] = useState([]);
+	// const [filledWeek, set_filledWeek] = useState([]);
 	const [filledWeek2, set_filledWeek2] = useState([]);
-	const [oneWeekHours, setOneWeekHours] = useState("");
 	const user = useContext(AuthContext);
+	const oneWeekDotsHours = useSelector((state) => state.oneWeekDots);
 
 	const specify_weekago = () => {
 		let agoDate = new Date();
@@ -104,43 +105,7 @@ export default function MydotsChart() {
 		return weeksObj;
 	};
 
-	const array = [];
-	//一週間分のdotsをDBから取得
-	useEffect(() => {
-		if (user) {
-			db.where("userId", "==", user.uid)
-				.where(
-					"createdAt",
-					">",
-					firebase.firestore.Timestamp.fromDate(specify_weekago())
-				)
-				.orderBy("createdAt")
-				.onSnapshot((snapshot) => {
-					const hope = init_arrayWeeks().weekData;
-					snapshot.docs.map((doc) => {
-						const item = doc.data();
-						array.push(item);
-						const receivedDay = item.getday;
-						const hours = item.working;
-						for (let i = 0; i < hope.length; i++) {
-							if (receivedDay === hope[i].jsGetDay) {
-								hope[i].initNum = hours;
-							}
-						}
-					});
-					const totalWeekHours = array.reduce((result, current) => {
-						return result + current.working;
-					}, 0);
-
-					const finalWeek = hope.map((el) => {
-						return el.initNum;
-					});
-					setOneWeekHours(totalWeekHours);
-					set_filledWeek(finalWeek);
-				});
-		}
-	}, [user]);
-
+	// 定義するもの多すぎてredux管理断念
 	//前週のdotsをDBから取得
 	useEffect(() => {
 		if (user) {
@@ -174,107 +139,107 @@ export default function MydotsChart() {
 		}
 	}, [user]);
 
-  return (
-    <div className="App">
-      <div
-        style={{
-          height: "550px",
-          width: "800px",
-          marginTop: "25px",
-          // position: "absolute",
-        }}
-      >
-        <Line
-          data={{
-            labels: init_arrayWeeks().weekLabel,
-            // labels: init_arrayWeeks2().weekLabel,
-            datasets: [
-              {
-                label: " #今週の学習状況 ",
-                data: filledWeek,
-                // fill: false,
+	return (
+		<div className="App">
+			<div
+				style={{
+					height: "550px",
+					width: "800px",
+					marginTop: "25px",
+					// position: "absolute",
+				}}
+			>
+				<Line
+					data={{
+						labels: init_arrayWeeks().weekLabel,
+						// labels: init_arrayWeeks2().weekLabel,
+						datasets: [
+							{
+								label: " #今週の学習状況 ",
+								data: oneWeekDotsHours,
+								// fill: false,
 
-                // lineTension: 0,
-                backgroundColor: [
-                  "rgb(255, 255, 0, 0.15)",
-                  "rgba(54, 162, 235, 0.2)",
-                  "rgba(255, 206, 86, 0.2)",
-                  "rgba(75, 192, 192, 0.2)",
-                  "rgba(153, 102, 255, 0.2)",
-                  "rgba(255, 159, 64, 0.2)",
-                ],
-                borderColor: [
-                  "rgb(255, 215, 0, 1)",
-                  "rgb(255, 255, 0, 0.7)",
-                  "rgb(255, 255, 0, 0.7)",
-                  "rgb(255, 255, 0, 0.7)",
-                  "rgb(255, 255, 0, 0.7)",
-                ],
-                borderWidth: 4,
-              },
-              {
-                label: " # 前週の学習状況",
-                data: filledWeek2,
-                // lineTension: 0,
-                // fill: false,
-                backgroundColor: [
-                  "rgba(0, 191, 255, 0.1)",
-                  "rgba(54, 162, 235, 0.2)",
-                  "rgba(255, 206, 86, 0.2)",
-                  "rgba(75, 192, 192, 0.2)",
-                  "rgba(153, 102, 255, 0.2)",
-                  "rgba(255, 159, 64, 0.2)",
-                ],
-                borderColor: [
-                  "rgba(30, 144, 255, 0.25)",
-                  "rgba(0, 191, 255, 0.3)",
-                  "rgba(0, 191, 255, 0.3)",
-                  "rgba(0, 191, 255, 0.3)",
-                  "rgba(0, 191, 255, 0.3)",
-                  "rgba(0, 191, 255, 0.3)",
-                ],
-                borderWidth: 3,
-              },
-            ],
-          }}
-          options={{
-            maintainAspectRatio: false,
-            scales: {
-              xAxes: [
-                {
-                  ticks: {
-                    fontSize: 20,
-                  },
-                  scaleLabel: {
-                    display: true,
-                    labelString: "day",
-                    fontSize: 25,
-                  },
-                },
-              ],
-              yAxes: [
-                {
-                  ticks: {
-                    beginAtZero: true,
-                    max: 8,
-                    fontSize: 25,
-                  },
-                  scaleLabel: {
-                    display: true,
-                    labelString: "hour",
-                    fontSize: 25,
-                  },
-                },
-              ],
-            },
-            legend: {
-              labels: {
-                fontSize: 25,
-              },
-            },
-          }}
-        />
-      </div>
-    </div>
-  );
-};
+								// lineTension: 0,
+								backgroundColor: [
+									"rgb(255, 255, 0, 0.15)",
+									"rgba(54, 162, 235, 0.2)",
+									"rgba(255, 206, 86, 0.2)",
+									"rgba(75, 192, 192, 0.2)",
+									"rgba(153, 102, 255, 0.2)",
+									"rgba(255, 159, 64, 0.2)",
+								],
+								borderColor: [
+									"rgb(255, 215, 0, 1)",
+									"rgb(255, 255, 0, 0.7)",
+									"rgb(255, 255, 0, 0.7)",
+									"rgb(255, 255, 0, 0.7)",
+									"rgb(255, 255, 0, 0.7)",
+								],
+								borderWidth: 4,
+							},
+							{
+								label: " # 前週の学習状況",
+								data: filledWeek2,
+								// lineTension: 0,
+								// fill: false,
+								backgroundColor: [
+									"rgba(0, 191, 255, 0.1)",
+									"rgba(54, 162, 235, 0.2)",
+									"rgba(255, 206, 86, 0.2)",
+									"rgba(75, 192, 192, 0.2)",
+									"rgba(153, 102, 255, 0.2)",
+									"rgba(255, 159, 64, 0.2)",
+								],
+								borderColor: [
+									"rgba(30, 144, 255, 0.25)",
+									"rgba(0, 191, 255, 0.3)",
+									"rgba(0, 191, 255, 0.3)",
+									"rgba(0, 191, 255, 0.3)",
+									"rgba(0, 191, 255, 0.3)",
+									"rgba(0, 191, 255, 0.3)",
+								],
+								borderWidth: 3,
+							},
+						],
+					}}
+					options={{
+						maintainAspectRatio: false,
+						scales: {
+							xAxes: [
+								{
+									ticks: {
+										fontSize: 20,
+									},
+									scaleLabel: {
+										display: true,
+										labelString: "day",
+										fontSize: 25,
+									},
+								},
+							],
+							yAxes: [
+								{
+									ticks: {
+										beginAtZero: true,
+										max: 8,
+										fontSize: 25,
+									},
+									scaleLabel: {
+										display: true,
+										labelString: "hour",
+										fontSize: 25,
+									},
+								},
+							],
+						},
+						legend: {
+							labels: {
+								fontSize: 25,
+							},
+						},
+					}}
+				/>
+			</div>
+		</div>
+	);
+}

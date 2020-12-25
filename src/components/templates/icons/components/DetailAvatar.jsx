@@ -12,6 +12,8 @@ export default function DetailAvatar({ clickedDot }) {
 	const iconsData = useSelector((state) => state.icons);
 	const [userIcon, set_userIcon] = useState();
 
+	console.log(userIcon)
+
 	useEffect(() => {
 		if (iconsData && clickedDot) {
 			const thisUserData = iconsData.find(

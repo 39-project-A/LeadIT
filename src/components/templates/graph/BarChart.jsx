@@ -49,6 +49,7 @@ export default function BarChart() {
 		return weeksObj;
 	};
 
+	// redux変更
 	//一週間分のdotsをDBから取得
 	useEffect(() => {
 		if (user) {
@@ -79,6 +80,8 @@ export default function BarChart() {
 				});
 		}
 	}, [user]);
+
+	console.log(filledWeek);
 
 	return (
 		<div className="App">
@@ -144,4 +147,3 @@ export default function BarChart() {
 		</div>
 	);
 }
-

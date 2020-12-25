@@ -97,7 +97,6 @@ export default function Base() {
         });
     }
   }, [user]);
-  console.log(user_name);
 
   // 今日から一週間前の指定
   const specify_weekago = () => {

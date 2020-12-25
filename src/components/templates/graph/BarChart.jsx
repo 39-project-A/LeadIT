@@ -172,9 +172,11 @@ export default function BarChart() {
     <div className="App">
       <div
         style={{
-          height: "550px",
-          width: "800px",
-          marginTop: "25px",
+          // position: " relative",
+          width: "100%",
+          height: "80vh",
+          // overflow: "hidden",
+          margin: "20px",
         }}
       >
         <Line
@@ -230,6 +232,7 @@ export default function BarChart() {
             ],
           }}
           options={{
+            responsive: true,
             maintainAspectRatio: false,
             scales: {
               xAxes: [

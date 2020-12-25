@@ -17,18 +17,16 @@
 .rank_title {
   font-weight: bold;
   text-align: center;
+  width: 100%;
   font-size: 30px;
-  /* margin-left: 30px; */
   margin-top: 10px;
   font-family: cursive;
-  /* background-image: url(../components/pages/img/flag.png); */
-  /* background-size: contain; */
 }
 
 .rank_title:before {
   content: "";
   display: inline-block;
-  width: 40%;
+  width: 30%;
   height: 40px;
   background-image: url(../components/pages/img/flag.png);
   background-size: contain;
@@ -37,7 +35,7 @@
 .rank_title:after {
   content: "";
   display: inline-block;
-  width: 40%;
+  width: 30%;
   height: 40px;
   background-image: url(../components/pages/img/flag.png);
   background-size: contain;
@@ -70,7 +68,9 @@
 
 .step-container:nth-child(2) {
   background-image: url(../components/pages/img/ranking-background.png);
-  background-size: 512px 329px;
+  /* background-size: 512px 329px; */
+  background-size: contain;
+  width: 100%;
 }
 /* .step-container:nth-child(3) {
   background-image: url(../components/pages/img/congratu.png);

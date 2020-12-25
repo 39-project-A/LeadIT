@@ -26,6 +26,7 @@ import {
   UserName,
   WeekStudyHours,
   StudyHours,
+  RightItem,
   StyledCalendar,
   ExplainCa,
   StyledChart,
@@ -305,17 +306,19 @@ export default function Base() {
             <StudyHours>前週の学習時間 / {lastweek_hours}時間</StudyHours>
             <StudyHours>総学習時間 / {total_hours}時間</StudyHours>
           </WeekStudyHours>
-          <StyledChart>
-            <BarChart />
-          </StyledChart>
-          <StyledCalendar>
-            <Calendar />
-            <ExplainCa>🟩 # dot済み (クリックで確認)</ExplainCa>
-          </StyledCalendar>
-          <Mydots>📝 Mydots </Mydots>
-          <StyledDots>
-            <MiniDots dots={sortDots} />
-          </StyledDots>
+          {/* <StyledChart> */}
+          <BarChart />
+          {/* </StyledChart> */}
+          <RightItem>
+            <StyledCalendar>
+              <Calendar />
+              <ExplainCa>🟩 # dot済み (クリックで確認)</ExplainCa>
+            </StyledCalendar>
+            <Mydots>📝 Mydots </Mydots>
+            <StyledDots>
+              <MiniDots dots={sortDots} />
+            </StyledDots>
+          </RightItem>
         </form>
         <Footer />
       </Base_wrapper>

@@ -61,13 +61,21 @@ export const StudyHours = styled.li`
 export const StyledChart = styled.div`
   position: absolute;
   transform: translate(436px, 30px);
+  width: 50vw;
+  height: 50vh;
+`;
+
+export const RightItem = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
 `;
 
 export const StyledCalendar = styled.div`
-  margin-right: 3rem;
-  position: absolute;
+  /* margin-right: 3rem; */
+  /* position: absolute;
   right: -20px;
-  top: 112px;
+  top: 112px; */
 `;
 
 export const ExplainCa = styled.p`

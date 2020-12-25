@@ -40,7 +40,7 @@ const bodyStyle = {
 
 const H3 = styled.h3`
 	text-align: center;
-	padding-bottom: 5%;
+	padding-bottom: 2%;
 	color: #003399;
 	font-weight: bold;
 `;

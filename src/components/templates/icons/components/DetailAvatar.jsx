@@ -4,15 +4,13 @@ import Avatar from "@material-ui/core/Avatar";
 import styled from "styled-components";
 
 const AVATAR = styled(Avatar)`
-	width: 100%;
-	height: auto;
+	width: 100% !important;
+	height: auto !important;
 `;
 
 export default function DetailAvatar({ clickedDot }) {
 	const iconsData = useSelector((state) => state.icons);
 	const [userIcon, set_userIcon] = useState();
-
-	console.log(userIcon)
 
 	useEffect(() => {
 		if (iconsData && clickedDot) {

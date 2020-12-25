@@ -49,6 +49,12 @@ export default function Calendar() {
       highlightDates={dotDay}
       placeholderText="This highlights a week ago and a week from today"
       inline
+      // withPortal={isMobile}
+      popperModifiers={{
+        preventOverflow: {
+          enabled: true,
+        },
+      }}
     />
   );
 }

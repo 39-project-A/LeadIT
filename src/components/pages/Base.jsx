@@ -26,9 +26,9 @@ import {
   UserName,
   WeekStudyHours,
   StudyHours,
+  RightItem,
   StyledCalendar,
   ExplainCa,
-  StyledChart,
   StyledDots,
   Mydots,
 } from "../../style/BaseStyle";
@@ -274,28 +274,7 @@ export default function Base() {
               set_sortDots={set_sortDots}
             />
           </div>
-          <button
-            style={{
-              width: "130px",
-              height: "30px",
-              boxShadow: "5px 5px 5px rgba(0,0,0,0.4)",
-              backgroundColor: "aqua",
-              borderRadius: "5px",
-            }}
-            onClick={logout}
-          >
-            {" "}
-            <Signout>
-              {" "}
-              <FontAwesomeIcon
-                icon={faSignOutAlt}
-                color="black"
-                size="1x"
-                style={{ marginRight: "10px" }}
-              />
-              ログアウト
-            </Signout>
-          </button>
+
           <Profile>
             <UserIcon />
             <UserName>{user_name}</UserName>
@@ -305,17 +284,43 @@ export default function Base() {
             <StudyHours>前週の学習時間 / {lastweek_hours}時間</StudyHours>
             <StudyHours>総学習時間 / {total_hours}時間</StudyHours>
           </WeekStudyHours>
-          <StyledChart>
-            <BarChart />
-          </StyledChart>
-          <StyledCalendar>
-            <Calendar />
-            <ExplainCa>🟩 # dot済み (クリックで確認)</ExplainCa>
-          </StyledCalendar>
-          <Mydots>📝 Mydots </Mydots>
-          <StyledDots>
-            <MiniDots dots={sortDots} />
-          </StyledDots>
+          <BarChart />
+          <RightItem>
+            <button
+              style={{
+                width: "130px",
+                height: "30px",
+                boxShadow: "5px 5px 5px rgba(0,0,0,0.4)",
+                backgroundColor: "aqua",
+                borderRadius: "5px",
+                position: "fixed",
+                top: "65px",
+                right: "0",
+              }}
+              onClick={logout}
+            >
+              {" "}
+              <Signout>
+                {" "}
+                <FontAwesomeIcon
+                  icon={faSignOutAlt}
+                  color="black"
+                  size="1x"
+                  style={{ marginRight: "10px" }}
+                />
+                ログアウト
+              </Signout>
+            </button>
+            <StyledCalendar>
+              <Calendar />
+              <ExplainCa>🟩 # dot済み (クリックで確認)</ExplainCa>
+            </StyledCalendar>
+            <Mydots>📝 Mydots </Mydots>
+
+            <StyledDots>
+              <MiniDots dots={sortDots} />
+            </StyledDots>
+          </RightItem>
         </form>
         <Footer />
       </Base_wrapper>

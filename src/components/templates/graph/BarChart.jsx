@@ -70,7 +70,6 @@ export default function BarChart() {
     return weeksObj;
   };
 
-
   //前週の日付とラベルを取得
   const init_arrayWeeks2 = () => {
     let today = new Date(specify_weekago());
@@ -170,12 +169,17 @@ export default function BarChart() {
   }, [user]);
 
   return (
-    <div className="App">
+    <div
+      className="App"
+      style={{
+        width: "40%",
+      }}
+    >
       <div
         style={{
-          height: "550px",
-          width: "800px",
-          marginTop: "25px",
+          width: "50vw",
+          height: "70vh",
+          margin: "50px 25px",
         }}
       >
         <Line
@@ -231,6 +235,7 @@ export default function BarChart() {
             ],
           }}
           options={{
+            responsive: true,
             maintainAspectRatio: false,
             scales: {
               xAxes: [

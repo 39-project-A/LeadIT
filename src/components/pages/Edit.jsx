@@ -17,7 +17,7 @@ import styled from "styled-components";
 
 const useStyles = makeStyles({
 	container: {
-		width: "400px",
+		width: "60%",
 		position: "absolute",
 		top: "50%",
 		left: "50%",
@@ -30,7 +30,7 @@ const useStyles = makeStyles({
 		height: "40px",
 	},
 	text: {
-		width: "400px",
+		width: "100%",
 	},
 });
 
@@ -46,7 +46,7 @@ const H3 = styled.h3`
 `;
 
 const WRAPPER = styled.div`
-	margin-bottom: 7%;
+	margin-bottom: 6%;
 `;
 
 const LABEL = styled(InputLabel)`
@@ -66,7 +66,6 @@ export default function Edit() {
 	const classes = useStyles();
 	const { id } = useParams();
 	const history = useHistory();
-	const dispatch = useDispatch();
 	const user = useContext(AuthContext);
 	const [dot, set_dot] = useState();
 	const [tags, set_tags] = useState();
@@ -91,29 +90,6 @@ export default function Edit() {
 			set_tags(dot.tags);
 		}
 	}, [dot]);
-
-	// starをリロードしても正常に表示させる
-	if (user) {
-		const get_todayMidnight = () => {
-			const TODAY_MIDNIGHT = new Date();
-			TODAY_MIDNIGHT.setHours(0);
-			TODAY_MIDNIGHT.setMinutes(0);
-			return TODAY_MIDNIGHT.setSeconds(0);
-		};
-
-		firebase
-			.firestore()
-			.collection("dots")
-			.where("userId", "==", user.uid)
-			.where("createdAt", ">=", new Date(get_todayMidnight()))
-			.get()
-			.then((data) => {
-				const todayDot = data.docs.map((doc) => {
-					return doc.data();
-				});
-				dispatch(fetch_todayDotLength(todayDot.length));
-			});
-	}
 
 	const onSubmit = (data) => {
 		firebase
@@ -169,6 +145,7 @@ export default function Edit() {
 						name="working"
 						defaultValue={dot && dot.working}
 						ref={register({ required: true })}
+						style={{ width: "30%" }}
 					>
 						{dot && (
 							<option value={dot.working} selected>

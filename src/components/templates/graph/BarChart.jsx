@@ -70,6 +70,7 @@ export default function BarChart() {
     return weeksObj;
   };
 
+
   //前週の日付とラベルを取得
   const init_arrayWeeks2 = () => {
     let today = new Date(specify_weekago());

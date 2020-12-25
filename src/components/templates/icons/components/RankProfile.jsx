@@ -6,7 +6,8 @@ import firebase from "firebase";
 export default function RankProfile({ oneRank, twoRank, threeRank }) {
 	const [imageSrc, setImageSrc] = useState("");
   const db = firebase.firestore().collection("userIcon");
-  
+	
+	// redux管理　最後
 	useEffect(() => {
 		db.get().then((data) => {
 			data.docs.map((doc) => {

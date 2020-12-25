@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetch_dots } from "./reducks/dots/action";
 import { fetch_todayDotLength } from "./reducks/star/action";
 import { fetch_icons } from "./reducks/userIcon/action";
+import { fetch_oneWeekDots } from "./reducks/oneWeekDots/action";
 import Base from "./components/pages/Base";
 import Home from "./components/pages/Home";
 import SignIn from "./components/pages/SignIn";
@@ -32,11 +33,11 @@ const TITLE = styled.h1`
 `;
 
 export default function App() {
-  const currentUser = firebase.auth().currentUser;
+	const currentUser = firebase.auth().currentUser;
 	const [loading, set_loading] = useState();
 	const dispatch = useDispatch();
-  const reduxLoading = useSelector((state) => state.loading);
-  
+	const reduxLoading = useSelector((state) => state.loading);
+
 	function get_userPromise() {
 		return new Promise((resolve, reject) => {
 			setTimeout(() => {
@@ -134,12 +135,85 @@ export default function App() {
 					const todayDot = data.docs.map((doc) => {
 						return doc.data();
 					});
-					console.log(todayDot);
 					dispatch(fetch_todayDotLength(todayDot.length));
 				});
+
+			//-redux変更完了
+			const array = [];
+			const specify_weekago = () => {
+				let agoDate = new Date();
+				let agoWeek = agoDate.setDate(agoDate.getDate() - 6);
+				let hope = new Date(agoWeek);
+				let zero = hope.setHours(0);
+				let one = new Date(zero);
+				let two = one.setMinutes(0);
+				let three = new Date(two);
+				let four = three.setSeconds(0);
+				let five = new Date(four);
+				return five;
+      };
+      const init_arrayWeeks = () => {
+        const jsWeekAgo = [];
+        let today = new Date();
+        today.setDate(today.getDate() + 1);
+        const infoWeek = [];
+        const infoDay = [];
+        const subtract = 1;
+        const max = 6;
+        for (let i = 0; i <= max; i++) {
+          today.setDate(today.getDate() - subtract);
+          infoWeek[i] = today.getMonth() + 1 + "/" + today.getDate();
+          infoDay[i] = today.getDay();
+          jsWeekAgo.push({
+            label: infoWeek[i],
+            jsGetDay: infoDay[i],
+            initNum: 0,
+          });
+        }
+        const reversedLabelWeek = infoWeek.reverse();
+        const reversedDataWeek = jsWeekAgo.reverse();
+        const weeksObj = {
+          weekLabel: reversedLabelWeek,
+          weekData: reversedDataWeek,
+        };
+        return weeksObj;
+      };
+
+			firebase
+				.firestore()
+				.collection("dots")
+				.where("userId", "==", currentUser.uid)
+				.where(
+					"createdAt",
+					">",
+					firebase.firestore.Timestamp.fromDate(specify_weekago())
+				)
+				.orderBy("createdAt")
+				.onSnapshot((snapshot) => {
+					const hope = init_arrayWeeks().weekData;
+					snapshot.docs.map((doc) => {
+						const item = doc.data();
+						array.push(item);
+						const receivedDay = item.getday;
+						const hours = item.working;
+						for (let i = 0; i < hope.length; i++) {
+							if (receivedDay === hope[i].jsGetDay) {
+								hope[i].initNum = hours;
+							}
+						}
+					});
+					const totalWeekHours = array.reduce((result, current) => {
+						return result + current.working;
+					}, 0);
+
+					const finalWeek = hope.map((el) => {
+						return el.initNum;
+					});
+					dispatch(fetch_oneWeekDots(finalWeek));
+				});
 		}
-  }, [currentUser]);
-  
+	}, [currentUser]);
+
 
 	return (
 		<>

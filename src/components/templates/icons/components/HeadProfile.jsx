@@ -1,51 +1,49 @@
 import React, { useState, useEffect, useContext } from "react";
+import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserAlt } from "@fortawesome/free-solid-svg-icons";
 import firebase from "firebase";
 import { AuthContext } from "../../../../firebase/AuthService";
 
-export default function HeadProfile()  {
-  const [imageSrc, setImageSrc] = useState("");
-  const user = useContext(AuthContext);
-  const db = firebase.firestore().collection("userIcon");
+export default function HeadProfile() {
+	const [imageSrc, setImageSrc] = useState("");
+	const user = useContext(AuthContext);
+	const currentUser = firebase.auth().currentUser;
+	const db = firebase.firestore().collection("userIcon");
+	const iconsData = useSelector((state) => state.icons);
+	const [userIcon, set_userIcon] = useState();
 
-  useEffect(() => {
-    if (user) {
-      db.where("userId", "==", user.uid)
-        .limit(1)
-        .get()
-        .then((data) => {
-          data.docs.map((doc) => {
-            const item = doc.data();
-            const blob = item.img;
-            if (!imageSrc) {
-              setImageSrc(blob);
-            }
-          });
-        });
-    }
-  }, [user]);
+  // redux変更完了
+	useEffect(() => {
+		if (iconsData) {
+			const thisUserData = iconsData.find(
+				(iconData) => iconData.userId === currentUser.uid
+			);
+			set_userIcon(thisUserData);
+		}
+	}, [iconsData]);
 
-  return (
-    <div className="container3">
-      <button
-        type="button"
+
+	return (
+		<div className="container3">
+			<button
+				type="button"
         className=" btn-primary_header rounded-circle  opaque profile-pic3"
-        disabled={imageSrc}
-      >
-        {!imageSrc && (
-          <FontAwesomeIcon icon={faUserAlt} color="white" size="2x" />
-        )}
-        {imageSrc && (
-          <img
-            alt="profile"
-            src={imageSrc}
-            className="rounded-circle"
-            width="100%"
-          />
-        )}
-      </button>
-    </div>
-  );
-};
-
+        // 👇変更の必要アリ
+				disabled={imageSrc}
+			>
+				{!userIcon && (
+					<FontAwesomeIcon icon={faUserAlt} color="white" size="2x" />
+				)}
+				{userIcon && (
+					<img
+						alt="profile"
+						src={userIcon.img}
+						className="rounded-circle"
+						width="100%"
+					/>
+				)}
+			</button>
+		</div>
+	);
+}

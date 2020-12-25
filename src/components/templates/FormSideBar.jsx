@@ -1,5 +1,4 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
@@ -24,19 +23,10 @@ import { faGlobe } from "@fortawesome/free-solid-svg-icons";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: "100%",
-    maxWidth: 200,
-    backgroundColor: theme.palette.background.paper,
-  },
-}));
-
 const TAGLISTS = styled(ListItem)`
   height: 5vh;
 `;
 export default function FormSideBar({ tags, set_tags }) {
-  const classes = useStyles();
   const adjust_tags = (tag) => {
     let index = tags.indexOf(tag);
     if (index === -1) {
@@ -70,121 +60,119 @@ export default function FormSideBar({ tags, set_tags }) {
     set_tags([]);
   };
   return (
-    <div className={classes.root}>
-      <List component="nav" aria-label="main mailbox folders">
-        <TAGLISTS button onClick={() => adjust_AllTags()}>
-          <ListItemIcon>
-            <FontAwesomeIcon icon={faGlobe} />
-          </ListItemIcon>
-          <ListItemText primary="ALL" />
-        </TAGLISTS>
-        <Divider />
-        <TAGLISTS button onClick={() => clear_tags()}>
-          <ListItemIcon>
-            <FontAwesomeIcon icon={faTrash} />
-          </ListItemIcon>
-          <ListItemText primary="clear" />
-        </TAGLISTS>
-        <Divider />
-        <TAGLISTS button onClick={() => adjust_tags("HTML5")}>
-          <ListItemIcon>
-            <FontAwesomeIcon icon={faHtml5} />
-          </ListItemIcon>
-          <ListItemText primary="HTML5" />
-        </TAGLISTS>
-        <Divider />
-        <TAGLISTS button onClick={() => adjust_tags("CSS3")}>
-          <ListItemIcon>
-            <FontAwesomeIcon icon={faCss3} />
-          </ListItemIcon>
-          <ListItemText primary="CSS3" />
-        </TAGLISTS>
-        <Divider />
-        <TAGLISTS button onClick={() => adjust_tags("JavaScript")}>
-          <ListItemIcon>
-            <FontAwesomeIcon icon={faJs} />
-          </ListItemIcon>
-          <ListItemText primary="JavaScript" />
-        </TAGLISTS>
-        <Divider />
-        <TAGLISTS button onClick={() => adjust_tags("React")}>
-          <ListItemIcon>
-            <FontAwesomeIcon icon={faReact} />
-          </ListItemIcon>
-          <ListItemText primary="React" />
-        </TAGLISTS>
-        <Divider />
-        <TAGLISTS button onClick={() => adjust_tags("Vue")}>
-          <ListItemIcon>
-            <FontAwesomeIcon icon={faVuejs} />
-          </ListItemIcon>
-          <ListItemText primary="Vue" />
-        </TAGLISTS>
-        <Divider />
-        <TAGLISTS button onClick={() => adjust_tags("Angular")}>
-          <ListItemIcon>
-            <FontAwesomeIcon icon={faAngular} />
-          </ListItemIcon>
-          <ListItemText primary="Angular" />
-        </TAGLISTS>
-        <Divider />
-        <TAGLISTS button onClick={() => adjust_tags("PHP")}>
-          <ListItemIcon>
-            <FontAwesomeIcon icon={faPhp} />
-          </ListItemIcon>
-          <ListItemText primary="PHP" />
-        </TAGLISTS>
-        <Divider />
-        <TAGLISTS button onClick={() => adjust_tags("Laravel")}>
-          <ListItemIcon>
-            <FontAwesomeIcon icon={faLaravel} />
-          </ListItemIcon>
-          <ListItemText primary="Laravel" />
-        </TAGLISTS>
-        <Divider />
-        <TAGLISTS button onClick={() => adjust_tags("Python")}>
-          <ListItemIcon>
-            <FontAwesomeIcon icon={faPython} />
-          </ListItemIcon>
-          <ListItemText primary="Python" />
-        </TAGLISTS>
-        <Divider />
-        <TAGLISTS button onClick={() => adjust_tags("Java")}>
-          <ListItemIcon>
-            <FontAwesomeIcon icon={faJava} />
-          </ListItemIcon>
-          <ListItemText primary="Java" />
-        </TAGLISTS>
-        <Divider />
-        <TAGLISTS button onClick={() => adjust_tags("Swift")}>
-          <ListItemIcon>
-            <FontAwesomeIcon icon={faSwift} />
-          </ListItemIcon>
-          <ListItemText primary="Swift" />
-        </TAGLISTS>
-        <Divider />
-        <TAGLISTS button onClick={() => adjust_tags("Git")}>
-          <ListItemIcon>
-            <FontAwesomeIcon icon={faGit} />
-          </ListItemIcon>
-          <ListItemText primary="Git" />
-        </TAGLISTS>
-        <Divider />
-        <TAGLISTS button onClick={() => adjust_tags("Github")}>
-          <ListItemIcon>
-            <FontAwesomeIcon icon={faGithub} />
-          </ListItemIcon>
-          <ListItemText primary="Github" />
-        </TAGLISTS>
-        <Divider />
-        <TAGLISTS button onClick={() => adjust_tags("Docker")}>
-          <ListItemIcon>
-            <FontAwesomeIcon icon={faDocker} />
-          </ListItemIcon>
-          <ListItemText primary="Docker" />
-        </TAGLISTS>
-        <Divider />
-      </List>
-    </div>
+    <List component="nav" aria-label="main mailbox folders">
+      <TAGLISTS button onClick={() => adjust_AllTags()}>
+        <ListItemIcon>
+          <FontAwesomeIcon icon={faGlobe} />
+        </ListItemIcon>
+        <ListItemText primary="ALL" />
+      </TAGLISTS>
+      <Divider />
+      <TAGLISTS button onClick={() => clear_tags()}>
+        <ListItemIcon>
+          <FontAwesomeIcon icon={faTrash} />
+        </ListItemIcon>
+        <ListItemText primary="clear" />
+      </TAGLISTS>
+      <Divider />
+      <TAGLISTS button onClick={() => adjust_tags("HTML5")}>
+        <ListItemIcon>
+          <FontAwesomeIcon icon={faHtml5} />
+        </ListItemIcon>
+        <ListItemText primary="HTML5" />
+      </TAGLISTS>
+      <Divider />
+      <TAGLISTS button onClick={() => adjust_tags("CSS3")}>
+        <ListItemIcon>
+          <FontAwesomeIcon icon={faCss3} />
+        </ListItemIcon>
+        <ListItemText primary="CSS3" />
+      </TAGLISTS>
+      <Divider />
+      <TAGLISTS button onClick={() => adjust_tags("JavaScript")}>
+        <ListItemIcon>
+          <FontAwesomeIcon icon={faJs} />
+        </ListItemIcon>
+        <ListItemText primary="JavaScript" />
+      </TAGLISTS>
+      <Divider />
+      <TAGLISTS button onClick={() => adjust_tags("React")}>
+        <ListItemIcon>
+          <FontAwesomeIcon icon={faReact} />
+        </ListItemIcon>
+        <ListItemText primary="React" />
+      </TAGLISTS>
+      <Divider />
+      <TAGLISTS button onClick={() => adjust_tags("Vue")}>
+        <ListItemIcon>
+          <FontAwesomeIcon icon={faVuejs} />
+        </ListItemIcon>
+        <ListItemText primary="Vue" />
+      </TAGLISTS>
+      <Divider />
+      <TAGLISTS button onClick={() => adjust_tags("Angular")}>
+        <ListItemIcon>
+          <FontAwesomeIcon icon={faAngular} />
+        </ListItemIcon>
+        <ListItemText primary="Angular" />
+      </TAGLISTS>
+      <Divider />
+      <TAGLISTS button onClick={() => adjust_tags("PHP")}>
+        <ListItemIcon>
+          <FontAwesomeIcon icon={faPhp} />
+        </ListItemIcon>
+        <ListItemText primary="PHP" />
+      </TAGLISTS>
+      <Divider />
+      <TAGLISTS button onClick={() => adjust_tags("Laravel")}>
+        <ListItemIcon>
+          <FontAwesomeIcon icon={faLaravel} />
+        </ListItemIcon>
+        <ListItemText primary="Laravel" />
+      </TAGLISTS>
+      <Divider />
+      <TAGLISTS button onClick={() => adjust_tags("Python")}>
+        <ListItemIcon>
+          <FontAwesomeIcon icon={faPython} />
+        </ListItemIcon>
+        <ListItemText primary="Python" />
+      </TAGLISTS>
+      <Divider />
+      <TAGLISTS button onClick={() => adjust_tags("Java")}>
+        <ListItemIcon>
+          <FontAwesomeIcon icon={faJava} />
+        </ListItemIcon>
+        <ListItemText primary="Java" />
+      </TAGLISTS>
+      <Divider />
+      <TAGLISTS button onClick={() => adjust_tags("Swift")}>
+        <ListItemIcon>
+          <FontAwesomeIcon icon={faSwift} />
+        </ListItemIcon>
+        <ListItemText primary="Swift" />
+      </TAGLISTS>
+      <Divider />
+      <TAGLISTS button onClick={() => adjust_tags("Git")}>
+        <ListItemIcon>
+          <FontAwesomeIcon icon={faGit} />
+        </ListItemIcon>
+        <ListItemText primary="Git" />
+      </TAGLISTS>
+      <Divider />
+      <TAGLISTS button onClick={() => adjust_tags("Github")}>
+        <ListItemIcon>
+          <FontAwesomeIcon icon={faGithub} />
+        </ListItemIcon>
+        <ListItemText primary="Github" />
+      </TAGLISTS>
+      <Divider />
+      <TAGLISTS button onClick={() => adjust_tags("Docker")}>
+        <ListItemIcon>
+          <FontAwesomeIcon icon={faDocker} />
+        </ListItemIcon>
+        <ListItemText primary="Docker" />
+      </TAGLISTS>
+      <Divider />
+    </List>
   );
 }

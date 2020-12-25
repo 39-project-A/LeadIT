@@ -9,5 +9,3 @@ export const FOOTER = styled.footer`
   align-items: center;
   justify-content: center;
 `;
-
-// export const FooterWrapper = styled.div``;

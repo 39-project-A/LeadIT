@@ -9,6 +9,7 @@ import { StarReducer } from "../star/reducer";
 import { LoadingReducer } from "../loading/reducer";
 import { IconReducer } from "../userIcon/reducer";
 import { OneWeekDotsReducer } from "../oneWeekDots/reducer";
+import { LastWeekDotsReducer } from "../lastWeekDots/reducer";
 import reduxThunk from "redux-thunk";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -20,6 +21,7 @@ export default function createStore() {
 			loading: LoadingReducer,
 			icons: IconReducer,
 			oneWeekDots: OneWeekDotsReducer,
+			lastWeekDots: LastWeekDotsReducer,
 		}),
 		composeEnhancers(applyMiddleware(reduxThunk))
 	);

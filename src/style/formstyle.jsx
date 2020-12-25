@@ -5,8 +5,9 @@ export const BODY = styled.div`
 export const CONTAINER = styled.section`
   max-width: 40%;
   min-width: 30%;
+  height: 80vh;
   margin: 0 auto;
-  margin-top: 2em;
+  margin-top: 4vh;
 `;
 export const TITLE = styled.h1`
   display: block;
@@ -14,7 +15,8 @@ export const TITLE = styled.h1`
   background: #f1773b;
   color: white;
   margin: 0;
-  padding: 0.75em 0;
+  padding: 0.5em 0;
+  font-size: 2em;
   font-weight: normal;
   border-radius: 10px 10px 0 0;
 `;
@@ -89,12 +91,11 @@ export const TEXTAREA = styled.textarea`
   margin-top: 1em;
   display: block;
   width: 100%;
-  height: 100%;
+  height: 25vh;
   border: 0;
   outline: none;
   padding: 0em 1em 1em;
   font-size: 1.2em;
-  height: 16em;
   resize: none;
   font-size: 1.2em;
   font-family: verdana;

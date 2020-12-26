@@ -10,61 +10,61 @@ import { DOT, TEXT, TITLE } from "../../style/OurDots";
 import OurIcon from "../templates/icons/components/OurIcon";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    width: "100%",
-    height: "50vh",
-    maxWidth: 400,
-    backgroundColor: theme.palette.background.paper,
-    margin: "auto",
-    marginTop: 10,
-    position: "relative",
-  },
-  primary: {
-    whiteSpace: "nowrap",
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-  },
-  addButton: {
-    fontSize: 30,
-    position: "fixed",
-    right: "0%",
-    bottom: "7%",
-  },
+	root: {
+		width: "100%",
+		height: "50vh",
+		maxWidth: 400,
+		backgroundColor: theme.palette.background.paper,
+		margin: "auto",
+		marginTop: 10,
+		position: "relative",
+	},
+	primary: {
+		whiteSpace: "nowrap",
+		overflow: "hidden",
+		textOverflow: "ellipsis",
+	},
+	addButton: {
+		fontSize: 30,
+		position: "fixed",
+		right: "0%",
+		bottom: "7%",
+	},
 }));
 const bodyStyle = {
-  display: "flex",
+	display: "flex",
 };
 const sideBar = {
-  float: "left",
+	float: "left",
 };
 
 export default function OurDots() {
-  const dots = useSelector((state) => state.dots);
-  const [sortDots, set_sortDots] = useState([]);
-  const classes = useStyles();
-  useEffect(() => {
-    set_sortDots(dots);
-  }, [dots]);
-  return (
-    <React.Fragment>
-      <Header />
-      <div style={sideBar}>
-        <OurSideBar
-          dots={dots}
-          sortDots={sortDots}
-          set_sortDots={set_sortDots}
-        />
-      </div>
-      <div className="MainBody" style={bodyStyle}>
-        <div className={classes.root}>
-          <List style={{ height: "80vh", overflow: "auto" }} component="nav">
-            {sortDots.map((dot) => {
-              return <OurIcon dot={dot} />;
-            })}
-          </List>
-        </div>
-      </div>
-      <Footer />
-    </React.Fragment>
-  );
+	const dots = useSelector((state) => state.dots);
+	const [sortDots, set_sortDots] = useState([]);
+	const classes = useStyles();
+	useEffect(() => {
+		set_sortDots(dots);
+	}, [dots]);
+	return (
+		<React.Fragment>
+			<Header />
+			<div style={sideBar}>
+				<OurSideBar
+					dots={dots}
+					sortDots={sortDots}
+					set_sortDots={set_sortDots}
+				/>
+			</div>
+			<div className="MainBody" style={bodyStyle}>
+				<div className={classes.root}>
+					<List style={{ height: "80vh", overflow: "auto" }} component="nav">
+						{sortDots.map((dot) => {
+							return <OurIcon dot={dot} />;
+						})}
+					</List>
+				</div>
+			</div>
+			<Footer />
+		</React.Fragment>
+	);
 }

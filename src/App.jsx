@@ -86,6 +86,7 @@ export default function App() {
 		firebase
 			.firestore()
 			.collection("dots")
+			.orderBy("createdAt", "desc")
 			.get()
 			.then((data) => {
 				const dotData = data.docs.map((doc) => {
@@ -292,7 +293,7 @@ export default function App() {
 					const finalWeek2 = hope2.map((el) => {
 						return el.initNum;
 					});
-					dispatch(fetch_lastWeekDots(finalWeek2))
+					dispatch(fetch_lastWeekDots(finalWeek2));
 					// set_filledWeek2(finalWeek2);
 				});
 		}

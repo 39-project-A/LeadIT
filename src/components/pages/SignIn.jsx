@@ -17,128 +17,128 @@ import { complete_loading } from "../../reducks/loading/action";
 import { useDispatch } from "react-redux";
 
 function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <a color="inherit" href="https://material-ui.com/">
-        Your Website
-      </a>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
+	return (
+		<Typography variant="body2" color="textSecondary" align="center">
+			{"Copyright © "}
+			<a color="inherit" href="https://material-ui.com/">
+				Your Website
+			</a>{" "}
+			{new Date().getFullYear()}
+			{"."}
+		</Typography>
+	);
 }
 
 const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(3),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
+	paper: {
+		marginTop: theme.spacing(8),
+		display: "flex",
+		flexDirection: "column",
+		alignItems: "center",
+	},
+	avatar: {
+		margin: theme.spacing(1),
+		backgroundColor: theme.palette.secondary.main,
+	},
+	form: {
+		width: "100%", // Fix IE 11 issue.
+		marginTop: theme.spacing(3),
+	},
+	submit: {
+		margin: theme.spacing(3, 0, 2),
+	},
 }));
 
 const SignIn = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const dispatch = useDispatch();
-  // const [, setLoading] = useState(false);
-  const classes = useStyles();
-  const history = useHistory();
-  const user = useContext(AuthContext);
-  // if (user) {
-  //   return <Redirect to="/" />;
-  // }
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // setLoading(true);
-    auth
-      .signInWithEmailAndPassword(email, password)
-      .then((response) => {
-        // setLoading(false);
-        dispatch(complete_loading("complete"));
-        history.push("/");
-      })
-      .catch((e) => {
-        // setLoading(false);
-        alert("メールアドレスかパスワードか違います");
-      });
-  };
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const dispatch = useDispatch();
+	// const [, setLoading] = useState(false);
+	const classes = useStyles();
+	const history = useHistory();
+	const user = useContext(AuthContext);
+	// if (user) {
+	//   return <Redirect to="/" />;
+	// }
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		// setLoading(true);
+		auth
+			.signInWithEmailAndPassword(email, password)
+			.then((response) => {
+				// setLoading(false);
+				dispatch(complete_loading("complete"));
+				history.push("/");
+			})
+			.catch((e) => {
+				// setLoading(false);
+				alert("メールアドレスかパスワードか違います");
+			});
+	};
 
-  return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign In
-        </Typography>
-        <form className={classes.form} onSubmit={handleSubmit} noValidate>
-          <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}></Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                value={password}
-                inputProps={{ maxLength: 20, minLength: 4 }}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </Grid>
-          </Grid>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Sign In
-          </Button>
-          <Grid container justify="flex-end">
-            <Grid item>
-              <Link to="/SignUp">Do you have an account? Register</Link>
-            </Grid>
-          </Grid>
-        </form>
-      </div>
-      <Box mt={5}>
-        <Copyright />
-      </Box>
-    </Container>
-  );
+	return (
+		<Container component="main" maxWidth="xs">
+			<CssBaseline />
+			<div className={classes.paper}>
+				<Avatar className={classes.avatar}>
+					<LockOutlinedIcon />
+				</Avatar>
+				<Typography component="h1" variant="h5">
+					Sign In
+				</Typography>
+				<form className={classes.form} onSubmit={handleSubmit} noValidate>
+					<Grid container spacing={2}>
+						<Grid item xs={12} sm={6}></Grid>
+						<Grid item xs={12}>
+							<TextField
+								variant="outlined"
+								required
+								fullWidth
+								id="email"
+								label="Email Address"
+								name="email"
+								autoComplete="email"
+								value={email}
+								onChange={(e) => setEmail(e.target.value)}
+							/>
+						</Grid>
+						<Grid item xs={12}>
+							<TextField
+								variant="outlined"
+								required
+								fullWidth
+								name="password"
+								label="Password"
+								type="password"
+								id="password"
+								autoComplete="current-password"
+								value={password}
+								inputProps={{ maxLength: 20, minLength: 4 }}
+								onChange={(e) => setPassword(e.target.value)}
+							/>
+						</Grid>
+					</Grid>
+					<Button
+						type="submit"
+						fullWidth
+						variant="contained"
+						color="primary"
+						className={classes.submit}
+					>
+						Sign In
+					</Button>
+					<Grid container justify="flex-end">
+						<Grid item>
+							<Link to="/SignUp">Don't have an account? Register</Link>
+						</Grid>
+					</Grid>
+				</form>
+			</div>
+			<Box mt={5}>
+				<Copyright />
+			</Box>
+		</Container>
+	);
 };
 
 export default SignIn;

@@ -85,7 +85,7 @@ export default function Ranking() {
       <Header />
       <p className="rank_title">🏆 Weekly Ranking</p>{" "}
       <>
-        <div id="podium-box" className="row" style={{ height: "600px" }}>
+        <div id="podium-box" className="row" style={{ height: "79vh" }}>
           <div className="col-md-4 step-container m-0 p-0">
             <div>
               <p className="two_username">

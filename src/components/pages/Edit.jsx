@@ -106,6 +106,7 @@ export default function Edit() {
 				userName: user.displayName,
 				createdAt: new Date(dot.createdAt.seconds * 1000),
 				getday: dot.getday,
+				getDate: dot.getDate,
 			})
 			.then(function () {
 				history.push("/");

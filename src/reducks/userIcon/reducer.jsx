@@ -8,7 +8,9 @@ export const IconReducer = (state = initialState, action) => {
 		case Actions.ADD_ICON:
 			return [...state, action.payload];
 		case Actions.DELETE_ICON:
-			return state.filter((iconData) => iconData.userId !== action.payload)
+			return state.filter((iconData) => iconData.userId !== action.payload);
+		case Actions.RESET_ICON:
+			return action.payload;
 		default:
 			return state;
 	}

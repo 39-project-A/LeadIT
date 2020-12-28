@@ -21,3 +21,11 @@ export const delete_icon = (iconData) => {
 		payload: iconData.userId,
 	};
 };
+
+export const RESET_ICON = "RESET_ICON";
+export const reset_icon = (iconData) => {
+	return {
+		type: RESET_ICON,
+		payload: iconData,
+	};
+};

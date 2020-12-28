@@ -6,22 +6,23 @@ import firebase from "firebase";
 import { AuthContext } from "../../../../firebase/AuthService";
 
 export default function HeadProfile() {
-  const [imageSrc, setImageSrc] = useState("");
+  // const [imageSrc, setImageSrc] = useState("");
   const user = useContext(AuthContext);
   const currentUser = firebase.auth().currentUser;
   const db = firebase.firestore().collection("userIcon");
   const iconsData = useSelector((state) => state.icons);
-  const [userIcon, set_userIcon] = useState();
+	const [userIcon, set_userIcon] = useState();
+
 
   // redux変更完了
   useEffect(() => {
-    if (iconsData && currentUser) {
+    if (iconsData && user) {
       const thisUserData = iconsData.find(
-        (iconData) => iconData.userId === currentUser.uid
+        (iconData) => iconData.userId === user.uid
       );
       set_userIcon(thisUserData);
     }
-  }, [iconsData, currentUser]);
+  }, [iconsData, user]);
 
   return (
     <div className="container3">
@@ -29,7 +30,7 @@ export default function HeadProfile() {
         type="button"
         className=" btn-primary_header rounded-circle  opaque profile-pic3"
         // 👇変更の必要アリ
-        disabled={imageSrc}
+        disabled={userIcon && userIcon.img}
       >
         {!userIcon && (
           <FontAwesomeIcon icon={faUserAlt} color="white" size="2x" />

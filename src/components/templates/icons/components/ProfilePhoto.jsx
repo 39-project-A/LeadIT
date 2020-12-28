@@ -19,7 +19,6 @@ export default function ProfilePhoto({ getData, imageSrc }) {
 	const user = useContext(AuthContext);
 	const dispatch = useDispatch();
 	const iconsData = useSelector((state) => state.icons);
-
 	const [userIcon, set_userIcon] = useState();
 
 	useEffect(() => {

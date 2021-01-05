@@ -163,7 +163,7 @@ const Form = () => {
 									id="text"
 									name="text"
 									tabindex="3"
-									ref={register({ required: true })}
+									inputRef={register({ required: true })}
 								></TEXTAREA>
 							</LI>
 						</UL>
